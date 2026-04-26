@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Badge from '../../components/ui/Badge.astro';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout
+  title="Blog — Jitsu-Do Karate Newmarket"
+  description="Training tips, technique breakdowns, and dojo news from Jitsu-Do Karate in Newmarket, Ontario."
+>
+  <Hero
+    eyebrow="From the Dojo"
+    headline="Training Tips &"
+    accentLine="Dojo News"
+    body="Insights on martial arts, fitness, and mindset from Jitsu-Do Karate in Newmarket."
+    minHeight="min-h-[40vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => {
+          const dateStr = post.data.date.toLocaleDateString('en-CA', {
+            year: 'numeric', month: 'long', day: 'numeric',
+          });
+          return (
+            <article class="group bg-surface border border-white/10 flex flex-col overflow-hidden hover:border-accent/40 transition-colors">
+              {post.data.featuredImage && post.data.featuredImage !== '/images/placeholder.jpg' && (
+                <a href={`/blog/${post.id}`} class="block aspect-[16/9] overflow-hidden">
+                  <img
+                    src={post.data.featuredImage}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover grayscale saturate-0 group-hover:grayscale-0 group-hover:saturate-100 transition-all duration-500"
+                    loading="lazy"
+                  />
+                </a>
+              )}
+              <div class="p-6 flex flex-col flex-1">
+                <time class="text-xs text-white/40 font-display tracking-widest uppercase mb-3 block">{dateStr}</time>
+                <h2 class="font-display text-xl uppercase tracking-wide leading-snug mb-3 flex-1">
+                  <a href={`/blog/${post.id}`} class="hover:text-accent transition-colors">{post.data.title}</a>
+                </h2>
+                <p class="text-sm text-white/60 leading-relaxed mb-5 line-clamp-3">{post.data.excerpt}</p>
+                {post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-5">
+                    {post.data.tags.map((tag) => (
+                      <span class="text-xs px-2 py-0.5 bg-white/5 text-white/50 border border-white/10">{tag}</span>
+                    ))}
+                  </div>
+                )}
+                <a
+                  href={`/blog/${post.id}`}
+                  class="inline-flex items-center gap-2 text-xs font-display tracking-[0.2em] uppercase text-accent hover:text-white transition-colors mt-auto"
+                >
+                  Read More
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Layout>
