@@ -11,6 +11,15 @@ const credentials = [
   '35+ years continuous training & instruction',
   'Founder, Jitsu-Do Karate (est. 2009)',
 ];
+
+const influences = [
+  { name: 'Chito-Ryu Karate', role: 'Core striking system', note: 'Structural precision, biomechanics-based technique developed by Dr. Tsuyoshi Chitose.' },
+  { name: 'Gracie Humaita BJJ', role: 'Core grappling system', note: 'Leverage-based ground fighting from one of the most rigorous BJJ lineages in the world.' },
+  { name: 'Aikido', role: 'Influence', note: 'Joint manipulation and redirection principles that inform our self-defense applications.' },
+  { name: 'Muay Thai', role: 'Influence', note: 'Clinch work and elbow/knee mechanics that sharpen our striking at close range.' },
+  { name: 'Wing Tsun', role: 'Influence', note: 'Close-quarters centerline theory and simultaneous block-and-strike methodology.' },
+  { name: 'Judo', role: 'Influence', note: 'Takedown and throwing mechanics that bridge the standup-to-ground transition.' },
+];
 ---
 <Layout
   title="Our Story — Jitsu-Do Karate Newmarket"
@@ -80,7 +89,31 @@ const credentials = [
     </div>
   </section>
 
+  <!-- Arts influences -->
   <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Lineage & Influences" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-4">What Shaped Our System</h2>
+      <p class="text-white/60 mb-10 max-w-2xl text-sm leading-relaxed">
+        Jitsu-Do is rooted in two core systems, shaped by decades of cross-training across multiple disciplines. We kept what worked. We discarded what didn't.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {influences.map((art) => (
+          <div class={`p-5 border ${art.role === 'Core striking system' || art.role === 'Core grappling system' ? 'border-accent/50 bg-surface' : 'border-white/10 bg-surface/50'}`}>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="font-display text-sm uppercase tracking-wide text-white">{art.name}</span>
+              {(art.role === 'Core striking system' || art.role === 'Core grappling system') && (
+                <span class="text-xs bg-accent/20 text-accent px-2 py-0.5 uppercase tracking-wider">Core</span>
+              )}
+            </div>
+            <p class="text-xs text-white/55 leading-relaxed">{art.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Find Us In Newmarket" class="mb-4 block" />
       <h2 class="font-display text-3xl uppercase tracking-wide mb-8">Our Location</h2>

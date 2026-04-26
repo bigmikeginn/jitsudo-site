@@ -1,0 +1,110 @@
+---
+// Subtle animated background — floating geometric shapes + accent glow.
+// Usage: place as a direct child of a relative-positioned section.
+interface Props {
+  variant?: 'default' | 'hero';
+}
+const { variant = 'default' } = Astro.props;
+---
+
+<div class="animated-bg pointer-events-none select-none" aria-hidden="true" data-variant={variant}>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="geo geo-1"></div>
+  <div class="geo geo-2"></div>
+  <div class="geo geo-3"></div>
+</div>
+
+<style>
+.animated-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Glowing orbs — very low opacity blobs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.07;
+  background: var(--color-accent);
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  top: -100px; left: -100px;
+  animation: drift-1 28s ease-in-out infinite;
+}
+.orb-2 {
+  width: 350px; height: 350px;
+  bottom: -80px; right: 10%;
+  animation: drift-2 34s ease-in-out infinite;
+  opacity: 0.05;
+}
+.orb-3 {
+  width: 250px; height: 250px;
+  top: 40%; left: 55%;
+  animation: drift-3 22s ease-in-out infinite;
+  opacity: 0.04;
+}
+
+/* Geometric lines — thin diagonal rectangles */
+.geo {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.03);
+  transform-origin: center;
+}
+.geo-1 {
+  width: 1px; height: 300px;
+  top: 5%; left: 15%;
+  animation: geo-float-1 18s ease-in-out infinite;
+}
+.geo-2 {
+  width: 1px; height: 200px;
+  top: 30%; right: 20%;
+  animation: geo-float-2 24s ease-in-out infinite;
+}
+.geo-3 {
+  width: 180px; height: 1px;
+  bottom: 20%; left: 30%;
+  animation: geo-float-3 20s ease-in-out infinite;
+}
+
+/* Orb drift animations */
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0); }
+  25%       { transform: translate(60px, 40px); }
+  50%       { transform: translate(30px, 80px); }
+  75%       { transform: translate(-20px, 30px); }
+}
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0); }
+  33%       { transform: translate(-50px, -30px); }
+  66%       { transform: translate(40px, 20px); }
+}
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(30px, -40px) scale(1.2); }
+}
+
+/* Geo float animations */
+@keyframes geo-float-1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.03; }
+  50%       { transform: translateY(-30px) rotate(8deg); opacity: 0.06; }
+}
+@keyframes geo-float-2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.03; }
+  50%       { transform: translateY(25px) rotate(-5deg); opacity: 0.05; }
+}
+@keyframes geo-float-3 {
+  0%, 100% { transform: translateX(0px); opacity: 0.03; }
+  50%       { transform: translateX(20px); opacity: 0.06; }
+}
+
+/* Hero variant — slightly brighter */
+[data-variant="hero"] .orb { opacity: 0.12; }
+[data-variant="hero"] .orb-2 { opacity: 0.08; }
+[data-variant="hero"] .geo { background: rgba(255,255,255,0.05); }
+</style>

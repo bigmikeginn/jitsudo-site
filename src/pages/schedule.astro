@@ -15,7 +15,6 @@ const plans = [
     features: [
       { ok: true, text: 'Up to 2 classes per week' },
       { ok: true, text: 'Karate & BJJ included' },
-      { ok: false, text: 'Limited class selection' },
     ],
     highlighted: false,
   },
@@ -48,6 +47,15 @@ const plans = [
     highlighted: false,
   },
 ];
+
+const schedule = [
+  { day: 'Monday',    slots: ['5:00 – 6:00 pm', '6:00 – 7:00 pm', '7:00 – 8:15 pm'] },
+  { day: 'Tuesday',   slots: ['5:00 – 6:00 pm', '6:00 – 7:00 pm', '7:00 – 8:15 pm'] },
+  { day: 'Wednesday', slots: ['5:00 – 6:00 pm', '6:00 – 7:00 pm', '7:00 – 8:15 pm'] },
+  { day: 'Thursday',  slots: ['5:00 – 6:00 pm', '6:00 – 7:00 pm', '7:00 – 8:15 pm'] },
+  { day: 'Friday',    slots: ['5:00 – 6:00 pm', '6:00 – 7:00 pm', '7:00 – 8:15 pm'] },
+  { day: 'Saturday',  slots: ['8:30 – 9:30 am', '9:30 – 11:30 am'] },
+];
 ---
 <Layout
   title="Schedule & Pricing — Jitsu-Do Karate Newmarket"
@@ -62,24 +70,46 @@ const plans = [
     minHeight="min-h-[55vh]"
   />
 
-  <section class="py-20 bg-black">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <Badge label="Tuition & Memberships" class="mb-4 block" />
-      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Three Streams. One Standard.</h2>
-      <p class="text-white/75 leading-relaxed mb-6">
-        We offer three membership streams depending on your investment and commitment. <strong class="text-white">Elite</strong> is our premium training experience for students who want the fastest progress. <strong class="text-white">Core</strong> is the complete Jitsu-Do training experience and our most popular membership. <strong class="text-white">Basic</strong> is a simple way to get started with structured training.
-      </p>
-      <p class="text-white/75 leading-relaxed">
-        We don't do high-pressure sales. Every new student begins with a <strong class="text-white">free trial</strong>. We want you to confirm our technical standards and dojo culture align with your goals before any financial commitment.
-      </p>
+  <!-- Class Schedule -->
+  <section class="py-20 bg-surface">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Class Times" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-4">Weekly Schedule</h2>
+      <p class="text-white/60 mb-10 text-sm">Contact us to confirm specific class formats. Times may vary by season.</p>
+      <div class="divide-y divide-white/10 border border-white/10">
+        {schedule.map((row) => (
+          <div class="grid grid-cols-[140px_1fr] items-center">
+            <div class="px-5 py-4 border-r border-white/10">
+              <span class="font-display text-sm uppercase tracking-widest text-accent">{row.day}</span>
+            </div>
+            <div class="px-5 py-4 flex flex-wrap gap-3">
+              {row.slots.map((slot) => (
+                <span class="text-sm text-white/80 bg-black/50 border border-white/10 px-3 py-1.5">{slot}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-white/40 text-xs">* Specific class types (Karate, BJJ, Kids, Mixed) rotate through slots. Contact us or drop in to see what's on.</p>
     </div>
   </section>
 
-  <section class="py-20 bg-surface">
+  <!-- Pricing -->
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+      <Badge label="Tuition & Memberships" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Three Streams. One Standard.</h2>
+      <p class="text-white/75 leading-relaxed mb-4">
+        We offer three membership streams depending on your investment and commitment. <strong class="text-white">Elite</strong> is our premium experience for students who want the fastest progress. <strong class="text-white">Core</strong> is the complete Jitsu-Do experience and our most popular tier. <strong class="text-white">Basic</strong> is a simple way to get started.
+      </p>
+      <p class="text-white/75 leading-relaxed">
+        Every new student begins with a <strong class="text-white">free trial</strong>. Confirm our standard fits your goals before any financial commitment.
+      </p>
+    </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {plans.map((plan) => (
-          <div class={`relative bg-black border ${plan.highlighted ? 'border-accent' : 'border-white/10'} p-8 flex flex-col`}>
+          <div class={`relative bg-surface border ${plan.highlighted ? 'border-accent' : 'border-white/10'} p-8 flex flex-col`}>
             {plan.highlighted && (
               <span class="absolute -top-3 left-8 bg-accent text-white text-xs tracking-[0.2em] uppercase px-3 py-1">
                 {plan.eyebrow}
@@ -97,7 +127,7 @@ const plans = [
             <ul class="space-y-2 mb-8 flex-1">
               {plan.features.map((f) => (
                 <li class="flex gap-2 text-sm text-white/75">
-                  <span class={f.ok ? 'text-accent' : 'text-white/30'}>{f.ok ? '✓' : '—'}</span>
+                  <span class="text-accent">✓</span>
                   <span>{f.text}</span>
                 </li>
               ))}

@@ -16,7 +16,7 @@ const { title, description, image, href, linkLabel = 'Learn More' } = Astro.prop
       <img
         src={image}
         alt={title}
-        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+        class="w-full h-full object-cover grayscale saturate-0 group-hover:grayscale-0 group-hover:saturate-100 transition-all duration-500"
         loading="lazy"
       />
     </div>

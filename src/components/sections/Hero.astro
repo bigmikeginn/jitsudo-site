@@ -1,6 +1,7 @@
 ---
 import Button from '../ui/Button.astro';
 import Badge from '../ui/Badge.astro';
+import AnimatedBg from '../ui/AnimatedBg.astro';
 
 interface Props {
   eyebrow?: string;
@@ -33,8 +34,10 @@ const {
 >
   <!-- Overlay -->
   {bgImage && (
-    <div class="absolute inset-0 bg-black/65" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
   )}
+  <!-- Animated background (visible when no bgImage, subtle when there is one) -->
+  <AnimatedBg variant="hero" />
 
   <div class="relative z-10 max-w-4xl mx-auto py-24">
     {eyebrow && (

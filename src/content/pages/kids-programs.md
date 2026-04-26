@@ -38,4 +38,4 @@ FOUNDATION TODAY
 
 The best time to build a scaffold for a disciplined life is during these formative years. Join our Newmarket community for a trial and build a strong foundation with us together.
 
-[Claim your FREE trial!](/trial-class/) ![Kids Programs at Jitsu-Do Newmarket](/images/kids-programs-photo.jpg)
+[Claim your FREE trial!](/trial)

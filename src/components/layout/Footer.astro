@@ -2,13 +2,12 @@
 import { business } from '../../data/business';
 
 const footerLinks = [
-  { label: 'Adult Programs', href: '/programs/adult' },
-  { label: 'Kids Programs', href: '/programs/kids' },
-  { label: 'Youth Programs', href: '/programs/youth' },
+  { label: 'Adult Programs', href: '/adult-programs' },
+  { label: 'Kids Programs', href: '/kids-programs' },
+  { label: 'Youth Programs', href: '/youth-programs' },
   { label: 'Schedule & Pricing', href: '/schedule' },
   { label: 'Free Trial Class', href: '/trial' },
   { label: 'Our Story', href: '/about' },
-  { label: 'Instructors', href: '/instructors' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -92,7 +91,13 @@ const socialLinks = [
             <span class="text-accent mt-0.5 shrink-0">●</span>
             <span>
               {business.address.street}<br />
-              {business.address.city}, {business.address.region}
+              {business.address.city}, {business.address.region}<br />
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=1211+Gorham+Street+Unit+5+Newmarket+Ontario"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-accent hover:text-white transition-colors text-xs mt-1 inline-block"
+              >Get Directions →</a>
             </span>
           </li>
           <li class="flex gap-3 text-sm">

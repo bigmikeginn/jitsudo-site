@@ -47,4 +47,4 @@ IS FREE
 
 No gear required. Athletic clothing is fine. Come see if Jitsu-Do is the right fit for your teenager.
 
-[Claim your FREE trial!](/trial-class/) ![Youth Programs at Jitsu-Do Newmarket](/images/youth-programs-photo.jpg)
+[Claim your FREE trial!](/trial)
