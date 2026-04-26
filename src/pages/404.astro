@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import AnimatedBg from '../components/ui/AnimatedBg.astro';
+---
+<Layout
+  title="Page Not Found — Jitsu-Do Karate Newmarket"
+  description="The page you were looking for doesn't exist."
+  noindex={true}
+>
+  <section class="relative flex items-center justify-center text-center min-h-[80vh] px-4 bg-black overflow-hidden">
+    <AnimatedBg variant="hero" />
+    <div class="relative z-10 max-w-2xl mx-auto py-24">
+      <Badge label="Error 404" class="mb-6" />
+      <h1 class="font-display text-6xl sm:text-7xl uppercase tracking-wide leading-tight mb-2">
+        Page Not
+      </h1>
+      <p class="font-display text-6xl sm:text-7xl uppercase tracking-wide leading-tight text-accent mb-8">
+        Found
+      </p>
+      <p class="text-base sm:text-lg text-white/70 max-w-xl mx-auto mb-10 leading-relaxed">
+        The page you're looking for doesn't exist or has moved. Don't sweat it — the dojo is still here.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <Button href="/" variant="primary">Back to Home</Button>
+        <Button href="/programs" variant="ghost">View Programs</Button>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/10 max-w-md mx-auto">
+        <p class="text-xs font-display tracking-[0.2em] uppercase text-white/40 mb-4">Looking For Something Specific?</p>
+        <div class="grid grid-cols-2 gap-3 text-sm">
+          <a href="/karate" class="text-white/70 hover:text-accent transition-colors">Karate</a>
+          <a href="/bjj" class="text-white/70 hover:text-accent transition-colors">BJJ</a>
+          <a href="/schedule" class="text-white/70 hover:text-accent transition-colors">Schedule</a>
+          <a href="/trial" class="text-white/70 hover:text-accent transition-colors">Free Trial</a>
+          <a href="/blog" class="text-white/70 hover:text-accent transition-colors">Blog</a>
+          <a href="/contact" class="text-white/70 hover:text-accent transition-colors">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
