@@ -1,0 +1,53 @@
+---
+interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+  eyebrow?: string;
+  heading?: string;
+}
+
+const { images, eyebrow, heading } = Astro.props;
+const [primary, ...rest] = images;
+---
+
+<section class="py-16 bg-black">
+  {(eyebrow || heading) && (
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+      {eyebrow && <p class="text-xs tracking-[0.25em] uppercase text-white/40 mb-3">{eyebrow}</p>}
+      {heading && <h2 class="font-display text-4xl uppercase tracking-wide">{heading}</h2>}
+    </div>
+  )}
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {primary && (
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <!-- Primary large image -->
+        <div class="aspect-[3/4] lg:aspect-auto lg:row-span-2 overflow-hidden">
+          <img
+            src={primary.src}
+            alt={primary.alt}
+            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+            loading="lazy"
+          />
+        </div>
+        <!-- Secondary images grid -->
+        <div class="grid grid-cols-2 gap-2">
+          {rest.slice(0, 4).map((img) => (
+            <div class="aspect-square overflow-hidden">
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

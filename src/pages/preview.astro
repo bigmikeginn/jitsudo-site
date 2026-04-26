@@ -1,0 +1,223 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import Hero from '../components/sections/Hero.astro';
+import ClassCard from '../components/sections/ClassCard.astro';
+import ProgramCard from '../components/sections/ProgramCard.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import FAQAccordion from '../components/sections/FAQAccordion.astro';
+import ReviewCard from '../components/sections/ReviewCard.astro';
+import ReviewSection from '../components/sections/ReviewSection.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import ContactForm from '../components/forms/ContactForm.astro';
+
+const sampleReviews = [
+  {
+    name: 'Lia Carpino',
+    text: 'We are so happy with Jitsu-Do Karate! Our son has had a wonderful experience and greatly enjoys the classes!',
+    rating: 5,
+    date: '17 weeks ago',
+    source: 'google' as const,
+  },
+  {
+    name: 'Min Kim',
+    text: "Our child truly enjoyed this class — he'd come home proudly practicing what he learned. A great balance of learning and play.",
+    rating: 5,
+    date: '18 weeks ago',
+    source: 'google' as const,
+  },
+  {
+    name: 'Scott Morris',
+    text: 'Sensei Mike not only showed you how to do techniques but why — always practical, always engaging. Thank you for the fun!',
+    rating: 5,
+    date: 'Mar 14, 2025',
+    source: 'google' as const,
+  },
+];
+
+const sampleFAQs = [
+  {
+    question: 'How long does a trial class take?',
+    answer: 'A trial class takes 30–45 minutes. You wear your own clothes and train alongside beginners. Senior students are welcoming and patient.',
+  },
+  {
+    question: 'Am I too old? Do I need to be fit?',
+    answer: "You're never too old. Anyone can do this and all students are encouraged to go at their own pace. We're about progress, not perfection.",
+  },
+  {
+    question: 'Do I need any equipment to start?',
+    answer: 'No equipment needed for your first class. We recommend comfortable athletic clothing. If you decide to continue, we\'ll guide you on what gear to get.',
+  },
+  {
+    question: 'Is there a long-term contract?',
+    answer: 'No contracts. We offer monthly memberships and multi-month packages, but you\'re never locked in.',
+  },
+];
+
+const sampleGallery = [
+  { src: 'https://placehold.co/800x1000/111/333?text=Karate+Main', alt: 'Karate class' },
+  { src: 'https://placehold.co/400x400/111/333?text=BJJ', alt: 'BJJ training' },
+  { src: 'https://placehold.co/400x400/111/333?text=Kids', alt: 'Kids class' },
+  { src: 'https://placehold.co/400x400/111/333?text=Sparring', alt: 'Sparring session' },
+  { src: 'https://placehold.co/400x400/111/333?text=Grappling', alt: 'Grappling' },
+];
+
+
+---
+
+<Layout title="Component Preview — Jitsu-Do" description="Phase 2 component library preview." noindex={true}>
+  <Header />
+
+  <!-- ── BUTTONS ─────────────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">Buttons &amp; Badge</p>
+  </div>
+  <div class="bg-black px-8 py-12 flex flex-wrap gap-6 items-center">
+    <Button href="#" variant="primary">Claim Your Free Trial</Button>
+    <Button href="#" variant="ghost">View Schedule</Button>
+    <Button href="#" variant="primary" size="sm">Join Now</Button>
+    <Button href="#" variant="ghost" size="sm">Learn More</Button>
+    <Button href="#" variant="primary" size="lg">Start Today</Button>
+    <span class="ml-8"><Badge label="What We Teach" /></span>
+  </div>
+
+  <!-- ── HERO ───────────────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">Hero</p>
+  </div>
+  <Hero
+    eyebrow="Newmarket's Premier Martial Arts Dojo"
+    headline="Practical Martial Arts."
+    accentLine="No Fluff."
+    body="Newmarket's home for high-standard Karate and Brazilian Jiu-Jitsu. Proven real-world health and self-defence practices for adults, youths, and kids."
+    bullets={['No commitment required', 'First class free', 'Limited beginner spots']}
+    primaryCta={{ label: 'Claim Your Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+    minHeight="min-h-[70vh]"
+  />
+
+  <!-- ── CLASS CARDS ────────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">ClassCard</p>
+  </div>
+  <div class="bg-black px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+      <ClassCard
+        title="Karate"
+        description="Traditional Shotokan karate refined for practical self-defence. Adults, youths, and kids welcome."
+        href="/programs/karate"
+        linkLabel="Explore Karate"
+      />
+      <ClassCard
+        title="Brazilian Jiu-Jitsu"
+        description="Ground-based grappling focused on technique over strength. Beginner to advanced."
+        href="/programs/bjj"
+        linkLabel="Explore BJJ"
+      />
+    </div>
+  </div>
+
+  <!-- ── PROGRAM CARDS ──────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">ProgramCard</p>
+  </div>
+  <div class="bg-black px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
+      <ProgramCard
+        title="Kids Programs"
+        ageGroup="Ages 5–12"
+        description="Structured discipline, focus, and fun in a safe environment. Belt progression builds real confidence."
+        href="/programs/kids"
+        features={['Karate & BJJ tracks', 'Belt grading twice yearly', 'Character curriculum']}
+      />
+      <ProgramCard
+        title="Youth Programs"
+        ageGroup="Ages 13–17"
+        description="Serious training for teens who want more than a hobby. Fitness, discipline, and community."
+        href="/programs/youth"
+        features={['Karate & BJJ options', 'Competition pathways', 'Leadership development']}
+      />
+      <ProgramCard
+        title="Adult Programs"
+        ageGroup="Ages 18+"
+        description="Real martial arts for real life. No fluff, no fitness gimmicks — practical skills that hold up."
+        href="/programs/adult"
+        features={['Beginner-friendly', 'Evening & Saturday classes', 'First class free']}
+      />
+    </div>
+  </div>
+
+  <!-- ── GALLERY ─────────────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">Gallery</p>
+  </div>
+  <Gallery
+    eyebrow="Inside the Dojo"
+    heading="See Us Train"
+    images={sampleGallery}
+  />
+
+  <!-- ── FAQ ACCORDION ──────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">FAQAccordion</p>
+  </div>
+  <FAQAccordion
+    eyebrow="Before You Start"
+    heading="Common Questions"
+    items={sampleFAQs}
+  />
+
+  <!-- ── REVIEW CARD ────────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">ReviewCard</p>
+  </div>
+  <div class="bg-black px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl">
+      {sampleReviews.map((r) => <ReviewCard {...r} />)}
+    </div>
+  </div>
+
+  <!-- ── REVIEW SECTION ─────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">ReviewSection</p>
+  </div>
+  <ReviewSection
+    eyebrow="Google Reviews"
+    heading="What Our Students Say"
+    featured={{
+      name: 'Heather West',
+      text: "Jitsu-Do is like no other dojo I've encountered — high quality teaching, every student known by name. We train hard and laugh a lot. Sensei Ginn explains the why behind everything, welcomes every question, and has a witty sense of humour. You'd be lucky to train here.",
+      rating: 5,
+      date: 'Member 13 years · 16 weeks ago',
+      source: 'google',
+    }}
+    reviews={sampleReviews}
+  />
+
+  <!-- ── CTA BAND ────────────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">CTABand</p>
+  </div>
+  <CTABand
+    eyebrow="Ready to Start?"
+    heading="Your First Class Is Free"
+    body="No commitment. No pressure. Show up, train, and see if it's right for you."
+    primaryCta={{ label: 'Claim Your Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+  />
+
+  <!-- ── CONTACT FORM ────────────────────────────────── -->
+  <div class="bg-surface border-b border-white/10 px-8 py-3">
+    <p class="text-xs tracking-[0.25em] uppercase text-white/40">ContactForm</p>
+  </div>
+  <div class="bg-black px-8 py-16">
+    <div class="max-w-xl">
+      <ContactForm heading="Get In Touch" />
+    </div>
+  </div>
+
+  <Footer />
+</Layout>

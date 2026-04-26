@@ -1,0 +1,133 @@
+---
+import { business } from '../../data/business';
+
+const footerLinks = [
+  { label: 'Adult Programs', href: '/programs/adult' },
+  { label: 'Kids Programs', href: '/programs/kids' },
+  { label: 'Youth Programs', href: '/programs/youth' },
+  { label: 'Schedule & Pricing', href: '/schedule' },
+  { label: 'Free Trial Class', href: '/trial' },
+  { label: 'Our Story', href: '/about' },
+  { label: 'Instructors', href: '/instructors' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const socialLinks = [
+  { label: 'Facebook', href: 'https://facebook.com', icon: 'fb' },
+  { label: 'Instagram', href: 'https://instagram.com', icon: 'ig' },
+  { label: 'TikTok', href: 'https://tiktok.com', icon: 'tt' },
+  { label: 'YouTube', href: 'https://youtube.com', icon: 'yt' },
+];
+---
+
+<footer class="bg-black border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- Col 1: Brand + social -->
+      <div>
+        <a href="/" class="inline-block mb-4">
+          <span class="font-display text-xl tracking-[0.2em] uppercase text-white">Jitsu-Do</span>
+        </a>
+        <p class="text-sm text-white/55 leading-relaxed mb-8 max-w-xs">
+          Newmarket's home for high-standard Karate and Brazilian Jiu-Jitsu.
+          Practical martial arts, no fluff.
+        </p>
+        <div class="flex items-center gap-3">
+          {socialLinks.map((s) => (
+            <a
+              href={s.href}
+              aria-label={s.label}
+              class="w-10 h-10 border border-white/20 flex items-center justify-center text-white/55 hover:text-white hover:border-white/60 transition-colors text-xs font-display tracking-widest"
+            >
+              {s.icon === 'fb' && (
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                </svg>
+              )}
+              {s.icon === 'ig' && (
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="4" stroke-width="2"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              )}
+              {s.icon === 'tt' && (
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/>
+                </svg>
+              )}
+              {s.icon === 'yt' && (
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+                </svg>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Col 2: Quick links -->
+      <div>
+        <p class="text-xs tracking-[0.25em] uppercase text-white/40 mb-6">Quick Links</p>
+        <ul class="space-y-3">
+          {footerLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-white/65 hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 3: Contact info -->
+      <div>
+        <p class="text-xs tracking-[0.25em] uppercase text-white/40 mb-6">Visit Us</p>
+        <ul class="space-y-4">
+          <li class="flex gap-3 text-sm text-white/65">
+            <span class="text-accent mt-0.5 shrink-0">●</span>
+            <span>
+              {business.address.street}<br />
+              {business.address.city}, {business.address.region}
+            </span>
+          </li>
+          <li class="flex gap-3 text-sm">
+            <span class="text-accent shrink-0">●</span>
+            <a href={`tel:${business.phone}`} class="text-white/65 hover:text-white transition-colors">
+              {business.phoneDisplay}
+            </a>
+          </li>
+          <li class="flex gap-3 text-sm">
+            <span class="text-accent shrink-0">●</span>
+            <a href={`mailto:${business.email}`} class="text-white/65 hover:text-white transition-colors break-all">
+              {business.email}
+            </a>
+          </li>
+          <li class="flex gap-3 text-sm text-white/65">
+            <span class="text-accent mt-0.5 shrink-0">●</span>
+            <span>{business.hoursDisplay}</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-white/35">
+        &copy; {new Date().getFullYear()} {business.name}. All rights reserved.
+      </p>
+      <div class="flex gap-6">
+        <a href="/contact" class="text-xs text-white/35 hover:text-white/70 transition-colors">Contact</a>
+        <a href="/join" class="text-xs text-white/35 hover:text-white/70 transition-colors">Join Now</a>
+        <a href="/trial" class="text-xs text-white/35 hover:text-white/70 transition-colors">Free Trial</a>
+      </div>
+    </div>
+  </div>
+</footer>

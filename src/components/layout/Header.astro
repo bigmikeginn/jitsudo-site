@@ -1,0 +1,140 @@
+---
+const navLinks = [
+  {
+    label: 'Programs',
+    href: '/programs',
+    children: [
+      { label: 'Karate', href: '/programs/karate' },
+      { label: 'BJJ', href: '/programs/bjj' },
+      { label: 'Kids Programs', href: '/programs/kids' },
+      { label: 'Youth Programs', href: '/programs/youth' },
+      { label: 'Adult Programs', href: '/programs/adult' },
+    ],
+  },
+  { label: 'Our Story', href: '/about' },
+  { label: 'Schedule & Pricing', href: '/schedule' },
+  { label: 'Instructors', href: '/instructors' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 shrink-0">
+        <span class="font-display text-lg tracking-[0.2em] uppercase text-white">Jitsu-Do</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-8">
+        {navLinks.map((link) => (
+          link.children ? (
+            <div class="relative group">
+              <button class="flex items-center gap-1 text-xs tracking-widest uppercase text-white/75 hover:text-white transition-colors">
+                {link.label}
+                <svg class="w-3 h-3 mt-0.5" fill="none" viewBox="0 0 10 6">
+                  <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <div class="absolute top-full left-0 mt-2 min-w-48 bg-black border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
+                {link.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class="block px-5 py-3 text-xs tracking-widest uppercase text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={link.href}
+              class="text-xs tracking-widest uppercase text-white/75 hover:text-white transition-colors"
+            >
+              {link.label}
+            </a>
+          )
+        ))}
+      </nav>
+
+      <!-- CTA + Mobile toggle -->
+      <div class="flex items-center gap-4">
+        <a
+          href="/join"
+          class="hidden lg:inline-block bg-accent text-white px-6 py-3 text-xs font-display tracking-widest uppercase hover:bg-red-800 transition-colors"
+        >
+          Join Now
+        </a>
+        <button
+          id="menu-toggle"
+          class="lg:hidden text-white p-1"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <svg id="icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-black">
+    <nav class="px-4 py-6 flex flex-col gap-1">
+      {navLinks.map((link) => (
+        <div>
+          <a
+            href={link.href}
+            class="block py-3 text-xs tracking-widest uppercase text-white/75 hover:text-white transition-colors border-b border-white/5"
+          >
+            {link.label}
+          </a>
+          {link.children && (
+            <div class="pl-4">
+              {link.children.map((child) => (
+                <a
+                  href={child.href}
+                  class="block py-2 text-xs tracking-widest uppercase text-white/50 hover:text-white transition-colors"
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+      <a
+        href="/join"
+        class="mt-4 block text-center bg-accent text-white px-6 py-4 text-xs font-display tracking-widest uppercase"
+      >
+        Join Now
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-20"></div>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', isOpen);
+    iconOpen?.classList.toggle('hidden', !isOpen);
+    iconClose?.classList.toggle('hidden', isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>

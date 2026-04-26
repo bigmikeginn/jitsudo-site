@@ -1,0 +1,67 @@
+---
+import Badge from '../ui/Badge.astro';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  items: FAQItem[];
+}
+
+const { eyebrow, heading, items } = Astro.props;
+const uid = Math.random().toString(36).slice(2, 8);
+---
+
+<section class="py-20 bg-black">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    {eyebrow && <Badge label={eyebrow} class="mb-4 block" />}
+    <h2 class="font-display text-4xl uppercase tracking-wide mb-12">{heading}</h2>
+
+    <div class="space-y-2" id={`faq-${uid}`}>
+      {items.map((item, i) => (
+        <div class="border-b border-white/10" data-faq-item>
+          <button
+            type="button"
+            class="w-full flex items-center justify-between py-5 text-left gap-4"
+            aria-expanded="false"
+            data-faq-trigger
+          >
+            <span class="font-display text-sm uppercase tracking-wide">{item.question}</span>
+            <svg
+              class="w-4 h-4 shrink-0 text-accent transition-transform duration-200"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              data-faq-icon
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/>
+            </svg>
+          </button>
+          <div class="hidden pb-5 pr-8 text-sm text-white/65 leading-relaxed" data-faq-panel>
+            {item.answer}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-faq-item]').forEach((item) => {
+    const trigger = item.querySelector('[data-faq-trigger]') as HTMLButtonElement | null;
+    const panel = item.querySelector('[data-faq-panel]') as HTMLElement | null;
+    const icon = item.querySelector('[data-faq-icon]') as SVGElement | null;
+
+    trigger?.addEventListener('click', () => {
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+      panel?.classList.toggle('hidden', isOpen);
+      icon?.classList.toggle('rotate-45', !isOpen);
+    });
+  });
+</script>

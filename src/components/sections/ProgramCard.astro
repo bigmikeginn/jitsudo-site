@@ -1,0 +1,43 @@
+---
+interface Props {
+  title: string;
+  ageGroup: string;
+  description: string;
+  image?: string;
+  href: string;
+  features?: string[];
+}
+
+const { title, ageGroup, description, image, href, features = [] } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group block bg-surface-2 border border-white/10 hover:border-accent transition-colors duration-300 overflow-hidden"
+>
+  {image && (
+    <div class="aspect-video overflow-hidden">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="p-6">
+    <p class="text-xs tracking-[0.2em] uppercase text-accent mb-2">{ageGroup}</p>
+    <h3 class="font-display text-xl uppercase tracking-wide mb-3">{title}</h3>
+    <p class="text-sm text-white/60 leading-relaxed mb-4">{description}</p>
+    {features.length > 0 && (
+      <ul class="space-y-1">
+        {features.map((f) => (
+          <li class="flex items-center gap-2 text-xs text-white/50">
+            <span class="text-accent">—</span>
+            {f}
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</a>

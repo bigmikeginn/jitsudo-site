@@ -1,0 +1,80 @@
+---
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  eyebrow?: string;
+  headline: string;
+  accentLine?: string;
+  body?: string;
+  bullets?: string[];
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  bgImage?: string;
+  minHeight?: string;
+}
+
+const {
+  eyebrow,
+  headline,
+  accentLine,
+  body,
+  bullets = [],
+  primaryCta,
+  secondaryCta,
+  bgImage,
+  minHeight = 'min-h-screen',
+} = Astro.props;
+---
+
+<section
+  class={`relative flex items-center justify-center text-center ${minHeight} px-4`}
+  style={bgImage ? `background-image: url('${bgImage}'); background-size: cover; background-position: center;` : ''}
+>
+  <!-- Overlay -->
+  {bgImage && (
+    <div class="absolute inset-0 bg-black/65" aria-hidden="true"></div>
+  )}
+
+  <div class="relative z-10 max-w-4xl mx-auto py-24">
+    {eyebrow && (
+      <div class="mb-6">
+        <Badge label={eyebrow} />
+      </div>
+    )}
+
+    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl uppercase tracking-wide leading-tight mb-0">
+      {headline}
+    </h1>
+
+    {accentLine && (
+      <p class="font-display text-5xl sm:text-6xl lg:text-7xl uppercase tracking-wide leading-tight text-accent mb-6">
+        {accentLine}
+      </p>
+    )}
+
+    {body && (
+      <p class="text-base sm:text-lg text-white/75 max-w-2xl mx-auto mb-8 leading-relaxed">
+        {body}
+      </p>
+    )}
+
+    {bullets.length > 0 && (
+      <p class="text-sm text-white/60 mb-10 tracking-wide">
+        {bullets.map((b, i) => (
+          <span>
+            <span class="text-accent">✓</span> {b}
+            {i < bullets.length - 1 ? ' · ' : ''}
+          </span>
+        ))}
+      </p>
+    )}
+
+    {(primaryCta || secondaryCta) && (
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        {primaryCta && <Button href={primaryCta.href} variant="primary">{primaryCta.label}</Button>}
+        {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
+      </div>
+    )}
+  </div>
+</section>
