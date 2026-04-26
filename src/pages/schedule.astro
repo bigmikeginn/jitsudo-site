@@ -4,6 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import CTABand from '../components/sections/CTABand.astro';
+import AnimatedBg from '../components/ui/AnimatedBg.astro';
 
 const plans = [
   {
@@ -69,8 +70,8 @@ const plans = [
       <Badge label="Class Times" class="mb-4 block" />
       <h2 class="font-display text-4xl uppercase tracking-wide mb-4">Weekly Schedule</h2>
       <p class="text-white/60 mb-10 text-sm">Live schedule from our member portal. Click any class for details and to register.</p>
-      <div class="bg-black/30 border border-white/10 p-4 sm:p-6 gymdesk-wrap">
-        <div class="gymdesk-schedule" attr-gym="AyGZN" attr-visible_schedule="lN5qQ" attr-default_schedule="all" attr-program="all"></div>
+      <div class="gymdesk-wrap">
+        <div class="gymdesk-schedule" attr-gym="AyGZN" attr-visible_schedule="lN5qQ" attr-default_schedule="all" attr-program="all" attr-theme="dark"></div>
       </div>
       <p class="mt-6 text-white/40 text-xs">* New to the dojo? <a href="/trial" class="text-accent hover:text-white transition-colors">Book a free trial</a> instead of registering directly.</p>
     </div>
@@ -79,8 +80,9 @@ const plans = [
   <script src="https://app.gymdesk.com/js/widgets.js" is:inline></script>
 
   <!-- Pricing -->
-  <section class="py-20 bg-black">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+  <section class="relative py-20 bg-black overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
       <Badge label="Tuition & Memberships" class="mb-4 block" />
       <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Three Streams. One Standard.</h2>
       <p class="text-white/75 leading-relaxed mb-4">
@@ -90,7 +92,7 @@ const plans = [
         Every new student begins with a <strong class="text-white">free trial</strong>. Confirm our standard fits your goals before any financial commitment.
       </p>
     </div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {plans.map((plan) => (
           <div class={`relative bg-surface border ${plan.highlighted ? 'border-accent' : 'border-white/10'} p-8 flex flex-col`}>

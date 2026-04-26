@@ -4,6 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
 import CTABand from '../components/sections/CTABand.astro';
+import AnimatedBg from '../components/ui/AnimatedBg.astro';
 import { business } from '../data/business';
 ---
 <Layout
@@ -20,8 +21,9 @@ import { business } from '../data/business';
     minHeight="min-h-[55vh]"
   />
 
-  <section class="py-20 bg-black">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+  <section class="relative py-20 bg-black overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div>
         <Badge label="Find Us" class="mb-4 block" />
         <h2 class="font-display text-3xl uppercase tracking-wide mb-8">Location & Hours</h2>

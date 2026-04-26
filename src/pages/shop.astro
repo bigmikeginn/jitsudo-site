@@ -4,6 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import CTABand from '../components/sections/CTABand.astro';
+import AnimatedBg from '../components/ui/AnimatedBg.astro';
 
 const SHOP_URL = 'https://jitsu-do-karate.gymdesk.com/shop';
 
@@ -30,8 +31,9 @@ const categories = [
     minHeight="min-h-[60vh]"
   />
 
-  <section class="py-20 bg-black">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative py-20 bg-black overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="What's In Stock" class="mb-4 block" />
       <h2 class="font-display text-4xl uppercase tracking-wide mb-10">Gear Built For The Mat</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

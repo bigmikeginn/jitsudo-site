@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
+import AnimatedBg from '../components/ui/AnimatedBg.astro';
 import { business } from '../data/business';
 
 const credentials = [
@@ -37,8 +38,9 @@ const influences = [
     minHeight="min-h-[70vh]"
   />
 
-  <section class="py-20 bg-black">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative py-20 bg-black overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Our Story" class="mb-4 block" />
       <h2 class="font-display text-3xl uppercase tracking-wide mb-8">A Technical Lab in Newmarket</h2>
       <p class="text-white/75 leading-relaxed mb-6">

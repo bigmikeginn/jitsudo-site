@@ -8,6 +8,7 @@ import ReviewSection from '../components/sections/ReviewSection.astro';
 import Gallery from '../components/sections/Gallery.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import Button from '../components/ui/Button.astro';
+import AnimatedBg from '../components/ui/AnimatedBg.astro';
 import { business } from '../data/business';
 
 const faqItems = [
@@ -70,8 +71,9 @@ const galleryImages = [
   />
 
   <!-- Programs -->
-  <section class="py-20 bg-black">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative py-20 bg-black overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="What We Teach" class="mb-4 block" />
       <h2 class="font-display text-4xl uppercase tracking-wide mb-3">Our Classes</h2>
       <p class="text-white/60 mb-12 max-w-2xl">Precision training for adults, youths, and kids in Karate and BJJ.</p>

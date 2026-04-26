@@ -4,6 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import ProgramCard from '../components/sections/ProgramCard.astro';
 import CTABand from '../components/sections/CTABand.astro';
+import AnimatedBg from '../components/ui/AnimatedBg.astro';
 ---
 <Layout
   title="Programs — Jitsu-Do Karate Newmarket"
@@ -20,8 +21,9 @@ import CTABand from '../components/sections/CTABand.astro';
     minHeight="min-h-[60vh]"
   />
 
-  <section class="py-20 bg-black">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="relative py-20 bg-black overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Our Methodology" class="mb-4 block" />
       <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Bridging Two Disciplines</h2>
       <p class="text-white/75 leading-relaxed mb-6">
