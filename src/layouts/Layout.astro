@@ -1,0 +1,36 @@
+---
+import '@fontsource/aldrich';
+import '../styles/global.css';
+import { business } from '../data/business';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const { title, description, ogImage, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? `https://${business.domain}`);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.toString()} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.toString()} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+  </head>
+  <body class="bg-black text-white font-sans antialiased">
+    <slot />
+  </body>
+</html>

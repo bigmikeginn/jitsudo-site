@@ -1,0 +1,26 @@
+export const business = {
+  name: 'Jitsu-Do Karate + BJJ',
+  founded: 2009,
+  address: {
+    street: '1211 Gorham Street, Unit 5',
+    city: 'Newmarket',
+    region: 'ON',
+    postalCode: 'L3Y 8Y3',
+    country: 'CA',
+  },
+  phone: '+1-905-235-9119',
+  phoneDisplay: '(905) 235-9119',
+  email: 'sensei@karatenewmarket.com',
+  hours: {
+    monday: '17:00-20:15',
+    tuesday: '17:00-20:15',
+    wednesday: '17:00-20:15',
+    thursday: '17:00-20:15',
+    friday: '17:00-20:15',
+    saturday: '08:30-11:30',
+    sunday: 'closed',
+  },
+  hoursDisplay: 'Mon–Fri 5:00–8:15pm · Sat 8:30–11:30am',
+  domain: 'jitsudo.ca',
+  legacyDomain: 'karatenewmarket.com',
+};
