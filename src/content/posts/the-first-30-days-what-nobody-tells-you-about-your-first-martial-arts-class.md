@@ -8,7 +8,7 @@ seoDescription: "The Question: A nervous user on r/BJJ recently posted: \"I just
 tags: []
 draft: false
 ---
-![](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/tired-white-belt-NUQnfkK4Bdl1pDOO.webp)
+![](/images/tired-white-belt-NUQnfkK4Bdl1pDOO.webp)
 
 **The Question:** A nervous user on r/BJJ recently posted: “I just signed up for my first class tomorrow. I’m out of shape, I don’t know the moves, and I’m terrified of looking like an idiot. What should I actually expect?”
 

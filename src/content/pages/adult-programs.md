@@ -1,7 +1,7 @@
 ---
 title: "Adult Programs"
 description: "Adult karate and BJJ in Newmarket for busy professionals. Real-world skills, no fluff. Flexible schedule — Mon-Fri evenings, Sat mornings."
-ogImage: "https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg"
+ogImage: "/images/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg"
 ---
 ADULTS · NEWMARKET
 

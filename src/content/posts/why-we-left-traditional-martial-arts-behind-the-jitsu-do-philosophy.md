@@ -8,7 +8,7 @@ seoDescription: "Karate, BJJ, Muay Thai, Judo, Wing Tsun… Why pick just one?"
 tags: []
 draft: false
 ---
-![](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/hybrid-martial-arts-hOrawtWsgFsgnpcI.png)
+![](/images/hybrid-martial-arts-hOrawtWsgFsgnpcI.png)
 
 Karate, BJJ, Muay Thai, Judo, Wing Tsun… Why pick just one?
 

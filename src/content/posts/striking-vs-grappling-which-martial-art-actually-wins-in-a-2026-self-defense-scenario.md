@@ -8,7 +8,7 @@ seoDescription: "The Question: A common debate on Reddit's r/MMA_Academy and r/m
 tags: []
 draft: false
 ---
-![](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/striking-vs-grappling-rMroVyN1TcYbQ0DU.png)
+![](/images/striking-vs-grappling-rMroVyN1TcYbQ0DU.png)
 
 **The Question: A common debate on Reddit’s r/MMA\_Academy and r/martialarts is: “If you could only choose one for a real-life situation, is it better to be a striker (Muay Thai/Boxing) or a grappler (BJJ/Wrestling)?”**
 

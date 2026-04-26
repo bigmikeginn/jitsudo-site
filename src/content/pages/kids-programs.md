@@ -1,7 +1,7 @@
 ---
 title: "Kids Programs"
 description: "Kids karate and jiu-jitsu classes in Newmarket. Foundational discipline, focus, and respect for children. Free trial class available."
-ogImage: "https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/3x-seiza-hzWGsz3r226OhdrB-scaled.jpg"
+ogImage: "/images/3x-seiza-hzWGsz3r226OhdrB.jpg"
 ---
 AGES 6–12 · NEWMARKET
 

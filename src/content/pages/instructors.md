@@ -12,7 +12,7 @@ MEET YOUR INSTRUCTOR
 
 ## SHIHAN MICHAEL GINN
 
-![Shihan Michael Ginn — Head Instructor at Jitsu-Do Karate + BJJ, Newmarket](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/intermediate-class-shuto-zvNTZVpOSlKKzbMX-scaled.jpg)
+![Shihan Michael Ginn — Head Instructor at Jitsu-Do Karate + BJJ, Newmarket](/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg)
 
 FOUNDER & HEAD INSTRUCTOR
 

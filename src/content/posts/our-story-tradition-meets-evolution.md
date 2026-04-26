@@ -44,4 +44,4 @@ The highest dropout rate in martial arts happens between Day 1 and Day 90. To be
 
 By then, the “scary” people in the gym will be your best friends, and the “impossible” moves will start to feel like second nature.
 
-![](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/never-quit-gBz375sJlaAubLDO.png)
+![](/images/never-quit-gBz375sJlaAubLDO.png)

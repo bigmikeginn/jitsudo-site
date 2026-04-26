@@ -1,7 +1,7 @@
 ---
 title: "Youth Programs"
 description: "Teen martial arts in Newmarket. Advanced Karate and BJJ curriculum building resilience, accountability, and real skills for ages 12-17."
-ogImage: "https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg"
+ogImage: "/images/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg"
 ---
 AGES 13–17 · NEWMARKET
 

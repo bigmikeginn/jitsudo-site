@@ -8,7 +8,7 @@ seoDescription: "The Question: A user on Reddit recently asked: \"I’m 42, sit 
 tags: []
 draft: false
 ---
-![](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/old-guy-training-nJBUoR0i8rHLbeFQ.png)
+![](/images/old-guy-training-nJBUoR0i8rHLbeFQ.png)
 
 **The Question: A user on Reddit recently asked: “I’m 42, sit at a desk all day, and I’m out of shape. I’ve always wanted to try Karate/BJJ, but I’m terrified I’ll just get injured or laughed out of the gym. Is it too late for me to start?”**
 

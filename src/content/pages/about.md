@@ -1,7 +1,7 @@
 ---
 title: "Our Story"
 description: "Learn about Jitsu-Do Karate - 35+ years of technical martial arts mastery in Newmarket, Ontario. Serving the community since 2009."
-ogImage: "https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/bjj-sensei-choke-7u5FEZsd4VfSjAEF.webp"
+ogImage: "/images/bjj-sensei-choke-7u5FEZsd4VfSjAEF.webp"
 ---
 NEWMARKET · FOUNDED 2009
 

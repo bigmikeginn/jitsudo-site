@@ -20,7 +20,7 @@ WHAT WE TEACH
 
 Precision training for adults, youths, and kids in Karate and BJJ
 
-![Karate class at Jitsu-Do](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/charlotte-roundhouse-QFzAmO1THZeA6cRQ-scaled.jpg)
+![Karate class at Jitsu-Do](/images/charlotte-roundhouse-QFzAmO1THZeA6cRQ.jpg)
 
 ### Karate
 
@@ -28,7 +28,7 @@ Technical karate classes built on discipline, precision, and real-world self-def
 
 [EXPLORE KARATE ›](/karate/)
 
-![BJJ class at Jitsu-Do](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/cameron-choking-maddox-7HNaQ3ZlUPmaWX2a-scaled.jpg)
+![BJJ class at Jitsu-Do](/images/cameron-choking-maddox-7HNaQ3ZlUPmaWX2a.jpg)
 
 ### Brazilian Jiu-Jitsu
 
@@ -147,6 +147,6 @@ INSIDE THE DOJO
 
 ## OUR ACADEMY
 
-![Karate intermediate class at Jitsu-Do](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/intermediate-class-shuto-zvNTZVpOSlKKzbMX-scaled.jpg) ![Karate throw at Jitsu-Do](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg) ![BJJ hip toss](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/harrison-hip-toss-eOo9x8cW5NLwYzAL.jpg) ![BJJ grappling at Jitsu-Do](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/fuji-bjj-b-w-vguZNDdu5JCYl6qM-scaled.jpg)
+![Karate intermediate class at Jitsu-Do](/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg) ![Karate throw at Jitsu-Do](/images/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg) ![BJJ hip toss](/images/harrison-hip-toss-eOo9x8cW5NLwYzAL.jpg) ![BJJ grappling at Jitsu-Do](/images/fuji-bjj-b-w-vguZNDdu5JCYl6qM.jpg)
 
 ### YOU’RE ENTITLED TO A FREE T

@@ -8,7 +8,7 @@ seoDescription: "The Question: A common sentiment on LinkedIn and productivity s
 tags: []
 draft: false
 ---
-![](https://sienna-ram-139653.hostingersite.com/wp-content/uploads/2026/04/professional-weights-vs-karate-6bWg7WZ47o3MSlHe.webp)
+![](/images/professional-weights-vs-karate-6bWg7WZ47o3MSlHe.webp)
 
 **The Question:** A common sentiment on LinkedIn and productivity subreddits like r/getdisciplined is: “I’m overwhelmed with work and feel burnt out. I want to exercise, but I don’t have two hours to spend at a gym. Is martial arts just another distraction, or can it actually help my career?”
 
