@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import { business } from '../data/business';
+
+const credentials = [
+  '4th Dan — Jitsu-Do Karate',
+  'BJJ Brown Belt — Gracie Humaita',
+  '35+ years continuous training & instruction',
+  'Founder, Jitsu-Do Karate (est. 2009)',
+];
+---
+<Layout
+  title="Our Story — Jitsu-Do Karate Newmarket"
+  description="35+ years of technical martial arts mastery in Newmarket, Ontario. Serving the community since 2009."
+  ogImage="/images/bjj-sensei-choke-7u5FEZsd4VfSjAEF.webp"
+>
+  <Hero
+    eyebrow="Newmarket · Founded 2009"
+    headline="35+ Years Of Technical"
+    accentLine="Mastery in Newmarket"
+    body="Martial arts is not a commodity — it is a lineage."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Programs', href: '/programs' }}
+    bgImage="/images/bjj-sensei-choke-7u5FEZsd4VfSjAEF.webp"
+    minHeight="min-h-[70vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Our Story" class="mb-4 block" />
+      <h2 class="font-display text-3xl uppercase tracking-wide mb-8">A Technical Lab in Newmarket</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        <strong class="text-white">Jitsu-Do</strong> was founded by <strong class="text-white">Shihan Michael Ginn</strong>, a practitioner with over 35 years of dedicated experience in the evolution of combat science. After decades of training and instruction, Shihan Ginn recognized that the traditional martial arts landscape was often cluttered with fluff and outdated methods.
+      </p>
+      <p class="text-white/75 leading-relaxed mb-6">
+        He founded Jitsu-Do as a Technical Lab in Newmarket — a space where the structural power of <strong class="text-white">Chito-Ryu Karate</strong> and the ground-truth efficiency of <strong class="text-white">Gracie Humaita Brazilian Jiu-Jitsu</strong> are integrated into a single, high-standard curriculum.
+      </p>
+      <p class="text-white/75 leading-relaxed">
+        We don't believe in factory martial arts. At Jitsu-Do, every movement is scrutinized through the lens of biomechanics and safety. Our mission is to provide the Newmarket community with a training environment that prioritizes the 'how' and 'why' over the 'what.'
+      </p>
+      <blockquote class="border-l-2 border-accent pl-6 my-8 text-white/60 italic">
+        "This isn't a hobby — it's a scaffold for a more disciplined life."
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <Badge label="Head Instructor" class="mb-4 block" />
+        <h2 class="font-display text-4xl uppercase tracking-wide mb-2">Shihan Michael Ginn</h2>
+        <p class="text-accent font-display text-sm tracking-widest uppercase mb-8">4th Dan · BJJ Brown · 35+ Years</p>
+        <p class="text-white/75 leading-relaxed mb-6">
+          Shihan Ginn spent over three decades pursuing a single question: <em class="text-white">what actually works?</em> Beginning in the late 1980s, he trained across disciplines with a practitioner's eye — keeping what was structurally sound, discarding what wasn't, and building a curriculum grounded in biomechanics, safety, and real-world effectiveness.
+        </p>
+        <p class="text-white/75 leading-relaxed">
+          In 2009, he founded Jitsu-Do Karate in Newmarket with a clear mandate: <strong class="text-white">no fluff</strong>.
+        </p>
+      </div>
+      <div>
+        <img src="/images/bjj-sensei-choke-7u5FEZsd4VfSjAEF.webp" alt="Shihan Michael Ginn" class="w-full h-auto" loading="lazy" />
+      </div>
+    </div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
+      <Badge label="Credentials" class="mb-4 block" />
+      <ul class="space-y-3 max-w-xl">
+        {credentials.map((c) => (
+          <li class="flex gap-3 text-white/80">
+            <span class="text-accent">✓</span>
+            <span>{c}</span>
+          </li>
+        ))}
+      </ul>
+      <blockquote class="border-l-2 border-accent pl-6 mt-10 text-white/60 italic max-w-2xl">
+        "Our duty is not to win — it is not to lose."
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Find Us In Newmarket" class="mb-4 block" />
+      <h2 class="font-display text-3xl uppercase tracking-wide mb-8">Our Location</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-white/80">
+        <div>
+          <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Address</p>
+          <p>{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postalCode}</p>
+        </div>
+        <div>
+          <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Hours</p>
+          <p>Mon–Fri: 5:00–8:15pm<br />Saturday: 8:30–11:30am</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="First class is free"
+    heading="Come See What This Looks Like"
+    body="No commitment. No pressure. Come see what a technical martial arts environment actually feels like."
+    primaryCta={{ label: 'Claim Your Free Trial', href: '/trial' }}
+  />
+</Layout>

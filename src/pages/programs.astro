@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import ProgramCard from '../components/sections/ProgramCard.astro';
+import CTABand from '../components/sections/CTABand.astro';
+---
+<Layout
+  title="Programs — Jitsu-Do Karate Newmarket"
+  description="Adult, youth, and kids martial arts programs in Newmarket. Karate and Brazilian Jiu-Jitsu taught by Shihan Michael Ginn. Free trial available."
+>
+  <Hero
+    eyebrow="Newmarket's Technical Martial Arts Hub"
+    headline="Programs"
+    accentLine="For Every Stage"
+    body="Four decades of stripping away fluff to find the high-standard, practical core that actually works."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+    bgImage="/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg"
+    minHeight="min-h-[60vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Our Methodology" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Bridging Two Disciplines</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        At <strong class="text-white">Jitsu-Do</strong>, we treat martial arts as a laboratory for human potential, not a factory for trophies. We don't just teach you how to move; we teach you why the movement succeeds.
+      </p>
+      <p class="text-white/75 leading-relaxed mb-6">
+        By bridging the structural precision of <strong class="text-white">Chito-Ryu Karate</strong> with the ground-truth efficiency of <strong class="text-white">Gracie Humaita Brazilian Jiu-Jitsu</strong>, we provide a Newmarket-based curriculum built on biomechanics, safety, and real-world clarity.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="By Age Group" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-12">Choose Your Path</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <ProgramCard
+          title="Kids"
+          ageGroup="Foundational Capability"
+          description="Build a foundation of focus and discipline. Gross motor skills, respect protocols, and body awareness."
+          image="/images/3x-seiza-hzWGsz3r226OhdrB.jpg"
+          href="/kids-programs"
+          features={['Karate basics', 'Beginner BJJ', 'Discipline + focus']}
+        />
+        <ProgramCard
+          title="Youth"
+          ageGroup="Technical Resilience"
+          description="A scaffold for life — mental fortitude, conflict de-escalation, and personal accountability."
+          image="/images/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg"
+          href="/youth-programs"
+          features={['Hybrid curriculum', 'Mental resilience', 'Self-defense']}
+        />
+        <ProgramCard
+          title="Adult"
+          ageGroup="Applied Martial Science"
+          description="High-standard BJJ and Karate. Technical precision over ego, in a safe and elite environment."
+          image="/images/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg"
+          href="/adult-programs"
+          features={['Full BJJ curriculum', 'Chito-Ryu Karate', 'Physical longevity']}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="By Discipline" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-12">Two Systems, One Standard</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <ProgramCard
+          title="Chito-Ryu Karate"
+          ageGroup="Striking + Structure"
+          description="Precision-focused traditional karate built on biomechanics, kata, and real-world self-defense applications."
+          image="/images/charlotte-roundhouse-QFzAmO1THZeA6cRQ.jpg"
+          href="/karate"
+          features={['Stances + footwork', 'Kata applications', 'Controlled sparring']}
+        />
+        <ProgramCard
+          title="Gracie Humaita BJJ"
+          ageGroup="Grappling + Leverage"
+          description="Position before submission. Technically rigorous Brazilian Jiu-Jitsu rooted in the Gracie Humaita lineage."
+          image="/images/cameron-choking-maddox-7HNaQ3ZlUPmaWX2a.jpg"
+          href="/bjj"
+          features={['Guard + mount', 'Submissions', 'Live rolling']}
+        />
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="First class is free"
+    heading="Find Your Program"
+    body="Not sure which one is right for you? Come in for a trial and we'll help you decide."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'Contact Us', href: '/contact' }}
+  />
+</Layout>

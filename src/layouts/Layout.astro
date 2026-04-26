@@ -2,15 +2,18 @@
 import '@fontsource/aldrich';
 import '../styles/global.css';
 import { business } from '../data/business';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 
 interface Props {
   title: string;
   description: string;
   ogImage?: string;
   noindex?: boolean;
+  bare?: boolean;
 }
 
-const { title, description, ogImage, noindex = false } = Astro.props;
+const { title, description, ogImage, noindex = false, bare = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? `https://${business.domain}`);
 ---
 <!doctype html>
@@ -31,6 +34,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? `https://${business.
     {ogImage && <meta property="og:image" content={ogImage} />}
   </head>
   <body class="bg-black text-white font-sans antialiased">
-    <slot />
+    {!bare && <Header />}
+    <main>
+      <slot />
+    </main>
+    {!bare && <Footer />}
   </body>
 </html>

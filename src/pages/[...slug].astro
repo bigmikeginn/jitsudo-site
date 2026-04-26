@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Badge from '../components/ui/Badge.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+export async function getStaticPaths() {
+  // Slugs that have explicit page files — exclude from this catch-all.
+  const excluded = ['home', 'karate', 'bjj', 'programs', 'trial', 'contact', 'schedule', 'instructors', 'join', 'about', 'blog-stub'];
+  const pages = await getCollection('pages');
+  return pages
+    .filter((p) => !excluded.includes(p.id))
+    .map((page) => ({
+      params: { slug: page.id },
+      props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+<Layout
+  title={`${page.data.title} — Jitsu-Do Karate`}
+  description={page.data.description}
+  ogImage={page.data.ogImage}
+  noindex={page.data.noindex}
+>
+  <section class="pt-32 pb-8 px-4 bg-black">
+    <div class="max-w-3xl mx-auto">
+      <Badge label="Jitsu-Do Karate" class="mb-2 block" />
+    </div>
+  </section>
+
+  <article class="px-4 pb-24">
+    <div class="max-w-3xl mx-auto prose">
+      <Content />
+    </div>
+  </article>
+
+  <CTABand
+    eyebrow="Take the next step"
+    heading="Ready to train?"
+    body="Book a free trial class. No experience or equipment needed."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+  />
+</Layout>

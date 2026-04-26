@@ -35,7 +35,7 @@ In 2009, he founded Jitsu-Do Karate in Newmarket with a clear mandate: no fluff.
 
 “Our duty is not to win — it is not to lose.”
 
-[BOOK YOUR FREE TRIAL →](/trial-class/) ![Shihan Michael Ginn](/wp-content/uploads/2026/04/bjj-sensei-choke-7u5FEZsd4VfSjAEF.webp)
+[BOOK YOUR FREE TRIAL →](/trial-class/) ![Shihan Michael Ginn](/images/bjj-sensei-choke-7u5FEZsd4VfSjAEF.webp)
 
 OUR LOCATION
 

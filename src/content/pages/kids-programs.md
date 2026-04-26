@@ -14,7 +14,7 @@ STANDARD
 
 Discipline is not about punishment — it’s about protocol. Our students learn the bow-in culture and the importance of listening and following technical instruction from day one.
 
-![Kids karate class at Jitsu-Do Newmarket](/wp-content/uploads/2026/04/3x-seiza-hzWGsz3r226OhdrB-scaled.jpg)
+![Kids karate class at Jitsu-Do Newmarket](/images/3x-seiza-hzWGsz3r226OhdrB.jpg)
 
 ## SAFE  
 BOUNDARIES
@@ -26,7 +26,7 @@ FOUNDATION
 
 The best time to build a scaffold for a disciplined life is during the formative years. The habits built here carry forward into academics, sport, and character.
 
-![Kids jiu-jitsu at Jitsu-Do Newmarket](/wp-content/uploads/2026/04/harrison-hip-toss-eOo9x8cW5NLwYzAL.jpg)
+![Kids jiu-jitsu at Jitsu-Do Newmarket](/images/harrison-hip-toss-eOo9x8cW5NLwYzAL.jpg)
 
 ## WHO IT  
 IS FOR
@@ -38,4 +38,4 @@ FOUNDATION TODAY
 
 The best time to build a scaffold for a disciplined life is during these formative years. Join our Newmarket community for a trial and build a strong foundation with us together.
 
-[Claim your FREE trial!](/trial-class/) ![Kids Programs at Jitsu-Do Newmarket](/wp-content/uploads/2026/04/kids-programs-photo.jpg)
+[Claim your FREE trial!](/trial-class/) ![Kids Programs at Jitsu-Do Newmarket](/images/kids-programs-photo.jpg)

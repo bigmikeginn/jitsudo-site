@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+const credentials = [
+  { title: '4th Dan — Jitsu-Do Karate', body: 'Highest-ranking practitioner of the Jitsu-Do system — a hybrid curriculum refined over 35+ years of continuous training and instruction.' },
+  { title: 'BJJ Brown Belt', body: 'Grounded in BJJ training across multiple lineages, with emphasis on positional control, leverage, and practical grappling efficiency.' },
+  { title: 'Biomechanics-Based Instruction', body: 'Certified in biomechanics-based movement principles. Every technique is taught with structural rationale, not just pattern repetition.' },
+  { title: 'Founder (est. 2009)', body: 'Established Jitsu-Do Karate in Newmarket after identifying what was missing from mainstream martial arts: technical rigour without the ceremony.' },
+];
+---
+<Layout
+  title="Instructors — Jitsu-Do Karate Newmarket"
+  description="Meet Shihan Michael Ginn — 4th Dan Jitsu-Do, BJJ Brown Belt, 35+ years. Founder of Jitsu-Do Karate, Newmarket 2009."
+>
+  <Hero
+    eyebrow="Jitsu-Do Karate + BJJ"
+    headline="Shihan Michael Ginn"
+    body="Founder & Head Instructor. 35+ years. 4th Dan. Built for people who demand real training."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'About Jitsu-Do', href: '/about' }}
+    bgImage="/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg"
+    minHeight="min-h-[70vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <img
+          src="/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg"
+          alt="Shihan Michael Ginn — Head Instructor"
+          class="w-full h-auto"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <Badge label="Meet Your Instructor" class="mb-4 block" />
+        <h2 class="font-display text-3xl uppercase tracking-wide mb-2">Shihan Michael Ginn</h2>
+        <p class="text-accent font-display text-sm tracking-widest uppercase mb-8">Founder & Head Instructor</p>
+        <p class="text-white/75 leading-relaxed mb-6">
+          Shihan Michael Ginn has spent over three and a half decades pursuing a single question: <em class="text-white">what actually works?</em> Beginning in the late 1980s, he trained across disciplines with a practitioner's eye — stripping away ceremony where it added no value, keeping what was structurally sound, and building a curriculum grounded in biomechanics, safety, and real-world effectiveness.
+        </p>
+        <p class="text-white/75 leading-relaxed">
+          In 2009, he founded Jitsu-Do Karate in Newmarket with a clear mandate: <strong class="text-white">no fluff</strong>. The result is a hybrid system built on Chito-Ryu Karate and Brazilian Jiu-Jitsu — designed to produce technically proficient, pressure-tested martial artists regardless of age or athletic background.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Credentials & Lineage" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-12">Training Background</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {credentials.map((c) => (
+          <div class="bg-black border border-white/10 p-6">
+            <h3 class="font-display text-sm tracking-widest uppercase text-accent mb-3">{c.title}</h3>
+            <p class="text-sm text-white/70 leading-relaxed">{c.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-black">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Teaching Philosophy" class="mb-4 block" />
+      <h2 class="font-display text-3xl uppercase tracking-wide mb-8">A Laboratory for Human Capability</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        Shihan Ginn's philosophy centres on the idea that martial arts is a laboratory for human capability, not a factory for trophies. Every technique taught at Jitsu-Do has been stress-tested against that standard.
+      </p>
+      <p class="text-white/75 leading-relaxed">
+        Students learn not just how to move, but <strong class="text-white">why</strong> the movement succeeds — building a mental model that transfers under pressure.
+      </p>
+      <blockquote class="border-l-2 border-accent pl-6 my-8 text-white/60 italic">
+        "Our duty is not to win — it is not to lose."
+      </blockquote>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Train under Shihan Ginn"
+    heading="Every New Student Starts With A Free Trial"
+    body="No pressure, no commitment. Come in, see the environment, and decide for yourself."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+  />
+</Layout>

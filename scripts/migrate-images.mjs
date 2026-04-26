@@ -40,11 +40,10 @@ function rewriteUrls(content, skippedUrls) {
     content = content.replace(new RegExp(`!\\[[^\\]]*\\]\\(${escaped}\\)`, 'g'), '');
   }
 
-  // Rewrite remaining staging URLs to local /images/<filename>
-  const stagingBase = `${WP_BASE}/wp-content/uploads/`;
+  // Rewrite full staging URLs and relative /wp-content/uploads/ paths to /images/<filename>
   content = content.replace(
-    new RegExp(`https://sienna-ram-139653\\.hostingersite\\.com/wp-content/uploads/\\d{4}/\\d{2}/([^)"\\s]+)`, 'g'),
-    (_match, filename) => '/images/' + filename.replace(/-scaled(\.[^.]+)$/, '$1'),
+    /(https:\/\/sienna-ram-139653\.hostingersite\.com)?\/wp-content\/uploads\/\d{4}\/\d{2}\/([^)"\s]+)/g,
+    (_match, _host, filename) => '/images/' + filename.replace(/-scaled(\.[^.]+)$/, '$1'),
   );
 
   return content;

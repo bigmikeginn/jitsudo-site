@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+const plans = [
+  {
+    eyebrow: 'Entry',
+    name: 'Basic',
+    price: '$129.99',
+    cadence: '/mo',
+    note: '3-month term or $100 signup fee',
+    features: [
+      { ok: true, text: 'Up to 2 classes per week' },
+      { ok: true, text: 'Karate & BJJ included' },
+      { ok: false, text: 'Limited class selection' },
+    ],
+    highlighted: false,
+  },
+  {
+    eyebrow: 'Most Popular',
+    name: 'Core',
+    price: '$159.99',
+    cadence: '/mo',
+    note: 'No signup fee · No term limit',
+    features: [
+      { ok: true, text: 'Unlimited classes (Karate & BJJ)' },
+      { ok: true, text: 'Adult & family classes' },
+      { ok: true, text: 'No signup fees' },
+      { ok: true, text: 'No term limits' },
+    ],
+    highlighted: true,
+  },
+  {
+    eyebrow: 'Premium',
+    name: 'Elite',
+    price: '$209.99',
+    cadence: '/mo',
+    note: 'Fastest progress',
+    features: [
+      { ok: true, text: 'Everything in Core' },
+      { ok: true, text: '1 private lesson/month (30 min)' },
+      { ok: true, text: 'Gradings included (white–brown)' },
+      { ok: true, text: '15% gear discount' },
+    ],
+    highlighted: false,
+  },
+];
+---
+<Layout
+  title="Schedule & Pricing — Jitsu-Do Karate Newmarket"
+  description="Class schedule and membership pricing for Jitsu-Do Karate in Newmarket. Core, Elite, and Basic plans from $129.99/mo. No signup fees on Core."
+>
+  <Hero
+    eyebrow="Schedule + Pricing"
+    headline="Train On Your"
+    accentLine="Schedule"
+    body="Consistency is the only path to mastery. Whether you train twice a week or take private classes, we've got you covered."
+    primaryCta={{ label: 'Start Free Trial', href: '/trial' }}
+    minHeight="min-h-[55vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Tuition & Memberships" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Three Streams. One Standard.</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        We offer three membership streams depending on your investment and commitment. <strong class="text-white">Elite</strong> is our premium training experience for students who want the fastest progress. <strong class="text-white">Core</strong> is the complete Jitsu-Do training experience and our most popular membership. <strong class="text-white">Basic</strong> is a simple way to get started with structured training.
+      </p>
+      <p class="text-white/75 leading-relaxed">
+        We don't do high-pressure sales. Every new student begins with a <strong class="text-white">free trial</strong>. We want you to confirm our technical standards and dojo culture align with your goals before any financial commitment.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {plans.map((plan) => (
+          <div class={`relative bg-black border ${plan.highlighted ? 'border-accent' : 'border-white/10'} p-8 flex flex-col`}>
+            {plan.highlighted && (
+              <span class="absolute -top-3 left-8 bg-accent text-white text-xs tracking-[0.2em] uppercase px-3 py-1">
+                {plan.eyebrow}
+              </span>
+            )}
+            {!plan.highlighted && (
+              <p class="text-xs tracking-[0.2em] uppercase text-white/40 mb-2">{plan.eyebrow}</p>
+            )}
+            <h3 class="font-display text-3xl uppercase tracking-wide mb-4">{plan.name}</h3>
+            <div class="mb-2">
+              <span class="font-display text-4xl text-accent">{plan.price}</span>
+              <span class="text-white/55 text-sm">{plan.cadence}</span>
+            </div>
+            <p class="text-xs text-white/55 mb-6">{plan.note}</p>
+            <ul class="space-y-2 mb-8 flex-1">
+              {plan.features.map((f) => (
+                <li class="flex gap-2 text-sm text-white/75">
+                  <span class={f.ok ? 'text-accent' : 'text-white/30'}>{f.ok ? '✓' : '—'}</span>
+                  <span>{f.text}</span>
+                </li>
+              ))}
+            </ul>
+            <Button href="/trial" variant={plan.highlighted ? 'primary' : 'ghost'} size="md">Start Free Trial</Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Not sure which plan?"
+    heading="Try Before You Decide"
+    body="Every new student starts with a free trial class — no signup, no card, no commitment."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'Contact Us', href: '/contact' }}
+  />
+</Layout>

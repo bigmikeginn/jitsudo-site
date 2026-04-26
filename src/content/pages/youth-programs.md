@@ -17,7 +17,7 @@ CAPABILITY
 
 We move beyond basic coordination. Students learn the biomechanics of Chito-Ryu and BJJ, building a genuine physical foundation.
 
-[Book Free Trial Class](/trial-class/) ![Youth karate at Jitsu-Do Newmarket](/wp-content/uploads/2026/04/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg)
+[Book Free Trial Class](/trial-class/) ![Youth karate at Jitsu-Do Newmarket](/images/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg)
 
 ## ACCOUNTABILITY
 
@@ -35,7 +35,7 @@ IS FOR
 
 Teenagers who want something more demanding and more rewarding than recreational sports. No experience required — complete beginners are welcome.
 
-![Youth BJJ training at Jitsu-Do Newmarket](/wp-content/uploads/2026/04/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg)
+![Youth BJJ training at Jitsu-Do Newmarket](/images/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg)
 
 ## THE GROUND  
 GAME
@@ -47,4 +47,4 @@ IS FREE
 
 No gear required. Athletic clothing is fine. Come see if Jitsu-Do is the right fit for your teenager.
 
-[Claim your FREE trial!](/trial-class/) ![Youth Programs at Jitsu-Do Newmarket](/wp-content/uploads/2026/04/youth-programs-photo.jpg)
+[Claim your FREE trial!](/trial-class/) ![Youth Programs at Jitsu-Do Newmarket](/images/youth-programs-photo.jpg)

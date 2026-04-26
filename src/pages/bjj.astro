@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+const whatYoullLearn = [
+  'Guard, mount, side control & back control positions',
+  'Escapes, sweeps & reversals',
+  'Submissions: chokes, arm locks, leg locks',
+  'Takedowns & takedown defense',
+  'Live rolling with control & intent',
+];
+
+const whoItsFor = [
+  'Any size, any fitness level — leverage is the equalizer',
+  'Adults looking for a full-contact pressure test',
+  'Karate students wanting ground competency',
+  'Anyone who has been told they\'re "too small" to fight',
+  'Students who want to compete or simply survive',
+];
+---
+<Layout
+  title="Brazilian Jiu-Jitsu — Jitsu-Do Newmarket"
+  description="Gracie Humaita BJJ in Newmarket. Technically rigorous Brazilian Jiu-Jitsu built on leverage, timing, and position. All sizes welcome."
+>
+  <Hero
+    eyebrow="Gracie Humaita Lineage"
+    headline="Brazilian Jiu-Jitsu"
+    accentLine="The Ground Truth"
+    body="A smaller, weaker person should be able to control and neutralize a larger attacker using leverage, timing, and position. We take that premise seriously."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+    bgImage="/images/cameron-choking-maddox-7HNaQ3ZlUPmaWX2a.jpg"
+    minHeight="min-h-[70vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Gracie Humaita Lineage" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Position Before Submission</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        Jitsu-Do's BJJ curriculum is rooted in the <strong class="text-white">Gracie Humaita lineage</strong> — one of the most technically rigorous BJJ traditions in the world. The Gracie system was built on a simple premise: a smaller, weaker person should be able to control and neutralize a larger, stronger attacker using leverage, timing, and position.
+      </p>
+      <p class="text-white/75 leading-relaxed mb-6">
+        At Jitsu-Do, we take that premise seriously. Every technique we teach has been stress-tested. You will not learn moves that look impressive on video but fail under pressure. You will learn <strong class="text-white">what works and why</strong> — building the mental model that holds up when it matters.
+      </p>
+      <blockquote class="border-l-2 border-accent pl-6 my-8 text-white/60 italic">
+        "Position before submission. Every time."
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <Badge label="Curriculum" class="mb-4 block" />
+        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">What You'll Learn</h3>
+        <ul class="space-y-3">
+          {whatYoullLearn.map((item) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <Badge label="Right Fit" class="mb-4 block" />
+        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">Who It's For</h3>
+        <ul class="space-y-3">
+          {whoItsFor.map((item) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Ready to roll"
+    heading="Book Your Free Trial Class"
+    body="No prior experience, no gear required. Come learn what actually works on the mat."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'See Schedule', href: '/schedule' }}
+  />
+</Layout>

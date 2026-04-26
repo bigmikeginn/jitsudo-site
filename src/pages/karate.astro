@@ -1,0 +1,90 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+const whatYoullLearn = [
+  'Foundational stances, footwork & weight transfer',
+  'Punching, striking & blocking mechanics',
+  'Kata (forms) and their practical applications',
+  'Sparring with control and intent',
+  'Self-defense scenarios grounded in real physics',
+];
+
+const whoItsFor = [
+  'Complete beginners — no experience needed',
+  'Adult professionals who want functional fitness',
+  'Youth students building discipline & focus',
+  'Athletes cross-training for structure',
+  'Anyone serious about understanding how striking works',
+];
+---
+<Layout
+  title="Karate — Jitsu-Do Karate Newmarket"
+  description="Chito-Ryu Karate classes in Newmarket — precision-focused technical karate for all ages. Discipline, structure, and real-world applications."
+>
+  <Hero
+    eyebrow="Jitsu-Do Karate"
+    headline="Karate"
+    accentLine="Precision Over Power"
+    body="Chito-Ryu Karate — a discipline that integrates traditional Okinawan technique with modern biomechanical understanding."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+    bgImage="/images/charlotte-roundhouse-QFzAmO1THZeA6cRQ.jpg"
+    minHeight="min-h-[70vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Chito-Ryu Karate" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">The Chito-Ryu System</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        Jitsu-Do Karate is built on the <strong class="text-white">Chito-Ryu system</strong> — a discipline developed by Dr. Tsuyoshi Chitose to integrate traditional Okinawan technique with modern biomechanical understanding. Where most styles chase power, Chito-Ryu chases alignment. The result is a striking system that works regardless of size or strength.
+      </p>
+      <p class="text-white/75 leading-relaxed mb-6">
+        At Jitsu-Do, every movement is dissected through the lens of <strong class="text-white">structure and safety</strong>. You will learn why a technique works before you are asked to drill it. That distinction is what separates serious martial arts training from repetitive motion with no understanding.
+      </p>
+      <blockquote class="border-l-2 border-accent pl-6 my-8 text-white/60 italic">
+        "The goal is not to be dangerous — the goal is to be structurally sound under pressure."
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <Badge label="Curriculum" class="mb-4 block" />
+        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">What You'll Learn</h3>
+        <ul class="space-y-3">
+          {whatYoullLearn.map((item) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <Badge label="Right Fit" class="mb-4 block" />
+        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">Who It's For</h3>
+        <ul class="space-y-3">
+          {whoItsFor.map((item) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Ready to start"
+    heading="Book Your Free Trial Class"
+    body="No experience, no equipment, no commitment. Just come in and train."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'See Schedule', href: '/schedule' }}
+  />
+</Layout>

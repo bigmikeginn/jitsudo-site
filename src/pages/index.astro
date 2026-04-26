@@ -1,15 +1,129 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import ClassCard from '../components/sections/ClassCard.astro';
+import FAQAccordion from '../components/sections/FAQAccordion.astro';
+import ReviewSection from '../components/sections/ReviewSection.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import CTABand from '../components/sections/CTABand.astro';
+import Button from '../components/ui/Button.astro';
 import { business } from '../data/business';
+
+const faqItems = [
+  {
+    question: 'How long does a trial class take?',
+    answer: 'A trial class takes 30–45 minutes. You wear your own clothes and train alongside beginners. Senior students are always present to support you — you\'re never on your own.',
+  },
+  {
+    question: 'Am I too old? Do I need to be fit?',
+    answer: 'You\'re never too old. Anyone can do this and all students are encouraged to go at their own pace. We\'re about personal progress — not competing to see who\'s fastest or strongest.',
+  },
+  {
+    question: 'What do I need to bring?',
+    answer: 'Just yourself and comfortable clothes. No gi, no equipment, no experience required for your first visit. We\'ll guide you through everything.',
+  },
+  {
+    question: 'Is there a sign-up fee or contract?',
+    answer: 'No commitment required for your free trial. If you decide to join, we offer flexible membership options — no long-term contracts forcing you to stay.',
+  },
+];
+
+const featuredReview = {
+  name: 'Heather West',
+  text: 'Jitsu-Do is like no other dojo I\'ve encountered — high quality teaching, every student known by name. We train hard and laugh a lot. Sensei Ginn explains the why behind everything, welcomes every question, and has a witty sense of humour. You\'d be lucky to train here.',
+  rating: 5,
+  date: 'Member 13 years',
+  source: 'google' as const,
+};
+
+const reviews = [
+  { name: 'Lia Carpino', text: 'We are so happy with Jitsu-Do Karate! Our son has had a wonderful experience and greatly enjoys the classes!', rating: 5, date: '17 weeks ago', source: 'google' as const },
+  { name: 'Min Kim', text: 'Our child truly enjoyed this class — he\'d come home proudly practicing what he learned. A great balance of learning and play.', rating: 5, date: '18 weeks ago', source: 'google' as const },
+  { name: 'Scott Morris', text: 'Sensei Mike not only showed you how to do techniques but why — always practical, always engaging. Thank you for the fun!', rating: 5, date: 'Mar 14, 2025', source: 'google' as const },
+  { name: 'Dennis Dizon', text: 'My son joined over a year ago and has shown more interest in karate than any other sport. Sensei Ginn explains advanced concepts in an informative manner while keeping the class fun for all ages.', rating: 5, source: 'facebook' as const },
+  { name: 'Mumsietwo Rosen', text: 'Our son has been coming here over a year and absolutely loves it. Sensei is always friendly and welcoming. He teaches kids so well.', rating: 5, source: 'facebook' as const },
+  { name: 'Cassandra Matejka', text: 'My son and I love this place. Fun and challenging for both of us, everyone is welcoming. Sensei explains the reasoning behind every technique.', rating: 5, source: 'facebook' as const },
+];
+
+const galleryImages = [
+  { src: '/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg', alt: 'Karate intermediate class at Jitsu-Do' },
+  { src: '/images/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg', alt: 'Karate throw at Jitsu-Do' },
+  { src: '/images/harrison-hip-toss-eOo9x8cW5NLwYzAL.jpg', alt: 'BJJ hip toss' },
+  { src: '/images/fuji-bjj-b-w-vguZNDdu5JCYl6qM.jpg', alt: 'BJJ grappling at Jitsu-Do' },
+  { src: '/images/charlotte-roundhouse-QFzAmO1THZeA6cRQ.jpg', alt: 'Roundhouse kick at Jitsu-Do' },
+];
 ---
 <Layout
-  title={business.name}
-  description="Karate and Brazilian Jiu-Jitsu in Newmarket, Ontario. Founded 2009."
+  title={`${business.name} — Newmarket Karate + BJJ`}
+  description="Jitsu-Do Karate Newmarket: High-standard martial arts training in practical karate and Brazilian Jiu-Jitsu. No fluff, real results."
 >
-  <main class="min-h-screen flex items-center justify-center p-8">
-    <div class="text-center">
-      <h1 class="text-5xl font-display tracking-wide mb-4">{business.name}</h1>
-      <p class="text-lg opacity-70">Phase 1 scaffold complete. Site under reconstruction.</p>
+  <Hero
+    eyebrow="Newmarket's Premier Martial Arts Dojo"
+    headline="Practical Martial Arts."
+    accentLine="No Fluff."
+    body="Newmarket's home for high-standard Karate and Brazilian Jiu-Jitsu. Proven real-world health and self-defence practices for adults, youths, and kids."
+    bullets={['No commitment required', 'First class free', 'Limited beginner spots']}
+    primaryCta={{ label: 'Claim Your Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+    bgImage="/images/hero-dojo.png"
+  />
+
+  <!-- Programs -->
+  <section class="py-20 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="What We Teach" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-3">Our Classes</h2>
+      <p class="text-white/60 mb-12 max-w-2xl">Precision training for adults, youths, and kids in Karate and BJJ.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <ClassCard
+          title="Karate"
+          description="Technical karate classes built on discipline, precision, and real-world self-defence. Suitable for all ages and fitness levels."
+          image="/images/charlotte-roundhouse-QFzAmO1THZeA6cRQ.jpg"
+          href="/karate"
+          linkLabel="Explore Karate"
+        />
+        <ClassCard
+          title="Brazilian Jiu-Jitsu"
+          description="Hands-on BJJ sessions emphasising technique, control, and resilience. No prior experience needed to get started."
+          image="/images/cameron-choking-maddox-7HNaQ3ZlUPmaWX2a.jpg"
+          href="/bjj"
+          linkLabel="Explore BJJ"
+        />
+      </div>
+
+      <div class="mt-10 flex justify-center">
+        <Button href="/schedule" variant="ghost">View Full Schedule</Button>
+      </div>
     </div>
-  </main>
+  </section>
+
+  <FAQAccordion
+    eyebrow="Before You Start"
+    heading="Common Questions"
+    items={faqItems}
+  />
+
+  <ReviewSection
+    eyebrow="What People Say"
+    heading="Reviews"
+    featured={featuredReview}
+    reviews={reviews}
+  />
+
+  <Gallery
+    eyebrow="Inside the Dojo"
+    heading="Our Academy"
+    images={galleryImages}
+  />
+
+  <CTABand
+    eyebrow="You're Entitled To A Free Trial"
+    heading="Come Train With Us"
+    body="No commitment. No pressure. See what a technical martial arts environment actually feels like."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'Contact Us', href: '/contact' }}
+    bgImage="/images/hero-dojo.png"
+  />
 </Layout>

@@ -18,7 +18,7 @@ STAND-UP GAME
 
 ## KARATE: STRUCTURAL POWER
 
-![Karate kata](/wp-content/uploads/2026/04/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg)
+![Karate kata](/images/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg)
 
 We utilize the foundations of Okinawan Karate to master distance, timing, and structural integrity. You will learn to develop power that comes from mechanical advantage, not size or strength.
 
@@ -28,7 +28,7 @@ GROUND GAME
 
 ## BJJ: THE GROUND TRUTH
 
-![BJJ throw](/wp-content/uploads/2026/04/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg)
+![BJJ throw](/images/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg)
 
 Brazilian Jiu-Jitsu at Jitsu-Do emphasizes technical efficiency over athletic talent. You do not need strength to succeed — you need leverage, timing, and positional awareness.
 

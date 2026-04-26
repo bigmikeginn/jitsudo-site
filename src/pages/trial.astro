@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import { business } from '../data/business';
+
+const whatToBring = [
+  'Comfortable athletic clothing (gi not required for trial)',
+  'Water bottle',
+  'Clean indoor footwear or bare feet',
+  'An open mind and genuine questions',
+];
+---
+<Layout
+  title="Book Your Free Trial — Jitsu-Do Karate Newmarket"
+  description="Book your free trial class at Jitsu-Do Karate in Newmarket. No pressure, no commitment. Limited spots in beginner karate and BJJ classes."
+>
+  <Hero
+    eyebrow="Your First Step"
+    headline="Book Your"
+    accentLine="Free Trial Class"
+    body="Come in, train, see if the technical standard and dojo culture fit your goals. No high-pressure sales — ever."
+    primaryCta={{ label: 'Email To Book', href: `mailto:${business.email}` }}
+    secondaryCta={{ label: `Call ${business.phoneDisplay}`, href: `tel:${business.phone}` }}
+    bgImage="/images/3x-seiza-hzWGsz3r226OhdrB.jpg"
+    minHeight="min-h-[70vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="What to Expect" class="mb-4 block" />
+      <h2 class="font-display text-3xl uppercase tracking-wide mb-6">No Pressure, No Sales Pitch</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        Every new student starts with a <strong class="text-white">one-on-one orientation</strong> with Shihan Ginn before joining the class floor. This isn't a formality — it's how we make sure you are in the right program, at the right level, from day one.
+      </p>
+      <p class="text-white/75 leading-relaxed">
+        If the dojo fits, great. If it doesn't, there's no awkward conversation.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div>
+        <Badge label="Bring This" class="mb-4 block" />
+        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">What to Bring</h3>
+        <ul class="space-y-3">
+          {whatToBring.map((item) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-6 text-white/55 italic text-sm">No prior experience needed. No gear to buy before you decide.</p>
+      </div>
+      <div>
+        <Badge label="Class Times" class="mb-4 block" />
+        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">When To Come</h3>
+        <div class="space-y-5 text-white/80">
+          <div>
+            <p class="font-display text-sm tracking-widest text-accent uppercase mb-1">Monday – Friday</p>
+            <p>5:00 PM – 8:15 PM</p>
+          </div>
+          <div>
+            <p class="font-display text-sm tracking-widest text-accent uppercase mb-1">Saturday</p>
+            <p>8:30 AM – 11:30 AM</p>
+          </div>
+          <div class="pt-4 border-t border-white/10">
+            <p class="font-display text-sm tracking-widest text-accent uppercase mb-1">Find Us</p>
+            <p>{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postalCode}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-black text-center px-4">
+    <Badge label="Ready to Start" class="mb-4 block" />
+    <h2 class="font-display text-4xl uppercase tracking-wide mb-6">Book Your Free Trial</h2>
+    <p class="text-white/70 mb-10 max-w-xl mx-auto">Email us to schedule your orientation and first class.</p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <Button href={`mailto:${business.email}`} variant="primary" size="lg">Email To Book</Button>
+      <Button href={`tel:${business.phone}`} variant="ghost" size="lg">Call {business.phoneDisplay}</Button>
+    </div>
+  </section>
+</Layout>
