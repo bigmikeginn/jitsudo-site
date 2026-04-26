@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+const pillars = [
+  {
+    title: 'Technical Capability',
+    body: 'We move beyond basic coordination. Students learn the biomechanics of Chito-Ryu and BJJ, building a genuine physical foundation.',
+  },
+  {
+    title: 'Accountability',
+    body: 'In the dojo, there are no shortcuts. Students earn progress through mastery, fostering ownership over their personal growth.',
+  },
+  {
+    title: 'Conflict De-Escalation',
+    body: 'True confidence removes the need for aggression. We teach the mental clarity to navigate pressure — and the self-control to de-escalate before force is needed.',
+  },
+];
+
+const skills = [
+  'Real biomechanics — not just patterns and forms',
+  'Composure under physical and social pressure',
+  'Discipline that translates to school and sport',
+  'A peer group built on respect, not status',
+  'Both stand-up (Karate) and ground (BJJ) capability',
+];
+---
+<Layout
+  title="Youth Martial Arts — Jitsu-Do Newmarket"
+  description="Teen martial arts in Newmarket. Advanced Karate and BJJ curriculum building resilience, accountability, and real skills for ages 13-17."
+>
+  <Hero
+    eyebrow="Ages 13–17 · Newmarket"
+    headline="Youth Martial Arts"
+    accentLine="& Discipline"
+    body="Technical training that builds real capability — not just coordination. The next step beyond rec sports."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+    bgImage="/images/cameron-niseishi-fcIEm1xh5DdhCaIN.jpg"
+    minHeight="min-h-[70vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Beyond the Basics" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Real Skills, Real Standards</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        The Youth program is for teens ready to move past introductory martial arts. We train the same <strong class="text-white">technical curriculum</strong> as the adult classes — at age-appropriate intensity, with the same expectation of focus, ownership, and growth.
+      </p>
+      <p class="text-white/75 leading-relaxed">
+        This is not a place to coast. It is also not a place to be torn down. It is a place where teens learn what they are actually capable of — physically and mentally.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {pillars.map((p) => (
+          <div class="border-l-2 border-accent pl-6">
+            <h3 class="font-display text-xl uppercase tracking-wide mb-4">{p.title}</h3>
+            <p class="text-white/65 leading-relaxed text-sm">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-black">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="aspect-[4/3] overflow-hidden order-2 lg:order-1">
+        <img
+          src="/images/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg"
+          alt="Youth BJJ training at Jitsu-Do Newmarket"
+          class="w-full h-full object-cover grayscale saturate-50"
+          loading="lazy"
+        />
+      </div>
+      <div class="order-1 lg:order-2">
+        <Badge label="What They'll Develop" class="mb-4 block" />
+        <h3 class="font-display text-3xl uppercase tracking-wide mb-6">The Ground Game & The Stand-Up</h3>
+        <p class="text-white/70 leading-relaxed mb-6">
+          Brazilian Jiu-Jitsu teaches youth to stay calm under pressure. Leverage over strength, patience over aggression — lessons the mat teaches that carry far beyond the dojo.
+        </p>
+        <ul class="space-y-3">
+          {skills.map((s) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{s}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <Badge label="Right Fit" class="mb-4 block mx-auto" />
+      <h3 class="font-display text-3xl uppercase tracking-wide mb-6">Who It's For</h3>
+      <p class="text-white/75 leading-relaxed">
+        Teenagers who want something <strong class="text-white">more demanding and more rewarding</strong> than recreational sports. No experience required — complete beginners are welcome.
+      </p>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="First class is free"
+    heading="Try a Class"
+    body="No gear required. Athletic clothing is fine. Come see if Jitsu-Do is the right fit for your teenager."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'See Schedule', href: '/schedule' }}
+  />
+</Layout>

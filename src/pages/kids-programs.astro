@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+const pillars = [
+  {
+    title: 'The Dojo Standard',
+    body: 'Discipline is not punishment — it is protocol. Students learn the bow-in culture and the importance of listening and following technical instruction from day one.',
+  },
+  {
+    title: 'Safe Boundaries',
+    body: 'We focus on gross motor development and body awareness. Learning the structural basics of Jitsu-Do Karate develops balance and physical confidence that carries into every other sport.',
+  },
+  {
+    title: 'A Lifelong Foundation',
+    body: 'The best time to build a scaffold for a disciplined life is during the formative years. The habits built here carry forward into academics, sport, and character.',
+  },
+];
+
+const benefits = [
+  'Focus and listening skills that carry into the classroom',
+  'Body awareness, balance, and coordination',
+  'Respect for protocol — bow-in, listen, execute',
+  'Confidence built from real physical capability',
+  'Friendships in a high-standard, kind environment',
+];
+---
+<Layout
+  title="Kids Karate & BJJ — Jitsu-Do Newmarket"
+  description="Kids karate and jiu-jitsu classes in Newmarket for ages 6–12. Foundational discipline, focus, and respect. Free trial class available."
+>
+  <Hero
+    eyebrow="Ages 6–12 · Newmarket"
+    headline="Kids Karate"
+    accentLine="& Jiu-Jitsu"
+    body="A martial arts journey built on technical excellence — not just high-energy play. Foundations of Karate and Jiu-Jitsu in a structured, high-standard environment."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'View Schedule', href: '/schedule' }}
+    bgImage="/images/kids-punching-and-kicking-bags-bJPhiiUpHMYZHafa.png"
+    minHeight="min-h-[70vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Why Jitsu-Do for Kids" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">More Than Just Kicks</h2>
+      <p class="text-white/75 leading-relaxed mb-6">
+        At Jitsu-Do, we believe a child's martial arts journey should be built on a foundation of <strong class="text-white">technical excellence</strong>, not just high-energy play. Our Kids Foundations program introduces the fundamental biomechanics of Karate and Jiu-Jitsu in a structured, high-standard environment.
+      </p>
+      <p class="text-white/75 leading-relaxed">
+        We don't just teach kids how to kick — we teach them how to focus, how to respect the process, and how to build genuine physical capability.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {pillars.map((p) => (
+          <div class="border-l-2 border-accent pl-6">
+            <h3 class="font-display text-xl uppercase tracking-wide mb-4">{p.title}</h3>
+            <p class="text-white/65 leading-relaxed text-sm">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-black">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <Badge label="What They'll Build" class="mb-4 block" />
+        <h3 class="font-display text-3xl uppercase tracking-wide mb-6">Skills For Life</h3>
+        <ul class="space-y-3">
+          {benefits.map((b) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="aspect-[4/3] overflow-hidden">
+        <img
+          src="/images/3x-seiza-hzWGsz3r226OhdrB.jpg"
+          alt="Kids training at Jitsu-Do Newmarket"
+          class="w-full h-full object-cover grayscale saturate-50"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <Badge label="Right Fit" class="mb-4 block mx-auto" />
+      <h3 class="font-display text-3xl uppercase tracking-wide mb-6">Who It's For</h3>
+      <p class="text-white/75 leading-relaxed">
+        Children aged <strong class="text-white">6–12</strong> of any experience level. High-energy kids, those who need focus and structure, and complete beginners all thrive in the Kids Foundations program.
+      </p>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Start the foundation"
+    heading="Claim Your Free Trial"
+    body="No commitment, no pressure. Athletic clothing is fine — come see if Jitsu-Do is the right fit for your child."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'See Schedule', href: '/schedule' }}
+  />
+</Layout>

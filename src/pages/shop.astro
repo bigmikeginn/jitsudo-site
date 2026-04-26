@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import CTABand from '../components/sections/CTABand.astro';
+
+const SHOP_URL = 'https://jitsu-do-karate.gymdesk.com/shop';
+
+const categories = [
+  { label: 'Karate Gi', note: 'Lightweight & traditional weights' },
+  { label: 'BJJ Kimonos', note: 'Competition & training cuts' },
+  { label: 'Belts & Patches', note: 'Rank, ranking stripes, club crests' },
+  { label: 'Training Gear', note: 'Mouthguards, hand wraps, grappling shorts' },
+  { label: 'Branded Apparel', note: 'Hoodies, tees, hats — Jitsu-Do colours' },
+  { label: 'Equipment', note: 'Bags, focus mitts, accessories' },
+];
+---
+<Layout
+  title="Shop — Jitsu-Do Karate Newmarket"
+  description="Shop karate gi, BJJ uniforms, belts, and training gear. Official Jitsu-Do store powered by Gymdesk."
+>
+  <Hero
+    eyebrow="Official Jitsu-Do Store"
+    headline="Train In"
+    accentLine="The Right Gear"
+    body="Karate gi, BJJ kimonos, belts, and branded apparel — sourced and stocked by Jitsu-Do Karate. Powered by Gymdesk."
+    primaryCta={{ label: 'Visit The Shop', href: SHOP_URL }}
+    bgImage="/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg"
+    minHeight="min-h-[60vh]"
+  />
+
+  <section class="py-20 bg-black">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="What's In Stock" class="mb-4 block" />
+      <h2 class="font-display text-4xl uppercase tracking-wide mb-10">Gear Built For The Mat</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {categories.map((c) => (
+          <div class="bg-surface border border-white/10 p-6 hover:border-accent/40 transition-colors">
+            <h3 class="font-display text-base tracking-[0.15em] uppercase text-white mb-2">{c.label}</h3>
+            <p class="text-sm text-white/60 leading-relaxed">{c.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <Badge label="Members" class="mb-4 block mx-auto" />
+      <h3 class="font-display text-3xl uppercase tracking-wide mb-4">Save On Your Gear</h3>
+      <p class="text-white/75 leading-relaxed mb-8">
+        Active Jitsu-Do members get exclusive pricing on all store items. Sign in with your Gymdesk account to see member rates automatically applied at checkout.
+      </p>
+      <div class="inline-flex items-center gap-2 text-xs text-white/50 mb-8">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+        </svg>
+        <span>Opens in Gymdesk · Secure checkout</span>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4">
+        <Button href={SHOP_URL} variant="primary" size="lg">Visit The Shop</Button>
+        <Button href="/contact" variant="ghost" size="lg">Contact The Dojo</Button>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Not training with us yet?"
+    heading="Try A Class First"
+    body="Gear is great. Showing up matters more. Book a free trial and come see what we're about."
+    primaryCta={{ label: 'Book Free Trial', href: '/trial' }}
+    secondaryCta={{ label: 'See Programs', href: '/programs' }}
+  />
+</Layout>

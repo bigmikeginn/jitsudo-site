@@ -1,12 +1,17 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Badge from '../components/ui/Badge.astro';
+import Hero from '../components/sections/Hero.astro';
 import CTABand from '../components/sections/CTABand.astro';
 
 export async function getStaticPaths() {
-  // Slugs that have explicit page files — exclude from this catch-all.
-  const excluded = ['home', 'karate', 'bjj', 'programs', 'trial', 'contact', 'schedule', 'instructors', 'join', 'about', 'blog-stub'];
+  // All current pages have dedicated .astro files — this catch-all is a fallback for any new
+  // markdown pages added to /content/pages later.
+  const excluded = [
+    'home', 'about', 'karate', 'bjj', 'programs',
+    'kids-programs', 'youth-programs', 'adult-programs',
+    'trial', 'contact', 'schedule', 'join', 'shop',
+  ];
   const pages = await getCollection('pages');
   return pages
     .filter((p) => !excluded.includes(p.id))
@@ -25,13 +30,14 @@ const { Content } = await render(page);
   ogImage={page.data.ogImage}
   noindex={page.data.noindex}
 >
-  <section class="pt-32 pb-8 px-4 bg-black">
-    <div class="max-w-3xl mx-auto">
-      <Badge label="Jitsu-Do Karate" class="mb-2 block" />
-    </div>
-  </section>
+  <Hero
+    eyebrow="Jitsu-Do Karate"
+    headline={page.data.title}
+    body={page.data.description}
+    minHeight="min-h-[40vh]"
+  />
 
-  <article class="px-4 pb-24">
+  <article class="bg-black py-16 px-4">
     <div class="max-w-3xl mx-auto prose">
       <Content />
     </div>
