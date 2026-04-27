@@ -2,7 +2,7 @@
 // Subtle animated background — floating geometric shapes + accent glow.
 // Usage: place as a direct child of a relative-positioned section.
 interface Props {
-  variant?: 'default' | 'hero';
+  variant?: 'default' | 'hero' | 'subtle';
 }
 const { variant = 'default' } = Astro.props;
 ---
@@ -11,6 +11,7 @@ const { variant = 'default' } = Astro.props;
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
   <div class="geo geo-1"></div>
   <div class="geo geo-2"></div>
   <div class="geo geo-3"></div>
@@ -24,36 +25,44 @@ const { variant = 'default' } = Astro.props;
   z-index: 0;
 }
 
-/* Glowing orbs — very low opacity blobs */
+/* Glowing orbs — colored blobs that drift across the section */
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.07;
+  filter: blur(90px);
+  opacity: 0.18;
   background: var(--color-accent);
 }
 .orb-1 {
-  width: 500px; height: 500px;
-  top: -100px; left: -100px;
+  width: 520px; height: 520px;
+  top: -120px; left: -100px;
   animation: drift-1 28s ease-in-out infinite;
 }
 .orb-2 {
-  width: 350px; height: 350px;
-  bottom: -80px; right: 10%;
+  width: 380px; height: 380px;
+  bottom: -100px; right: 8%;
   animation: drift-2 34s ease-in-out infinite;
-  opacity: 0.05;
+  opacity: 0.14;
 }
 .orb-3 {
-  width: 250px; height: 250px;
+  width: 280px; height: 280px;
   top: 40%; left: 55%;
   animation: drift-3 22s ease-in-out infinite;
-  opacity: 0.04;
+  opacity: 0.10;
+  background: #ffffff;
+}
+.orb-4 {
+  width: 320px; height: 320px;
+  top: 10%; right: 25%;
+  animation: drift-4 26s ease-in-out infinite;
+  opacity: 0.09;
+  background: var(--color-accent);
 }
 
 /* Geometric lines — thin diagonal rectangles */
 .geo {
   position: absolute;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.06);
   transform-origin: center;
 }
 .geo-1 {
@@ -75,36 +84,49 @@ const { variant = 'default' } = Astro.props;
 /* Orb drift animations */
 @keyframes drift-1 {
   0%, 100% { transform: translate(0, 0); }
-  25%       { transform: translate(60px, 40px); }
-  50%       { transform: translate(30px, 80px); }
-  75%       { transform: translate(-20px, 30px); }
+  25%       { transform: translate(80px, 60px); }
+  50%       { transform: translate(40px, 100px); }
+  75%       { transform: translate(-30px, 40px); }
 }
 @keyframes drift-2 {
   0%, 100% { transform: translate(0, 0); }
-  33%       { transform: translate(-50px, -30px); }
-  66%       { transform: translate(40px, 20px); }
+  33%       { transform: translate(-70px, -40px); }
+  66%       { transform: translate(50px, 30px); }
 }
 @keyframes drift-3 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  50%       { transform: translate(30px, -40px) scale(1.2); }
+  50%       { transform: translate(40px, -50px) scale(1.25); }
+}
+@keyframes drift-4 {
+  0%, 100% { transform: translate(0, 0); }
+  40%       { transform: translate(-60px, 50px); }
+  80%       { transform: translate(20px, -30px); }
 }
 
 /* Geo float animations */
 @keyframes geo-float-1 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.03; }
-  50%       { transform: translateY(-30px) rotate(8deg); opacity: 0.06; }
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.06; }
+  50%       { transform: translateY(-30px) rotate(8deg); opacity: 0.12; }
 }
 @keyframes geo-float-2 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.03; }
-  50%       { transform: translateY(25px) rotate(-5deg); opacity: 0.05; }
+  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.06; }
+  50%       { transform: translateY(25px) rotate(-5deg); opacity: 0.10; }
 }
 @keyframes geo-float-3 {
-  0%, 100% { transform: translateX(0px); opacity: 0.03; }
-  50%       { transform: translateX(20px); opacity: 0.06; }
+  0%, 100% { transform: translateX(0px); opacity: 0.06; }
+  50%       { transform: translateX(20px); opacity: 0.12; }
 }
 
-/* Hero variant — slightly brighter */
-[data-variant="hero"] .orb { opacity: 0.12; }
-[data-variant="hero"] .orb-2 { opacity: 0.08; }
-[data-variant="hero"] .geo { background: rgba(255,255,255,0.05); }
+/* Hero variant — much brighter */
+[data-variant="hero"] .orb { opacity: 0.28; }
+[data-variant="hero"] .orb-2 { opacity: 0.20; }
+[data-variant="hero"] .orb-3 { opacity: 0.16; }
+[data-variant="hero"] .orb-4 { opacity: 0.16; }
+[data-variant="hero"] .geo { background: rgba(255,255,255,0.10); }
+
+/* Subtle variant — for sections sitting over a photo bg, dial it down */
+[data-variant="subtle"] .orb { opacity: 0.08; }
+[data-variant="subtle"] .orb-2 { opacity: 0.06; }
+[data-variant="subtle"] .orb-3 { opacity: 0.05; }
+[data-variant="subtle"] .orb-4 { opacity: 0.04; }
 </style>

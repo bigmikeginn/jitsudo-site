@@ -4,11 +4,49 @@
   --font-display: "Aldrich", sans-serif;
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --color-brand: #ffffff;
-  --color-brand-bg: #000000;
+  --color-brand-bg: #0a0a0a;
   --color-accent: #c41e1e;
-  --color-surface: #111111;
-  --color-surface-2: #1a1a1a;
+  --color-surface: #161616;
+  --color-surface-2: #1f1f1f;
+  --color-charcoal: #1a1a1a;
   --color-muted: rgba(255, 255, 255, 0.55);
+}
+
+/* Section treatments — used in place of stark bg-black to reduce monotony */
+.bg-charcoal {
+  background: linear-gradient(180deg, #0e0e0e 0%, #1a1a1a 50%, #0e0e0e 100%);
+}
+
+.bg-charcoal-warm {
+  background: linear-gradient(180deg, #141010 0%, #1d1818 50%, #141010 100%);
+}
+
+.bg-photo-parallax {
+  background-image:
+    linear-gradient(rgba(8, 8, 8, 0.82), rgba(8, 8, 8, 0.92)),
+    url('/images/hero-dojo.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.bg-photo-parallax-light {
+  background-image:
+    linear-gradient(rgba(8, 8, 8, 0.72), rgba(8, 8, 8, 0.85)),
+    url('/images/hero-dojo.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Disable parallax on touch / small screens — fixed bg is a known mobile perf issue */
+@media (max-width: 768px) {
+  .bg-photo-parallax,
+  .bg-photo-parallax-light {
+    background-attachment: scroll;
+  }
 }
 
 /* Prose: typography for markdown-rendered content */
