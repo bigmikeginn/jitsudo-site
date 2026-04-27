@@ -43,8 +43,8 @@ const { variant = 'default' } = Astro.props;
 
 .wave-1 {
   top: 8%;
-  stroke: var(--color-accent);
-  opacity: 0.55;
+  stroke: rgba(255, 255, 255, 0.55);
+  opacity: 0.65;
   animation: flow-left 18s linear infinite;
 }
 .wave-2 {
@@ -55,8 +55,8 @@ const { variant = 'default' } = Astro.props;
 }
 .wave-3 {
   top: 52%;
-  stroke: var(--color-accent);
-  opacity: 0.40;
+  stroke: rgba(255, 255, 255, 0.35);
+  opacity: 0.55;
   animation: flow-left 30s linear infinite;
   animation-delay: -6s;
 }
@@ -78,15 +78,15 @@ const { variant = 'default' } = Astro.props;
 .glow-1 {
   width: 600px; height: 600px;
   top: -200px; left: -150px;
-  background: var(--color-accent);
-  opacity: 0.18;
+  background: rgba(255, 255, 255, 1);
+  opacity: 0.10;
   animation: glow-drift-1 22s ease-in-out infinite;
 }
 .glow-2 {
   width: 500px; height: 500px;
   bottom: -200px; right: -100px;
-  background: var(--color-accent);
-  opacity: 0.12;
+  background: rgba(255, 255, 255, 1);
+  opacity: 0.07;
   animation: glow-drift-2 28s ease-in-out infinite;
 }
 
@@ -108,13 +108,13 @@ const { variant = 'default' } = Astro.props;
   50%      { transform: translate(-60px, -40px); }
 }
 
-/* Hero variant — brighter and more saturated */
+/* Hero variant — brighter, still grayscale */
 [data-variant="hero"] .wave-1 { opacity: 0.85; stroke-width: 2; }
 [data-variant="hero"] .wave-2 { opacity: 0.85; stroke-width: 1.75; }
 [data-variant="hero"] .wave-3 { opacity: 0.65; stroke-width: 1.75; }
 [data-variant="hero"] .wave-4 { opacity: 0.75; stroke-width: 1.25; }
-[data-variant="hero"] .glow-1 { opacity: 0.30; }
-[data-variant="hero"] .glow-2 { opacity: 0.20; }
+[data-variant="hero"] .glow-1 { opacity: 0.18; }
+[data-variant="hero"] .glow-2 { opacity: 0.12; }
 
 /* Subtle variant — for sections sitting over a photo bg */
 [data-variant="subtle"] .wave-1 { opacity: 0.30; }
