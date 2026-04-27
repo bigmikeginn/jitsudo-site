@@ -43,29 +43,29 @@ const { variant = 'default' } = Astro.props;
 
 .wave-1 {
   top: 8%;
-  stroke: rgba(255, 255, 255, 0.55);
-  opacity: 0.65;
-  animation: flow-left 18s linear infinite;
+  stroke: rgba(255, 255, 255, 1);
+  opacity: 0.18;
+  animation: flow-left 14s linear infinite;
 }
 .wave-2 {
   top: 30%;
-  stroke: rgba(255, 255, 255, 0.45);
-  opacity: 0.65;
-  animation: flow-right 24s linear infinite;
+  stroke: rgba(255, 255, 255, 1);
+  opacity: 0.14;
+  animation: flow-right 18s linear infinite;
 }
 .wave-3 {
   top: 52%;
-  stroke: rgba(255, 255, 255, 0.35);
-  opacity: 0.55;
-  animation: flow-left 30s linear infinite;
-  animation-delay: -6s;
+  stroke: rgba(255, 255, 255, 1);
+  opacity: 0.12;
+  animation: flow-left 22s linear infinite;
+  animation-delay: -4s;
 }
 .wave-4 {
   top: 70%;
-  stroke: rgba(255, 255, 255, 0.30);
+  stroke: rgba(255, 255, 255, 1);
   stroke-width: 1;
-  opacity: 0.55;
-  animation: flow-right 36s linear infinite;
+  opacity: 0.10;
+  animation: flow-right 26s linear infinite;
 }
 
 /* Soft glows behind the waves for depth */
@@ -108,13 +108,13 @@ const { variant = 'default' } = Astro.props;
   50%      { transform: translate(-60px, -40px); }
 }
 
-/* Hero variant — brighter, still grayscale */
-[data-variant="hero"] .wave-1 { opacity: 0.85; stroke-width: 2; }
-[data-variant="hero"] .wave-2 { opacity: 0.85; stroke-width: 1.75; }
-[data-variant="hero"] .wave-3 { opacity: 0.65; stroke-width: 1.75; }
-[data-variant="hero"] .wave-4 { opacity: 0.75; stroke-width: 1.25; }
-[data-variant="hero"] .glow-1 { opacity: 0.18; }
-[data-variant="hero"] .glow-2 { opacity: 0.12; }
+/* Hero variant — slightly brighter, still grayscale */
+[data-variant="hero"] .wave-1 { opacity: 0.30; stroke-width: 1.75; }
+[data-variant="hero"] .wave-2 { opacity: 0.25; stroke-width: 1.75; }
+[data-variant="hero"] .wave-3 { opacity: 0.20; stroke-width: 1.5; }
+[data-variant="hero"] .wave-4 { opacity: 0.18; stroke-width: 1.25; }
+[data-variant="hero"] .glow-1 { opacity: 0.14; }
+[data-variant="hero"] .glow-2 { opacity: 0.10; }
 
 /* Subtle variant — for sections sitting over a photo bg */
 [data-variant="subtle"] .wave-1 { opacity: 0.30; }
