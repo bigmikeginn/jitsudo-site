@@ -1,5 +1,6 @@
 ---
 import Badge from '../ui/Badge.astro';
+import AnimatedBg from '../ui/AnimatedBg.astro';
 
 interface FAQItem {
   question: string;
@@ -16,8 +17,9 @@ const { eyebrow, heading, items } = Astro.props;
 const uid = Math.random().toString(36).slice(2, 8);
 ---
 
-<section class="py-20 bg-black">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="relative py-20 bg-black overflow-hidden">
+  <AnimatedBg />
+  <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     {eyebrow && <Badge label={eyebrow} class="mb-4 block" />}
     <h2 class="font-display text-4xl uppercase tracking-wide mb-12">{heading}</h2>
 
