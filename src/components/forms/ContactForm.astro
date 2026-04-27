@@ -4,7 +4,8 @@ interface Props {
   heading?: string;
 }
 
-const { action = '#', heading } = Astro.props;
+const { heading } = Astro.props;
+const web3Key = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
 
 const inputClass = 'w-full bg-surface-2 border border-white/15 text-white text-sm px-4 py-3 placeholder-white/30 focus:outline-none focus:border-accent transition-colors';
 const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2';
@@ -14,7 +15,19 @@ const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2
   {heading && (
     <h3 class="font-display text-2xl uppercase tracking-wide mb-8">{heading}</h3>
   )}
-  <form action={action} method="POST" class="space-y-5" novalidate>
+  <form
+    action="https://api.web3forms.com/submit"
+    method="POST"
+    class="space-y-5"
+    novalidate
+  >
+    <input type="hidden" name="access_key" value={web3Key} />
+    <input type="hidden" name="subject" value="New contact form submission — Jitsu-Do Karate" />
+    <input type="hidden" name="_next" value="https://jitsudo.ca/thank-you" />
+    <input type="hidden" name="from_name" value="Jitsu-Do Website" />
+    <!-- honeypot -->
+    <input type="checkbox" name="_botcheck" style="display:none" tabindex="-1" aria-hidden="true" />
+
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
       <div>
         <label for="cf-name" class={labelClass}>Name *</label>
@@ -30,14 +43,14 @@ const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2
       <input id="cf-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class={inputClass} />
     </div>
     <div>
-      <label for="cf-subject" class={labelClass}>I'm interested in</label>
-      <select id="cf-subject" name="subject" class={`${inputClass} cursor-pointer`}>
+      <label for="cf-interest" class={labelClass}>I'm interested in</label>
+      <select id="cf-interest" name="interest" class={`${inputClass} cursor-pointer`}>
         <option value="" disabled selected>Select a program...</option>
-        <option value="karate">Karate</option>
-        <option value="bjj">Brazilian Jiu-Jitsu</option>
-        <option value="kids">Kids Programs</option>
-        <option value="trial">Free Trial Class</option>
-        <option value="other">General Inquiry</option>
+        <option value="Karate">Karate</option>
+        <option value="Brazilian Jiu-Jitsu">Brazilian Jiu-Jitsu</option>
+        <option value="Kids Programs">Kids Programs</option>
+        <option value="Free Trial Class">Free Trial Class</option>
+        <option value="General Inquiry">General Inquiry</option>
       </select>
     </div>
     <div>

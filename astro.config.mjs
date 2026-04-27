@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://jitsudo.ca',
@@ -7,6 +8,11 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/preview') && !page.includes('/thank-you'),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
