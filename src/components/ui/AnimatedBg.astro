@@ -1,6 +1,5 @@
 ---
-// Subtle animated background — floating geometric shapes + accent glow.
-// Usage: place as a direct child of a relative-positioned section.
+// Flowing SVG wave animation. Use as a direct child of a relative-positioned section.
 interface Props {
   variant?: 'default' | 'hero' | 'subtle';
 }
@@ -8,13 +7,20 @@ const { variant = 'default' } = Astro.props;
 ---
 
 <div class="animated-bg pointer-events-none select-none" aria-hidden="true" data-variant={variant}>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="orb orb-4"></div>
-  <div class="geo geo-1"></div>
-  <div class="geo geo-2"></div>
-  <div class="geo geo-3"></div>
+  <svg class="wave wave-1" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 100 C 240 40, 480 160, 720 100 S 1200 40, 1440 100 L 2880 100 C 2640 160, 2400 40, 2160 100 S 1680 160, 1440 100 Z" />
+  </svg>
+  <svg class="wave wave-2" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 110 C 200 30, 500 180, 720 100 S 1180 50, 1440 110 L 2880 110 C 2680 30, 2380 180, 2160 100 S 1700 50, 1440 110 Z" />
+  </svg>
+  <svg class="wave wave-3" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 90 C 280 60, 520 140, 720 100 S 1220 60, 1440 90 L 2880 90 C 2600 140, 2360 60, 2160 100 S 1660 140, 1440 90 Z" />
+  </svg>
+  <svg class="wave wave-4" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 80 C 360 130, 580 50, 720 95 S 1240 130, 1440 80 L 2880 80 C 2520 130, 2300 50, 2160 95 S 1640 130, 1440 80 Z" />
+  </svg>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
 </div>
 
 <style>
@@ -25,108 +31,103 @@ const { variant = 'default' } = Astro.props;
   z-index: 0;
 }
 
-/* Glowing orbs — colored blobs that drift across the section */
-.orb {
+/* Flowing wave layers — each wave is 2x viewBox width and slides left, looping seamlessly */
+.wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 60%;
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.wave-1 {
+  top: 8%;
+  stroke: var(--color-accent);
+  opacity: 0.55;
+  animation: flow-left 18s linear infinite;
+}
+.wave-2 {
+  top: 30%;
+  stroke: rgba(255, 255, 255, 0.45);
+  opacity: 0.65;
+  animation: flow-right 24s linear infinite;
+}
+.wave-3 {
+  top: 52%;
+  stroke: var(--color-accent);
+  opacity: 0.40;
+  animation: flow-left 30s linear infinite;
+  animation-delay: -6s;
+}
+.wave-4 {
+  top: 70%;
+  stroke: rgba(255, 255, 255, 0.30);
+  stroke-width: 1;
+  opacity: 0.55;
+  animation: flow-right 36s linear infinite;
+}
+
+/* Soft glows behind the waves for depth */
+.glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(120px);
+  pointer-events: none;
+}
+.glow-1 {
+  width: 600px; height: 600px;
+  top: -200px; left: -150px;
+  background: var(--color-accent);
   opacity: 0.18;
+  animation: glow-drift-1 22s ease-in-out infinite;
+}
+.glow-2 {
+  width: 500px; height: 500px;
+  bottom: -200px; right: -100px;
   background: var(--color-accent);
-}
-.orb-1 {
-  width: 520px; height: 520px;
-  top: -120px; left: -100px;
-  animation: drift-1 28s ease-in-out infinite;
-}
-.orb-2 {
-  width: 380px; height: 380px;
-  bottom: -100px; right: 8%;
-  animation: drift-2 34s ease-in-out infinite;
-  opacity: 0.14;
-}
-.orb-3 {
-  width: 280px; height: 280px;
-  top: 40%; left: 55%;
-  animation: drift-3 22s ease-in-out infinite;
-  opacity: 0.10;
-  background: #ffffff;
-}
-.orb-4 {
-  width: 320px; height: 320px;
-  top: 10%; right: 25%;
-  animation: drift-4 26s ease-in-out infinite;
-  opacity: 0.09;
-  background: var(--color-accent);
+  opacity: 0.12;
+  animation: glow-drift-2 28s ease-in-out infinite;
 }
 
-/* Geometric lines — thin diagonal rectangles */
-.geo {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.06);
-  transform-origin: center;
+/* Animations: waves translate horizontally to flow */
+@keyframes flow-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-.geo-1 {
-  width: 1px; height: 300px;
-  top: 5%; left: 15%;
-  animation: geo-float-1 18s ease-in-out infinite;
+@keyframes flow-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }
-.geo-2 {
-  width: 1px; height: 200px;
-  top: 30%; right: 20%;
-  animation: geo-float-2 24s ease-in-out infinite;
-}
-.geo-3 {
-  width: 180px; height: 1px;
-  bottom: 20%; left: 30%;
-  animation: geo-float-3 20s ease-in-out infinite;
-}
-
-/* Orb drift animations */
-@keyframes drift-1 {
+@keyframes glow-drift-1 {
   0%, 100% { transform: translate(0, 0); }
-  25%       { transform: translate(80px, 60px); }
-  50%       { transform: translate(40px, 100px); }
-  75%       { transform: translate(-30px, 40px); }
+  50%      { transform: translate(80px, 60px); }
 }
-@keyframes drift-2 {
+@keyframes glow-drift-2 {
   0%, 100% { transform: translate(0, 0); }
-  33%       { transform: translate(-70px, -40px); }
-  66%       { transform: translate(50px, 30px); }
-}
-@keyframes drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%       { transform: translate(40px, -50px) scale(1.25); }
-}
-@keyframes drift-4 {
-  0%, 100% { transform: translate(0, 0); }
-  40%       { transform: translate(-60px, 50px); }
-  80%       { transform: translate(20px, -30px); }
+  50%      { transform: translate(-60px, -40px); }
 }
 
-/* Geo float animations */
-@keyframes geo-float-1 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.06; }
-  50%       { transform: translateY(-30px) rotate(8deg); opacity: 0.12; }
-}
-@keyframes geo-float-2 {
-  0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.06; }
-  50%       { transform: translateY(25px) rotate(-5deg); opacity: 0.10; }
-}
-@keyframes geo-float-3 {
-  0%, 100% { transform: translateX(0px); opacity: 0.06; }
-  50%       { transform: translateX(20px); opacity: 0.12; }
-}
+/* Hero variant — brighter and more saturated */
+[data-variant="hero"] .wave-1 { opacity: 0.85; stroke-width: 2; }
+[data-variant="hero"] .wave-2 { opacity: 0.85; stroke-width: 1.75; }
+[data-variant="hero"] .wave-3 { opacity: 0.65; stroke-width: 1.75; }
+[data-variant="hero"] .wave-4 { opacity: 0.75; stroke-width: 1.25; }
+[data-variant="hero"] .glow-1 { opacity: 0.30; }
+[data-variant="hero"] .glow-2 { opacity: 0.20; }
 
-/* Hero variant — much brighter */
-[data-variant="hero"] .orb { opacity: 0.28; }
-[data-variant="hero"] .orb-2 { opacity: 0.20; }
-[data-variant="hero"] .orb-3 { opacity: 0.16; }
-[data-variant="hero"] .orb-4 { opacity: 0.16; }
-[data-variant="hero"] .geo { background: rgba(255,255,255,0.10); }
+/* Subtle variant — for sections sitting over a photo bg */
+[data-variant="subtle"] .wave-1 { opacity: 0.30; }
+[data-variant="subtle"] .wave-2 { opacity: 0.30; }
+[data-variant="subtle"] .wave-3 { opacity: 0.20; }
+[data-variant="subtle"] .wave-4 { opacity: 0.25; }
+[data-variant="subtle"] .glow-1 { opacity: 0.10; }
+[data-variant="subtle"] .glow-2 { opacity: 0.08; }
 
-/* Subtle variant — for sections sitting over a photo bg, dial it down */
-[data-variant="subtle"] .orb { opacity: 0.08; }
-[data-variant="subtle"] .orb-2 { opacity: 0.06; }
-[data-variant="subtle"] .orb-3 { opacity: 0.05; }
-[data-variant="subtle"] .orb-4 { opacity: 0.04; }
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .wave, .glow {
+    animation: none !important;
+  }
+}
 </style>
