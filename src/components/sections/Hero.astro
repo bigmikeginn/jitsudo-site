@@ -36,8 +36,8 @@ const {
   {bgImage && (
     <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
   )}
-  <!-- Animated background (visible when no bgImage, subtle when there is one) -->
-  <AnimatedBg variant="hero" />
+  <!-- Animated background only when no photo competes for attention -->
+  {!bgImage && <AnimatedBg variant="hero" />}
 
   <div class="relative z-10 max-w-4xl mx-auto py-24">
     {eyebrow && (
