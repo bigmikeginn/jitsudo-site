@@ -26,11 +26,11 @@ import { business } from '../data/business';
     <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div>
         <Badge label="Find Us" class="mb-4 block" />
-        <h2 class="font-display text-3xl uppercase tracking-wide mb-8">Location & Hours</h2>
+        <h2 class="text-3xl font-semibold tracking-tight mb-8">Location & Hours</h2>
 
         <div class="space-y-6 text-white/80">
           <div>
-            <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Address</p>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Address</p>
             <p class="mb-2">{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postalCode}</p>
             <a
               href="https://www.google.com/maps/search/?api=1&query=1211+Gorham+Street+Unit+5+Newmarket+Ontario"
@@ -46,15 +46,15 @@ import { business } from '../data/business';
             </a>
           </div>
           <div>
-            <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Hours</p>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Hours</p>
             <p>Monday – Friday: 5:00 – 8:15 pm<br />Saturday: 8:30 – 11:30 am</p>
           </div>
           <div>
-            <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Phone</p>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Phone</p>
             <a href={`tel:${business.phone}`} class="text-accent hover:text-white transition-colors">{business.phoneDisplay}</a>
           </div>
           <div>
-            <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Email</p>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Email</p>
             <a href={`mailto:${business.email}`} class="text-accent hover:text-white transition-colors">{business.email}</a>
           </div>
         </div>
@@ -62,7 +62,7 @@ import { business } from '../data/business';
 
       <div>
         <Badge label="Send a Message" class="mb-4 block" />
-        <h2 class="font-display text-3xl uppercase tracking-wide mb-8">Reply Within<br />One Business Day</h2>
+        <h2 class="text-3xl font-semibold tracking-tight mb-8">Reply Within<br />One Business Day</h2>
         <ContactForm />
       </div>
     </div>

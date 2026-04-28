@@ -42,7 +42,7 @@ const influences = [
     <AnimatedBg />
     <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Our Story" class="mb-4 block" />
-      <h2 class="font-display text-3xl uppercase tracking-wide mb-8">A Technical Lab in Newmarket</h2>
+      <h2 class="text-3xl font-semibold tracking-tight mb-8">A Technical Lab in Newmarket</h2>
       <p class="text-white/75 leading-relaxed mb-6">
         <strong class="text-white">Jitsu-Do</strong> was founded by <strong class="text-white">Shihan Michael Ginn</strong>, a practitioner with over 35 years of dedicated experience in the evolution of combat science. After decades of training and instruction, Shihan Ginn recognized that the traditional martial arts landscape was often cluttered with fluff and outdated methods.
       </p>
@@ -63,8 +63,8 @@ const influences = [
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       <div>
         <Badge label="Head Instructor" class="mb-4 block" />
-        <h2 class="font-display text-4xl uppercase tracking-wide mb-2">Shihan Michael Ginn</h2>
-        <p class="text-accent font-display text-sm tracking-widest uppercase mb-8">4th Dan · BJJ Brown · 35+ Years</p>
+        <h2 class="text-4xl font-semibold tracking-tight mb-2">Shihan Michael Ginn</h2>
+        <p class="text-accent font-mono text-sm tracking-widest uppercase mb-8">4th Dan · BJJ Brown · 35+ Years</p>
         <p class="text-white/75 leading-relaxed mb-6">
           Shihan Ginn spent over three decades pursuing a single question: <em class="text-white">what actually works?</em> Beginning in the late 1980s, he trained across disciplines with a practitioner's eye — keeping what was structurally sound, discarding what wasn't, and building a curriculum grounded in biomechanics, safety, and real-world effectiveness.
         </p>
@@ -96,7 +96,7 @@ const influences = [
   <section class="relative py-20 bg-photo-parallax overflow-hidden">
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Lineage & Influences" class="mb-4 block" />
-      <h2 class="font-display text-4xl uppercase tracking-wide mb-4">What Shaped Our System</h2>
+      <h2 class="text-4xl font-semibold tracking-tight mb-4">What Shaped Our System</h2>
       <p class="text-white/60 mb-10 max-w-2xl text-sm leading-relaxed">
         Jitsu-Do is rooted in two core systems, shaped by decades of cross-training across multiple disciplines. We kept what worked. We discarded what didn't.
       </p>
@@ -104,7 +104,7 @@ const influences = [
         {influences.map((art) => (
           <div class={`p-5 border ${art.role === 'Core striking system' || art.role === 'Core grappling system' ? 'border-accent/50 bg-surface' : 'border-white/10 bg-surface/50'}`}>
             <div class="flex items-center gap-2 mb-2">
-              <span class="font-display text-sm uppercase tracking-wide text-white">{art.name}</span>
+              <span class="font-mono text-sm tracking-[0.18em] uppercase text-white">{art.name}</span>
               {(art.role === 'Core striking system' || art.role === 'Core grappling system') && (
                 <span class="text-xs bg-accent/20 text-accent px-2 py-0.5 uppercase tracking-wider">Core</span>
               )}
@@ -120,14 +120,14 @@ const influences = [
     <AnimatedBg />
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Find Us In Newmarket" class="mb-4 block" />
-      <h2 class="font-display text-3xl uppercase tracking-wide mb-8">Our Location</h2>
+      <h2 class="text-3xl font-semibold tracking-tight mb-8">Our Location</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-white/80">
         <div>
-          <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Address</p>
+          <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Address</p>
           <p>{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postalCode}</p>
         </div>
         <div>
-          <p class="font-display text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Hours</p>
+          <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Hours</p>
           <p>Mon–Fri: 5:00–8:15pm<br />Saturday: 8:30–11:30am</p>
         </div>
       </div>

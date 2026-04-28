@@ -32,7 +32,7 @@ const whatToBring = [
     <AnimatedBg />
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="What to Expect" class="mb-4 block" />
-      <h2 class="font-display text-3xl uppercase tracking-wide mb-6">No Pressure, No Sales Pitch</h2>
+      <h2 class="text-3xl font-semibold tracking-tight mb-6">No Pressure, No Sales Pitch</h2>
       <p class="text-white/75 leading-relaxed mb-6">
         Every new student starts with a <strong class="text-white">one-on-one orientation</strong> with Shihan Ginn before joining the class floor. This isn't a formality — it's how we make sure you are in the right program, at the right level, from day one.
       </p>
@@ -47,7 +47,7 @@ const whatToBring = [
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div>
         <Badge label="Bring This" class="mb-4 block" />
-        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">What to Bring</h3>
+        <h3 class="text-2xl font-semibold tracking-tight mb-6">What to Bring</h3>
         <ul class="space-y-3">
           {whatToBring.map((item) => (
             <li class="flex gap-3 text-white/80">
@@ -60,7 +60,7 @@ const whatToBring = [
       </div>
       <div>
         <Badge label="Class Times" class="mb-4 block" />
-        <h3 class="font-display text-2xl uppercase tracking-wide mb-6">When To Come</h3>
+        <h3 class="text-2xl font-semibold tracking-tight mb-6">When To Come</h3>
         <div class="space-y-5 text-white/80">
           <div>
             <p class="font-display text-sm tracking-widest text-accent uppercase mb-1">Monday – Friday</p>
@@ -81,7 +81,7 @@ const whatToBring = [
 
   <section class="py-24 bg-black text-center px-4">
     <Badge label="Ready to Start" class="mb-4 block" />
-    <h2 class="font-display text-4xl uppercase tracking-wide mb-6">Book Your Free Trial</h2>
+    <h2 class="text-4xl font-semibold tracking-tight mb-6">Book Your Free Trial</h2>
     <p class="text-white/70 mb-10 max-w-xl mx-auto">Email us to schedule your orientation and first class.</p>
     <div class="flex flex-wrap items-center justify-center gap-4">
       <Button href={`mailto:${business.email}`} variant="primary" size="lg">Email To Book</Button>

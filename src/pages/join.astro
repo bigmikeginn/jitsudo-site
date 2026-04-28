@@ -37,11 +37,11 @@ const reasons = [
     <AnimatedBg />
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Why Trials Matter" class="mb-4 block" />
-      <h2 class="font-display text-4xl uppercase tracking-wide mb-12">What To Expect</h2>
+      <h2 class="text-4xl font-semibold tracking-tight mb-12">What To Expect</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {reasons.map((r) => (
           <div class="bg-surface border border-white/8 p-6">
-            <h3 class="font-display text-sm tracking-widest uppercase text-accent mb-3">{r.title}</h3>
+            <h3 class="font-mono text-sm tracking-widest uppercase text-accent mb-3">{r.title}</h3>
             <p class="text-sm text-white/70 leading-relaxed">{r.body}</p>
           </div>
         ))}
@@ -51,7 +51,7 @@ const reasons = [
 
   <section class="py-24 bg-surface text-center px-4">
     <Badge label="Ready?" class="mb-4 block" />
-    <h2 class="font-display text-4xl uppercase tracking-wide mb-4">Spots In Beginner Classes Are Limited</h2>
+    <h2 class="text-4xl font-semibold tracking-tight mb-4">Spots In Beginner Classes Are Limited</h2>
     <p class="text-white/70 mb-10 max-w-xl mx-auto">Register now through Gymdesk to secure your free trial class.</p>
     <div class="flex flex-wrap items-center justify-center gap-4">
       <Button href={REGISTER_URL} variant="primary" size="lg">Register Now</Button>

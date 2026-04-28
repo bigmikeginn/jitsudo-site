@@ -29,41 +29,39 @@ const {
 ---
 
 <section
-  class={`relative flex items-center justify-center text-center ${minHeight} px-4`}
-  style={bgImage ? `background-image: url('${bgImage}'); background-size: cover; background-position: center;` : ''}
+  class={`relative flex items-end overflow-hidden ${minHeight}`}
+  style={bgImage ? `background-image: url('${bgImage}'); background-size: cover; background-position: center top;` : ''}
 >
-  <!-- Overlay -->
   {bgImage && (
-    <div class="absolute inset-0 bg-black/60" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" aria-hidden="true"></div>
   )}
-  <!-- Animated background only when no photo competes for attention -->
   {!bgImage && <AnimatedBg variant="hero" />}
 
-  <div class="relative z-10 max-w-4xl mx-auto py-24">
+  <div class="relative z-10 w-full max-w-[1360px] mx-auto px-[clamp(20px,4vw,64px)] pb-[clamp(56px,9vh,112px)] pt-24">
     {eyebrow && (
       <div class="mb-6">
         <Badge label={eyebrow} />
       </div>
     )}
 
-    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl uppercase tracking-wide leading-tight mb-0">
+    <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-[-0.01em] max-w-[16ch] mb-0">
       {headline}
     </h1>
 
     {accentLine && (
-      <p class="font-display text-5xl sm:text-6xl lg:text-7xl uppercase tracking-wide leading-tight text-accent mb-6">
+      <p class="font-display text-5xl sm:text-6xl lg:text-7xl uppercase leading-[0.92] tracking-[-0.01em] text-accent mb-6">
         {accentLine}
       </p>
     )}
 
     {body && (
-      <p class="text-base sm:text-lg text-white/75 max-w-2xl mx-auto mb-8 leading-relaxed">
+      <p class="text-lg text-white/70 max-w-[52ch] mt-6 mb-8 leading-relaxed">
         {body}
       </p>
     )}
 
     {bullets.length > 0 && (
-      <p class="text-sm text-white/60 mb-10 tracking-wide">
+      <p class="text-sm text-white/50 mb-8 font-mono tracking-[0.1em]">
         {bullets.map((b, i) => (
           <span>
             <span class="text-accent">✓</span> {b}
@@ -74,7 +72,7 @@ const {
     )}
 
     {(primaryCta || secondaryCta) && (
-      <div class="flex flex-wrap items-center justify-center gap-4">
+      <div class="flex flex-wrap items-center gap-4">
         {primaryCta && <Button href={primaryCta.href} variant="primary">{primaryCta.label}</Button>}
         {secondaryCta && <Button href={secondaryCta.href} variant="ghost">{secondaryCta.label}</Button>}
       </div>

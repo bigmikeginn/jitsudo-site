@@ -21,7 +21,7 @@ const uid = Math.random().toString(36).slice(2, 8);
   <AnimatedBg />
   <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     {eyebrow && <Badge label={eyebrow} class="mb-4 block" />}
-    <h2 class="font-display text-4xl uppercase tracking-wide mb-12">{heading}</h2>
+    <h2 class="text-4xl font-semibold tracking-tight mb-12">{heading}</h2>
 
     <div class="space-y-2" id={`faq-${uid}`}>
       {items.map((item, i) => (
@@ -32,7 +32,7 @@ const uid = Math.random().toString(36).slice(2, 8);
             aria-expanded="false"
             data-faq-trigger
           >
-            <span class="font-display text-sm uppercase tracking-wide">{item.question}</span>
+            <span class="font-mono text-sm tracking-[0.18em] uppercase">{item.question}</span>
             <svg
               class="w-4 h-4 shrink-0 text-accent transition-transform duration-200"
               fill="none"

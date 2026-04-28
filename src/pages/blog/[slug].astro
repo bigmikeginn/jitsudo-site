@@ -43,8 +43,8 @@ const dateStr = post.data.date.toLocaleDateString('en-CA', {
       </div>
     )}
     <div class="relative z-10 max-w-3xl mx-auto">
-      <time class="text-xs text-white/40 font-display tracking-widest uppercase block mb-4">{dateStr}</time>
-      <h1 class="font-display text-4xl sm:text-5xl uppercase tracking-wide leading-tight mb-4">
+      <time class="font-mono text-xs tracking-widest uppercase text-white/40 block mb-4">{dateStr}</time>
+      <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight leading-tight mb-4">
         {post.data.title}
       </h1>
       {post.data.tags.length > 0 && (
@@ -69,13 +69,13 @@ const dateStr = post.data.date.toLocaleDateString('en-CA', {
         <nav class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row gap-6 justify-between">
           {prev && (
             <a href={`/blog/${prev.id}`} class="group flex flex-col gap-1 max-w-xs">
-              <span class="text-xs font-display tracking-[0.2em] uppercase text-white/40">← Previous</span>
+              <span class="font-mono text-xs tracking-[0.2em] uppercase text-white/40">← Previous</span>
               <span class="text-sm font-display uppercase tracking-wide text-white group-hover:text-accent transition-colors leading-snug">{prev.data.title}</span>
             </a>
           )}
           {next && (
             <a href={`/blog/${next.id}`} class="group flex flex-col gap-1 max-w-xs sm:text-right sm:ml-auto">
-              <span class="text-xs font-display tracking-[0.2em] uppercase text-white/40">Next →</span>
+              <span class="font-mono text-xs tracking-[0.2em] uppercase text-white/40">Next →</span>
               <span class="text-sm font-display uppercase tracking-wide text-white group-hover:text-accent transition-colors leading-snug">{next.data.title}</span>
             </a>
           )}
@@ -83,7 +83,7 @@ const dateStr = post.data.date.toLocaleDateString('en-CA', {
       )}
 
       <div class="mt-10">
-        <a href="/blog" class="inline-flex items-center gap-2 text-xs font-display tracking-[0.2em] uppercase text-white/50 hover:text-accent transition-colors">
+        <a href="/blog" class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.2em] uppercase text-white/50 hover:text-accent transition-colors">
           <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
           </svg>

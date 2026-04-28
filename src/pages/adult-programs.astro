@@ -43,7 +43,7 @@ const audiences = [
     <AnimatedBg />
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="The Standard" class="mb-4 block" />
-      <h2 class="font-display text-4xl uppercase tracking-wide mb-8">Neither Cardio Nor Combat Sport</h2>
+      <h2 class="text-4xl font-semibold tracking-tight mb-8">Neither Cardio Nor Combat Sport</h2>
       <p class="text-white/75 leading-relaxed mb-6">
         Most adult programs are either <strong class="text-white">cardio-kickboxing disguised as martial arts</strong> or high-ego competition stables. Jitsu-Do is neither.
       </p>
@@ -58,7 +58,7 @@ const audiences = [
     <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div>
         <Badge label="Stand-Up Game" class="mb-4 block" />
-        <h3 class="font-display text-3xl uppercase tracking-wide mb-6">Karate: Structural Power</h3>
+        <h3 class="text-3xl font-semibold tracking-tight mb-6">Karate: Structural Power</h3>
         <p class="text-white/75 leading-relaxed mb-4">
           We use the foundations of Okinawan Karate to master <strong class="text-white">distance, timing, and structural integrity</strong>. You'll develop power that comes from mechanical advantage — not size or strength.
         </p>
@@ -89,7 +89,7 @@ const audiences = [
       </div>
       <div class="order-1 lg:order-2">
         <Badge label="Ground Game" class="mb-4 block" />
-        <h3 class="font-display text-3xl uppercase tracking-wide mb-6">BJJ: The Ground Truth</h3>
+        <h3 class="text-3xl font-semibold tracking-tight mb-6">BJJ: The Ground Truth</h3>
         <p class="text-white/75 leading-relaxed mb-4">
           Brazilian Jiu-Jitsu at Jitsu-Do emphasizes <strong class="text-white">technical efficiency over athletic talent</strong>.
         </p>
@@ -105,12 +105,12 @@ const audiences = [
     <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <Badge label="Right Fit" class="mb-4 block mx-auto" />
-        <h3 class="font-display text-3xl uppercase tracking-wide">Built For The Professional Practitioner</h3>
+        <h3 class="text-3xl font-semibold tracking-tight">Built For The Professional Practitioner</h3>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {audiences.map((a) => (
           <div class="bg-surface-2 border border-white/10 p-6">
-            <h4 class="font-display text-sm tracking-[0.2em] uppercase text-accent mb-3">{a.label}</h4>
+            <h4 class="font-mono text-sm tracking-[0.2em] uppercase text-accent mb-3">{a.label}</h4>
             <p class="text-white/70 leading-relaxed text-sm">{a.body}</p>
           </div>
         ))}
