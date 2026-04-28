@@ -95,7 +95,7 @@ const { images, eyebrow, heading } = Astro.props;
     layout();
     window.addEventListener('resize', layout, { passive: true });
 
-    if (!reduced && total > 1) {
+    if (total > 1) {
       setInterval(advance, 2500);
     }
   }
