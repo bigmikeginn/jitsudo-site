@@ -1,86 +1,118 @@
 ---
-// Flowing SVG wave animation. Use as a direct child of a relative-positioned section.
+/**
+ * Topographic contour-line background.
+ * A dense field of smooth wave paths, very low opacity, continuously
+ * scrolling left. The SVG is 200% wide so translateX(-50%) loops
+ * seamlessly — wavelength 480 divides 1440 (container) exactly × 3.
+ */
 interface Props {
   variant?: 'default' | 'hero' | 'subtle';
 }
 const { variant = 'default' } = Astro.props;
+
+const LINES  = 24;   // number of contour lines
+const VW     = 2880; // viewBox width  (200% of 1440px container)
+const VH     = 600;  // viewBox height (scales to fill section)
+const WL     = 480;  // wavelength — must divide 1440 for seamless loop
+const AMP    = 11;   // wave amplitude in viewBox units
+const STEP   = WL / 4;   // quarter-wavelength sample spacing
+const GOLDEN = 2.39996322; // 2π × golden-ratio fraction — natural phase spread
+
+/** Catmull-Rom → cubic bezier conversion for smooth sine interpolation */
+function wavePath(baseY: number, phase: number): string {
+  const count = Math.ceil(VW / STEP) + 2;
+  const pts = Array.from({ length: count }, (_, i) => ({
+    x: i * STEP,
+    y: +(baseY + AMP * Math.sin(phase + (i * Math.PI) / 2)).toFixed(2),
+  }));
+
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(0, i - 1)];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[Math.min(pts.length - 1, i + 2)];
+    const cp1x = +(p1.x + (p2.x - p0.x) / 6).toFixed(1);
+    const cp1y = +(p1.y + (p2.y - p0.y) / 6).toFixed(2);
+    const cp2x = +(p2.x - (p3.x - p1.x) / 6).toFixed(1);
+    const cp2y = +(p2.y - (p3.y - p1.y) / 6).toFixed(2);
+    d += ` C ${cp1x} ${cp1y},${cp2x} ${cp2y},${p2.x} ${p2.y}`;
+  }
+  return d;
+}
+
+const paths = Array.from({ length: LINES }, (_, i) => {
+  const baseY = (i / (LINES - 1)) * VH;
+  const phase = i * GOLDEN;
+  return wavePath(baseY, phase);
+});
 ---
 
-<div class="animated-bg pointer-events-none select-none" aria-hidden="true" data-variant={variant}>
-  <svg class="wave wave-1" viewBox="0 0 2880 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 100 C 240 40, 480 160, 720 100 S 1200 40, 1440 100 S 1920 160, 2160 100 S 2640 40, 2880 100" />
-  </svg>
-  <svg class="wave wave-2" viewBox="0 0 2880 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 110 C 200 30, 500 180, 720 110 S 1180 50, 1440 110 S 1940 180, 2160 110 S 2620 50, 2880 110" />
-  </svg>
-  <svg class="wave wave-3" viewBox="0 0 2880 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 90 C 280 60, 520 140, 720 90 S 1220 60, 1440 90 S 1960 140, 2160 90 S 2660 60, 2880 90" />
+<div class="topo-bg" aria-hidden="true" data-variant={variant}>
+  <svg
+    class="topo-svg"
+    viewBox={`0 0 ${VW} ${VH}`}
+    preserveAspectRatio="xMidYMid slice"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {paths.map((d) => <path d={d} />)}
   </svg>
 </div>
 
 <style>
-.animated-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  z-index: 0;
-}
-
-/* Each SVG is 200% the parent width; translateX -50% loops one wavelength.
-   viewBox 0–2880 covers the full path so nothing gets clipped. */
-.wave {
-  position: absolute;
-  left: 0;
-  width: 200%;
-  height: 50%;
-  fill: none;
-  stroke-width: 1.5;
-  will-change: transform;
-}
-
-.wave-1 {
-  top: 12%;
-  stroke: rgba(255, 255, 255, 0.55);
-  animation: flow-left 8s linear infinite;
-}
-.wave-2 {
-  top: 38%;
-  stroke: rgba(255, 255, 255, 0.40);
-  stroke-width: 1.25;
-  animation: flow-right 12s linear infinite;
-}
-.wave-3 {
-  top: 64%;
-  stroke: rgba(255, 255, 255, 0.30);
-  stroke-width: 1;
-  animation: flow-left 16s linear infinite;
-  animation-delay: -4s;
-}
-
-/* Animations: full wavelength is 50% of SVG width because viewBox is 2x */
-@keyframes flow-left {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-@keyframes flow-right {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-
-/* Hero variant — brighter strokes */
-[data-variant="hero"] .wave-1 { stroke: rgba(255, 255, 255, 0.85); stroke-width: 2; }
-[data-variant="hero"] .wave-2 { stroke: rgba(255, 255, 255, 0.65); stroke-width: 1.5; }
-[data-variant="hero"] .wave-3 { stroke: rgba(255, 255, 255, 0.50); stroke-width: 1.25; }
-
-/* Subtle variant — for sections sitting over a photo bg */
-[data-variant="subtle"] .wave-1 { stroke: rgba(255, 255, 255, 0.30); }
-[data-variant="subtle"] .wave-2 { stroke: rgba(255, 255, 255, 0.22); }
-[data-variant="subtle"] .wave-3 { stroke: rgba(255, 255, 255, 0.18); }
-
-/* Hide entirely when user prefers reduced motion — no frozen static lines */
-@media (prefers-reduced-motion: reduce) {
-  .animated-bg {
-    display: none;
+  .topo-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
   }
-}
+
+  .topo-svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    will-change: transform;
+  }
+
+  .topo-svg path {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.055);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  [data-variant="hero"] .topo-svg path {
+    stroke: rgba(255, 255, 255, 0.08);
+  }
+
+  [data-variant="subtle"] .topo-svg path {
+    stroke: rgba(255, 255, 255, 0.035);
+  }
 </style>
+
+<script>
+  // Drive scroll via rAF so the OS "prefers-reduced-motion" CSS override can't kill it.
+  // translateX(-50%) of a 200%-wide element = one full container width = one viewbox repeat.
+  const DURATION = 32000; // ms for one full loop
+
+  document.querySelectorAll<SVGSVGElement>('.topo-svg').forEach((svg) => {
+    let progress = 0;
+    let last: number | null = null;
+
+    function tick(now: number) {
+      if (last !== null) {
+        progress += (now - last) / DURATION;
+        if (progress >= 1) progress -= 1;
+      }
+      last = now;
+      svg.style.transform = `translateX(-${(progress * 50).toFixed(4)}%)`;
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  });
+</script>
