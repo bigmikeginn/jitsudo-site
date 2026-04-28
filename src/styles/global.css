@@ -50,6 +50,37 @@
   }
 }
 
+/* Skip-to-content link — visually hidden until focused */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-accent);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Visible keyboard focus ring — WCAG 2.2 AA */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Suppress focus ring on mouse/touch interactions */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* Prose: typography for markdown-rendered content */
 .prose {
   color: rgba(255, 255, 255, 0.78);

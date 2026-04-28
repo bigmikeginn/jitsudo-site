@@ -91,8 +91,9 @@ const localBusinessSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   </head>
   <body class="bg-black font-sans antialiased" style="color: #f0ede6;">
+    <a href="#main-content" class="skip-link">Skip to content</a>
     {!bare && <Header />}
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     {!bare && <Footer />}
