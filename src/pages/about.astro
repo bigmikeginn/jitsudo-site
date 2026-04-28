@@ -4,6 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import KanjiDecor from '../components/ui/KanjiDecor.astro';
 import { business } from '../data/business';
 
 const credentials = [
@@ -78,10 +79,10 @@ const influences = [
     </div>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
       <Badge label="Credentials" class="mb-4 block" />
-      <ul class="space-y-3 max-w-xl">
+      <ul class="space-y-3 max-w-xl" data-stagger-list>
         {credentials.map((c) => (
           <li class="flex gap-3 text-white/80">
-            <span class="text-accent">✓</span>
+            <span class="text-accent shrink-0">✓</span>
             <span>{c}</span>
           </li>
         ))}
@@ -94,6 +95,7 @@ const influences = [
 
   <!-- Arts influences -->
   <section class="relative py-20 bg-photo-parallax overflow-hidden">
+    <KanjiDecor char="道" side="right" opacity={0.06} color="#ffffff" size="clamp(180px, 28vw, 440px)" />
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Lineage & Influences" class="mb-4 block" />
       <h2 class="text-4xl font-semibold tracking-tight mb-4">What Shaped Our System</h2>
@@ -118,18 +120,59 @@ const influences = [
 
   <section class="relative py-20 bg-surface overflow-hidden">
     <AnimatedBg />
-    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <Badge label="Find Us In Newmarket" class="mb-4 block" />
-      <h2 class="text-3xl font-semibold tracking-tight mb-8">Our Location</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-white/80">
-        <div>
-          <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Address</p>
-          <p>{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postalCode}</p>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-8 reveal">
+        <Badge label="Find Us In Newmarket" class="mb-4 block" />
+        <h2 class="text-3xl font-semibold tracking-tight">Our Location</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start reveal">
+
+        <!-- Info -->
+        <div class="lg:col-span-2 space-y-6 text-white/80">
+          <div>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Address</p>
+            <p class="mb-3 leading-relaxed">{business.address.street}<br />{business.address.city}, {business.address.region} {business.address.postalCode}</p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=1211+Gorham+Street+Unit+5+Newmarket+Ontario"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-xs text-accent hover:text-white transition-colors font-mono tracking-[0.15em] uppercase"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              Get Directions
+            </a>
+          </div>
+          <div>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Hours</p>
+            <p class="leading-relaxed">Monday – Friday: 5:00 – 8:15 pm<br />Saturday: 8:30 – 11:30 am</p>
+          </div>
+          <div>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Phone</p>
+            <a href={`tel:${business.phone}`} class="text-accent hover:text-white transition-colors">{business.phoneDisplay}</a>
+          </div>
+          <div>
+            <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Email</p>
+            <a href={`mailto:${business.email}`} class="text-accent hover:text-white transition-colors break-all">{business.email}</a>
+          </div>
         </div>
-        <div>
-          <p class="font-mono text-xs tracking-[0.2em] uppercase text-white/50 mb-2">Hours</p>
-          <p>Mon–Fri: 5:00–8:15pm<br />Saturday: 8:30–11:30am</p>
+
+        <!-- Google Map -->
+        <div class="lg:col-span-3 border border-white/12 overflow-hidden" style="aspect-ratio: 4/3;">
+          <iframe
+            title="Jitsu-Do Karate Newmarket — map"
+            src="https://maps.google.com/maps?q=44.05864,-79.42382&hl=en&z=15&output=embed"
+            width="100%"
+            height="100%"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            style="border:0; display:block; filter: grayscale(100%) invert(92%) contrast(88%) brightness(84%);"
+          ></iframe>
         </div>
+
       </div>
     </div>
   </section>

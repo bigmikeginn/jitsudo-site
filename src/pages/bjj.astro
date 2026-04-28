@@ -4,6 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import KanjiDecor from '../components/ui/KanjiDecor.astro';
 
 const whatYoullLearn = [
   'Guard, mount, side control & back control positions',
@@ -54,12 +55,13 @@ const whoItsFor = [
   </section>
 
   <section class="relative py-20 bg-surface overflow-hidden">
+    <KanjiDecor char="柔" side="right" opacity={0.055} />
     <AnimatedBg />
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div>
         <Badge label="Curriculum" class="mb-4 block" />
         <h3 class="text-2xl font-semibold tracking-tight mb-6">What You'll Learn</h3>
-        <ul class="space-y-3">
+        <ul class="space-y-3" data-stagger-list>
           {whatYoullLearn.map((item) => (
             <li class="flex gap-3 text-white/80">
               <span class="text-accent shrink-0">✓</span>
@@ -71,7 +73,7 @@ const whoItsFor = [
       <div>
         <Badge label="Right Fit" class="mb-4 block" />
         <h3 class="text-2xl font-semibold tracking-tight mb-6">Who It's For</h3>
-        <ul class="space-y-3">
+        <ul class="space-y-3" data-stagger-list>
           {whoItsFor.map((item) => (
             <li class="flex gap-3 text-white/80">
               <span class="text-accent shrink-0">✓</span>

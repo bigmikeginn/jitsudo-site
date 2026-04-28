@@ -1,0 +1,56 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+}
+const { quote, author } = Astro.props;
+---
+
+<section class="philosophy-statement reveal">
+  <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+  <blockquote>
+    <p>{quote}</p>
+    <footer>{author}</footer>
+  </blockquote>
+</section>
+
+<style>
+  .philosophy-statement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1.5rem;
+    background: transparent;
+    text-align: center;
+  }
+
+  .quote-mark {
+    color: #c41e1e;
+    font-size: 4.5rem;
+    line-height: 0.75;
+    margin-bottom: 1rem;
+  }
+
+  blockquote {
+    margin: 0;
+  }
+
+  /* Fixed: removed font-style:italic — Aldrich has no italic variant */
+  p {
+    max-width: 36ch;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: "Aldrich", sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.35;
+  }
+
+  footer {
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>

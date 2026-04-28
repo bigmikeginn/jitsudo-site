@@ -1,0 +1,40 @@
+---
+interface Props {
+  char: string;
+  side?: 'right' | 'left' | 'center';
+  opacity?: number;
+  color?: string;
+  size?: string;
+  top?: string;
+}
+const {
+  char,
+  side = 'right',
+  opacity = 0.18,
+  color = '#c8a96e',
+  size = 'clamp(200px, 32vw, 520px)',
+  top = '50%',
+} = Astro.props;
+---
+
+<span
+  class={`kanji-decor kanji-${side}`}
+  aria-hidden="true"
+  style={`color:${color};opacity:${opacity};font-size:${size};top:${top};`}
+>{char}</span>
+
+<style>
+  .kanji-decor {
+    position: absolute;
+    font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'BIZ UDMincho', 'Noto Serif CJK JP', 'MS Mincho', Georgia, serif;
+    line-height: 1;
+    font-weight: 900;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+    letter-spacing: 0;
+  }
+  .kanji-right  { right: -2%;  transform: translateY(-50%); }
+  .kanji-left   { left: -2%;   transform: translateY(-50%); }
+  .kanji-center { left: 50%;   transform: translate(-50%, -50%); }
+</style>

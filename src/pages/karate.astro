@@ -4,6 +4,7 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import KanjiDecor from '../components/ui/KanjiDecor.astro';
 
 const whatYoullLearn = [
   'Foundational stances, footwork & weight transfer',
@@ -37,15 +38,16 @@ const whoItsFor = [
   />
 
   <section class="relative py-20 bg-charcoal overflow-hidden">
+    <KanjiDecor char="空" side="right" />
     <AnimatedBg />
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Chito-Ryu Karate" class="mb-4 block" />
       <h2 class="text-4xl font-semibold tracking-tight mb-8">The Chito-Ryu System</h2>
       <p class="text-white/75 leading-relaxed mb-6">
-        Jitsu-Do Karate is built on the <strong class="text-white">Chito-Ryu system</strong> — a discipline developed by Dr. Tsuyoshi Chitose to integrate traditional Okinawan technique with modern biomechanical understanding. Where most styles chase power, Chito-Ryu chases alignment. The result is a striking system that works regardless of size or strength.
+        Chito-Ryu is the style I came from. Developed by Dr. Tsuyoshi Chitose to integrate traditional Okinawan technique with modern biomechanical understanding, it shaped everything I know about how the body generates power, maintains structure under pressure, and delivers technique with intent. <strong class="text-white">Jitsu-Do Karate is the evolution of that foundation</strong> — the same technical rigour, applied with a modern lens.
       </p>
       <p class="text-white/75 leading-relaxed mb-6">
-        At Jitsu-Do, every movement is dissected through the lens of <strong class="text-white">structure and safety</strong>. You will learn why a technique works before you are asked to drill it. That distinction is what separates serious martial arts training from repetitive motion with no understanding.
+        Traditional base. Modern application. Where Chito-Ryu gave me the "what," <strong class="text-white">Jitsu-Do asks the "why."</strong> Every movement is dissected through the lens of structure, safety, and real-world relevance. You will learn why a technique works before you are asked to drill it — that distinction is what separates serious martial arts training from repetitive motion with no understanding.
       </p>
       <blockquote class="border-l-2 border-accent pl-6 my-8 text-white/60 italic">
         "The goal is not to be dangerous — the goal is to be structurally sound under pressure."
@@ -55,11 +57,12 @@ const whoItsFor = [
 
   <section class="relative py-20 bg-surface overflow-hidden">
     <AnimatedBg />
+    <AnimatedBg />
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div>
         <Badge label="Curriculum" class="mb-4 block" />
         <h3 class="text-2xl font-semibold tracking-tight mb-6">What You'll Learn</h3>
-        <ul class="space-y-3">
+        <ul class="space-y-3" data-stagger-list>
           {whatYoullLearn.map((item) => (
             <li class="flex gap-3 text-white/80">
               <span class="text-accent shrink-0">✓</span>
@@ -71,7 +74,7 @@ const whoItsFor = [
       <div>
         <Badge label="Right Fit" class="mb-4 block" />
         <h3 class="text-2xl font-semibold tracking-tight mb-6">Who It's For</h3>
-        <ul class="space-y-3">
+        <ul class="space-y-3" data-stagger-list>
           {whoItsFor.map((item) => (
             <li class="flex gap-3 text-white/80">
               <span class="text-accent shrink-0">✓</span>

@@ -18,7 +18,7 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
+<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-white/10" style="background: rgba(17,17,17,0.95);">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
 
@@ -44,7 +44,7 @@ const navLinks = [
                   <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
               </button>
-              <div class="absolute top-full left-0 mt-2 min-w-48 bg-black border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
+              <div class="absolute top-full left-0 mt-2 min-w-48 border border-white/10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150" style="background: #181818;">
                 {link.children.map((child) => (
                   <a
                     href={child.href}
@@ -93,7 +93,7 @@ const navLinks = [
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-black">
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10" style="background: #181818;">
     <nav class="px-4 py-6 flex flex-col gap-1">
       {navLinks.map((link) => (
         <div>

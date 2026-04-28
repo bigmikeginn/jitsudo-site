@@ -5,21 +5,26 @@
   --font-sans: "Inter var", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --color-brand: #f0ede6;
-  --color-brand-bg: #0a0a0a;
+  --color-brand-bg: #0d0d0d;
   --color-accent: #c41e1e;
-  --color-surface: #161616;
-  --color-surface-2: #1f1f1f;
-  --color-charcoal: #1a1a1a;
+  --color-gold: #c8a96e;
+  --color-surface: #1e1e1e;
+  --color-surface-2: #282828;
+  --color-charcoal: #222222;
   --color-muted: rgba(240, 237, 230, 0.55);
 }
 
-/* Section treatments — used in place of stark bg-black to reduce monotony */
+/* Section treatments — raised from pure black; ambient red glow adds depth */
 .bg-charcoal {
-  background: linear-gradient(180deg, #0e0e0e 0%, #1a1a1a 50%, #0e0e0e 100%);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(196, 30, 30, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, #141414 0%, #1e1e1e 50%, #141414 100%);
 }
 
 .bg-charcoal-warm {
-  background: linear-gradient(180deg, #141010 0%, #1d1818 50%, #141010 100%);
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(196, 30, 30, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #161212 0%, #201a1a 50%, #161212 100%);
 }
 
 .bg-photo-parallax {
@@ -48,6 +53,19 @@
   .bg-photo-parallax-light {
     background-attachment: scroll;
   }
+}
+
+/* ─── Cursor spotlight ────────────────────────────────────────────────────── */
+#cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+  background: radial-gradient(
+    700px circle at var(--sx, -9999px) var(--sy, -9999px),
+    rgba(196, 30, 30, 0.07),
+    transparent 65%
+  );
 }
 
 /* Skip-to-content link — visually hidden until focused */
@@ -120,3 +138,65 @@
 }
 .prose hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 2.5rem 0; }
 .prose code { background: var(--color-surface-2); padding: 0.125rem 0.375rem; font-size: 0.875em; border-radius: 2px; }
+
+/* ─── Stagger list animation ──────────────────────────────────────────────── */
+.stagger-item {
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.42s ease, transform 0.42s ease;
+}
+
+.stagger-item.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Hover nudge — desktop pointer devices only */
+@media (hover: hover) and (pointer: fine) {
+  .stagger-item.revealed > span:first-child {
+    display: inline-block;
+    transition: transform 0.18s ease;
+  }
+
+  .stagger-item.revealed:hover {
+    transform: translateX(6px);
+    transition: transform 0.18s ease;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .stagger-item.revealed:hover > span:first-child {
+    transform: scale(1.25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ─── Scroll-reveal animation ─────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+  transition-delay: calc(var(--stagger-index, 0) * 0.08s);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect user motion preferences — show content immediately */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

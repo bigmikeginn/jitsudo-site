@@ -7,6 +7,7 @@ import '../styles/global.css';
 import { business } from '../data/business';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
+import GrainOverlay from '../components/ui/GrainOverlay.astro';
 
 interface Props {
   title: string;
@@ -90,12 +91,37 @@ const localBusinessSchema = {
     <!-- LocalBusiness structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   </head>
-  <body class="bg-black font-sans antialiased" style="color: #f0ede6;">
+  <body class="bg-brand-bg font-sans antialiased" style="color: #f0ede6;">
+    <!-- Cursor spotlight — red radial glow that follows mouse, desktop only -->
+    <div id="cursor-spotlight" aria-hidden="true"></div>
+    <GrainOverlay />
     <a href="#main-content" class="skip-link">Skip to content</a>
     {!bare && <Header />}
     <main id="main-content">
       <slot />
     </main>
     {!bare && <Footer />}
+    <script>
+      import '../scripts/scroll-reveal.js';
+      import '../scripts/card-tilt.js';
+    </script>
+    <script>
+      // Cursor spotlight — only on precise pointer devices (mouse, not touch)
+      if (window.matchMedia('(pointer: fine)').matches) {
+        const el = document.getElementById('cursor-spotlight');
+        if (el) {
+          let raf: number | null = null;
+          let mx = -9999, my = -9999;
+          document.addEventListener('mousemove', (e) => {
+            mx = e.clientX; my = e.clientY;
+            if (!raf) raf = requestAnimationFrame(() => {
+              el.style.setProperty('--sx', mx + 'px');
+              el.style.setProperty('--sy', my + 'px');
+              raf = null;
+            });
+          }, { passive: true });
+        }
+      }
+    </script>
   </body>
 </html>

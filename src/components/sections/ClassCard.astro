@@ -5,12 +5,13 @@ interface Props {
   image?: string;
   href: string;
   linkLabel?: string;
+  class?: string;
 }
 
-const { title, description, image, href, linkLabel = 'Learn More' } = Astro.props;
+const { title, description, image, href, linkLabel = 'Learn More', class: className = '' } = Astro.props;
 ---
 
-<div class="group relative bg-surface flex flex-col overflow-hidden border-t-2 border-accent">
+<div class={`group relative bg-surface flex flex-col overflow-hidden border-t-2 border-accent tilt-card reveal ${className}`}>
   {image && (
     <div class="aspect-[4/3] overflow-hidden">
       <img

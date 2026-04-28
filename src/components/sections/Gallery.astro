@@ -1,4 +1,6 @@
 ---
+import AnimatedBg from '../ui/AnimatedBg.astro';
+
 interface GalleryImage {
   src: string;
   alt: string;
@@ -11,47 +13,199 @@ interface Props {
 }
 
 const { images, eyebrow, heading } = Astro.props;
-const [primary, ...rest] = images;
+const id = `carousel-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<section class="py-16 bg-black">
+<section class="relative py-16 bg-charcoal overflow-hidden">
   {(eyebrow || heading) && (
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 reveal">
       {eyebrow && <p class="text-xs tracking-[0.25em] uppercase text-white/40 mb-3">{eyebrow}</p>}
       {heading && <h2 class="text-4xl font-semibold tracking-tight">{heading}</h2>}
     </div>
   )}
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {primary && (
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <!-- Primary large image -->
-        <div class="aspect-[3/4] lg:aspect-auto lg:row-span-2 overflow-hidden">
-          <img
-            src={primary.src}
-            alt={primary.alt}
-            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-            loading="lazy"
-            width="600"
-            height="800"
-          />
-        </div>
-        <!-- Secondary images grid -->
-        <div class="grid grid-cols-2 gap-2">
-          {rest.slice(0, 4).map((img) => (
-            <div class="aspect-square overflow-hidden">
-              <img
-                src={img.src}
-                alt={img.alt}
-                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                loading="lazy"
-                width="600"
-                height="600"
-              />
-            </div>
-          ))}
-        </div>
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
+    <div class="carousel-wrapper" id={id}>
+      <div class="carousel-track" role="list" aria-label={heading ?? 'Gallery'}>
+        {images.map((img, i) => (
+          <div class="carousel-slide" role="listitem">
+            <img
+              src={img.src}
+              alt={img.alt}
+              class="w-full h-full object-cover"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              width="900"
+              height="600"
+            />
+          </div>
+        ))}
       </div>
-    )}
+
+      <!-- Prev / Next -->
+      <button class="carousel-btn carousel-prev" aria-label="Previous image">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <button class="carousel-btn carousel-next" aria-label="Next image">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="carousel-dots" role="tablist" aria-label="Slide indicators">
+        {images.map((_, i) => (
+          <button
+            class={`carousel-dot${i === 0 ? ' active' : ''}`}
+            role="tab"
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-label={`Go to slide ${i + 1}`}
+            data-index={i}
+          />
+        ))}
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  function initCarousel(wrapper: HTMLElement) {
+    const track = wrapper.querySelector<HTMLElement>('.carousel-track')!;
+    const slides = wrapper.querySelectorAll<HTMLElement>('.carousel-slide');
+    const dots = wrapper.querySelectorAll<HTMLButtonElement>('.carousel-dot');
+    const prevBtn = wrapper.querySelector<HTMLButtonElement>('.carousel-prev')!;
+    const nextBtn = wrapper.querySelector<HTMLButtonElement>('.carousel-next')!;
+    const total = slides.length;
+    let current = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function goTo(index: number) {
+      current = (index + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+        d.setAttribute('aria-selected', String(i === current));
+      });
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => { goTo(Number(dot.dataset.index)); resetTimer(); });
+    });
+
+    // Touch / swipe
+    let touchStartX = 0;
+    track.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+      const delta = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 40) { goTo(delta > 0 ? current + 1 : current - 1); resetTimer(); }
+    }, { passive: true });
+
+    // Auto-advance
+    function startTimer() {
+      if (reduced || total <= 1) return;
+      timer = setInterval(() => goTo(current + 1), 4500);
+    }
+    function resetTimer() {
+      if (timer) clearInterval(timer);
+      startTimer();
+    }
+
+    wrapper.addEventListener('mouseenter', () => { if (timer) clearInterval(timer); });
+    wrapper.addEventListener('mouseleave', () => startTimer());
+
+    startTimer();
+  }
+
+  document.querySelectorAll<HTMLElement>('.carousel-wrapper').forEach(initCarousel);
+</script>
+
+<style>
+  .carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #111;
+  }
+
+  @media (max-width: 639px) {
+    .carousel-wrapper {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track { transition: none; }
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Prev / Next buttons */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(200, 169, 110, 0.25);
+    border-color: #c8a96e;
+    color: #c8a96e;
+  }
+
+  .carousel-prev { left: 12px; }
+  .carousel-next { right: 12px; }
+
+  /* Dots */
+  .carousel-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    padding: 0;
+  }
+
+  .carousel-dot.active,
+  .carousel-dot:hover {
+    background: #c8a96e;
+    border-color: #c8a96e;
+  }
+</style>

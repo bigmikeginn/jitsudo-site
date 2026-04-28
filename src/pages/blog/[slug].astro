@@ -30,7 +30,7 @@ const dateStr = post.data.date.toLocaleDateString('en-CA', {
   ogImage={post.data.featuredImage !== '/images/placeholder.jpg' ? post.data.featuredImage : undefined}
 >
   <!-- Post hero -->
-  <header class="relative bg-black pt-32 pb-12 px-4">
+  <header class="relative pt-32 pb-12 px-4" style="background: #141414;">
     {post.data.featuredImage && post.data.featuredImage !== '/images/placeholder.jpg' && (
       <div class="absolute inset-0 overflow-hidden">
         <img
@@ -60,7 +60,7 @@ const dateStr = post.data.date.toLocaleDateString('en-CA', {
   </header>
 
   <!-- Post body -->
-  <div class="bg-black py-12 px-4">
+  <div class="py-12 px-4 bg-charcoal">
     <div class="max-w-3xl mx-auto">
       <article class="prose">
         <Content />

@@ -1,6 +1,5 @@
 ---
 import Badge from '../ui/Badge.astro';
-import ReviewCard from './ReviewCard.astro';
 import AnimatedBg from '../ui/AnimatedBg.astro';
 
 interface Review {
@@ -20,120 +19,155 @@ interface Props {
 
 const { eyebrow, heading, featured, reviews } = Astro.props;
 
-const featuredInitials = featured
-  ? featured.name.split(' ').map((n) => n[0]).slice(0, 2).join('')
-  : '';
+// Merge featured into the list at the front, then shuffle Google+Facebook together
+const allReviews: Review[] = [
+  ...(featured ? [featured] : []),
+  ...reviews,
+];
 
-const googleReviews = reviews.filter((r) => r.source !== 'facebook');
-const facebookReviews = reviews.filter((r) => r.source === 'facebook');
+// Duplicate for seamless infinite loop
+const carouselItems = [...allReviews, ...allReviews];
 ---
 
-<section class="relative py-20 bg-charcoal overflow-hidden">
+<section class="relative py-16 bg-charcoal overflow-hidden">
   <AnimatedBg />
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    {eyebrow && <Badge label={eyebrow} class="mb-4 block" />}
-    {heading && <h2 class="text-4xl font-semibold tracking-tight mb-8">{heading}</h2>}
 
-    <!-- Rating stats bar -->
-    <div class="flex flex-wrap gap-6 mb-12">
-      <a
-        href="https://www.google.com/search?q=jitsu-do+karate"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-3 bg-surface border border-white/10 px-5 py-3 hover:border-accent/50 transition-colors"
-      >
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-        </svg>
-        <div>
-          <div class="flex items-center gap-1.5">
-            <span class="font-display text-xl text-white">4.7</span>
-            <div class="flex gap-0.5">
-              {[1,2,3,4,5].map((i) => (
-                <svg class={`w-3.5 h-3.5 ${i <= 4 ? 'text-accent' : 'text-accent/50'}`} fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                </svg>
-              ))}
-            </div>
-          </div>
-          <p class="text-xs text-white/45 mt-0.5">Google Reviews</p>
-        </div>
-      </a>
-      <a
-        href="https://www.facebook.com/JitsuDoKarate/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex items-center gap-3 bg-surface border border-white/10 px-5 py-3 hover:border-accent/50 transition-colors"
-      >
-        <svg class="w-5 h-5 text-[#1877F2] shrink-0" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-        </svg>
-        <div>
-          <div class="flex items-center gap-1.5">
-            <span class="font-display text-sm text-white uppercase tracking-widest">100%</span>
-          </div>
-          <p class="text-xs text-white/45 mt-0.5">Recommended · Facebook</p>
-        </div>
-      </a>
-    </div>
-
-    <!-- Featured review -->
-    {featured && (
-      <div class="mb-12 border-l-2 border-accent pl-8 py-2 max-w-3xl">
-        <div class="flex items-center gap-4 mb-4">
-          <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center shrink-0">
-            <span class="font-display text-sm text-white">{featuredInitials}</span>
-          </div>
-          <div>
-            <p class="font-mono text-sm tracking-widest uppercase">{featured.name}</p>
-            {featured.date && <p class="text-xs text-white/40 mt-0.5">{featured.date}</p>}
-          </div>
-        </div>
-        <p class="text-lg text-white/80 leading-relaxed italic">
-          <span class="text-accent text-2xl leading-none mr-1">&ldquo;</span>{featured.text}<span class="text-accent text-2xl leading-none ml-1">&rdquo;</span>
-        </p>
+    <!-- Header + stats in one reveal row -->
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 reveal">
+      <div>
+        {eyebrow && <Badge label={eyebrow} class="mb-3 block" />}
+        {heading && <h2 class="text-4xl font-semibold tracking-tight">{heading}</h2>}
       </div>
-    )}
 
-    <!-- Google reviews -->
-    {googleReviews.length > 0 && (
-      <div class="mb-10">
-        <div class="flex items-center gap-2 mb-5">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <!-- Rating badges -->
+      <div class="flex gap-3 shrink-0">
+        <a
+          href="https://www.google.com/search?q=jitsu-do+karate"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2.5 bg-surface border border-white/10 px-4 py-2.5 hover:border-accent/50 transition-colors"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
           </svg>
-          <span class="font-mono text-xs tracking-[0.2em] uppercase text-white/50">Google Reviews</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {googleReviews.map((review) => (
-            <ReviewCard {...review} />
-          ))}
-        </div>
-      </div>
-    )}
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-display text-lg text-white leading-none">4.7</span>
+              <div class="flex gap-0.5">
+                {[1,2,3,4,5].map((i) => (
+                  <svg class={`w-3 h-3 ${i <= 4 ? 'text-accent' : 'text-accent/50'}`} fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                ))}
+              </div>
+            </div>
+            <p class="text-xs text-white/45 leading-none mt-1">Google Reviews</p>
+          </div>
+        </a>
 
-    <!-- Facebook reviews -->
-    {facebookReviews.length > 0 && (
-      <div>
-        <div class="flex items-center gap-2 mb-5">
-          <svg class="w-4 h-4 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
+        <a
+          href="https://www.facebook.com/JitsuDoKarate/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2.5 bg-surface border border-white/10 px-4 py-2.5 hover:border-accent/50 transition-colors"
+        >
+          <svg class="w-4 h-4 text-[#1877F2] shrink-0" fill="currentColor" viewBox="0 0 24 24">
             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
           </svg>
-          <span class="font-mono text-xs tracking-[0.2em] uppercase text-white/50">Facebook Recommendations</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {facebookReviews.map((review) => (
-            <ReviewCard {...review} />
-          ))}
-        </div>
+          <div>
+            <span class="font-display text-lg text-white leading-none block">100%</span>
+            <p class="text-xs text-white/45 leading-none mt-1">Recommended · Facebook</p>
+          </div>
+        </a>
       </div>
-    )}
+    </div>
+  </div>
+
+  <!-- Carousel — full-width, breaks out of max-w container -->
+  <div class="carousel-mask relative">
+    <!-- Left fade -->
+    <div class="carousel-fade-left pointer-events-none absolute left-0 top-0 h-full w-24 z-10"
+         style="background: linear-gradient(to right, var(--color-charcoal, #1c1c1c), transparent);"></div>
+    <!-- Right fade -->
+    <div class="carousel-fade-right pointer-events-none absolute right-0 top-0 h-full w-24 z-10"
+         style="background: linear-gradient(to left, var(--color-charcoal, #1c1c1c), transparent);"></div>
+
+    <div class="carousel-track" style={`--card-count: ${allReviews.length};`}>
+      {carouselItems.map((review) => {
+        const initials = review.name.split(' ').map((n) => n[0]).slice(0, 2).join('');
+        const rating = review.rating ?? 5;
+        return (
+          <div class="carousel-card bg-surface-2 border border-white/8 p-5 flex flex-col gap-3 shrink-0">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center shrink-0">
+                  <span class="font-display text-xs text-white">{initials}</span>
+                </div>
+                <div>
+                  <p class="font-mono text-xs tracking-widest uppercase leading-tight">{review.name}</p>
+                  <div class="flex gap-0.5 mt-1" aria-label={`${rating} stars`}>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <svg class={`w-2.5 h-2.5 ${i < rating ? 'text-accent' : 'text-white/20'}`} fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              {review.source === 'google' && (
+                <svg class="w-4 h-4 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                </svg>
+              )}
+              {review.source === 'facebook' && (
+                <svg class="w-4 h-4 text-[#1877F2] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                </svg>
+              )}
+            </div>
+
+            <p class="text-sm text-white/65 leading-relaxed italic">&ldquo;{review.text}&rdquo;</p>
+
+            {review.date && <p class="text-xs text-white/35">{review.date}</p>}
+          </div>
+        );
+      })}
+    </div>
   </div>
 </section>
 
+<style>
+  .carousel-mask {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+    padding: 0.5rem 0;
+  }
+
+  /* Pause on hover for readability */
+  .carousel-mask:hover .carousel-track {
+    animation-play-state: paused;
+  }
+
+  .carousel-card {
+    width: 320px;
+  }
+
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

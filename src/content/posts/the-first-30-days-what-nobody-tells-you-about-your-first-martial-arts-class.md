@@ -2,7 +2,7 @@
 title: "The First 30 Days: What Nobody Tells You About Your First Martial Arts Class"
 date: "2026-03-10"
 excerpt: "The Question: A nervous user on r/BJJ recently posted: \"I just signed up for my first class tomorrow. I’m out of shape, I don't know the moves, and I’m terrified of looking like an idiot. What should I actually expect?\" Walking through the door of a martial arts academy for the first time is one"
-featuredImage: "/images/placeholder.jpg"
+featuredImage: "/images/tired-white-belt-NUQnfkK4Bdl1pDOO.webp"
 seoTitle: "The First 30 Days: What Nobody Tells You About Your First Martial Arts Class - Jitsu-Do Karate"
 seoDescription: "The Question: A nervous user on r/BJJ recently posted: \"I just signed up for my first class tomorrow. I’m out of shape, I don't know the moves, and I’m"
 tags: []

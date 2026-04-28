@@ -2,7 +2,7 @@
 title: "Why We Left \"Traditional\" Martial Arts Behind: The Jitsu-Do Philosophy"
 date: "2026-03-10"
 excerpt: "Karate, BJJ, Muay Thai, Judo, Wing Tsun… Why pick just one? Most martial arts schools in the York Region are stuck in the 1970s. They teach students to use moves that don’t work, perform deep, knee-breaking stances, and memorize complex routines (Kata) that haven't been updated in decades. They focus on \"winning\" a trophy or"
-featuredImage: "/images/placeholder.jpg"
+featuredImage: "/images/hybrid-martial-arts-hOrawtWsgFsgnpcI.png"
 seoTitle: "Why We Left \"Traditional\" Martial Arts Behind: The Jitsu-Do Philosophy - Jitsu-Do Karate"
 seoDescription: "Karate, BJJ, Muay Thai, Judo, Wing Tsun… Why pick just one?"
 tags: []

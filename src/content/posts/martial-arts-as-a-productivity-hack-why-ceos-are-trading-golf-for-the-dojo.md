@@ -2,7 +2,7 @@
 title: "Martial Arts as a Productivity Hack: Why CEOs are Trading Golf for the Dojo"
 date: "2026-03-10"
 excerpt: "The Question: A common sentiment on LinkedIn and productivity subreddits like r/getdisciplined is: \"I’m overwhelmed with work and feel burnt out. I want to exercise, but I don't have two hours to spend at a gym. Is martial arts just another distraction, or can it actually help my career?\" In the corporate world of 2026,"
-featuredImage: "/images/placeholder.jpg"
+featuredImage: "/images/professional-weights-vs-karate-6bWg7WZ47o3MSlHe.webp"
 seoTitle: "Martial Arts as a Productivity Hack: Why CEOs are Trading Golf for the Dojo - Jitsu-Do Karate"
 seoDescription: "The Question: A common sentiment on LinkedIn and productivity subreddits like r/getdisciplined is: \"I’m overwhelmed with work and feel burnt out. I want to"
 tags: []

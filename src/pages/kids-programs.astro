@@ -76,7 +76,7 @@ const benefits = [
       <div>
         <Badge label="What They'll Build" class="mb-4 block" />
         <h3 class="text-3xl font-semibold tracking-tight mb-6">Skills For Life</h3>
-        <ul class="space-y-3">
+        <ul class="space-y-3 mb-8" data-stagger-list>
           {benefits.map((b) => (
             <li class="flex gap-3 text-white/80">
               <span class="text-accent shrink-0">✓</span>
@@ -84,6 +84,12 @@ const benefits = [
             </li>
           ))}
         </ul>
+        <div class="border-l-2 border-accent/50 pl-5">
+          <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent/70 mb-2">Right Fit</p>
+          <p class="text-white/70 leading-relaxed text-sm">
+            Children aged <strong class="text-white">6–12</strong> of any experience level. High-energy kids, those who need focus and structure, and complete beginners all thrive.
+          </p>
+        </div>
       </div>
       <div class="aspect-[4/3] overflow-hidden">
         <img
@@ -95,17 +101,6 @@ const benefits = [
           height="600"
         />
       </div>
-    </div>
-  </section>
-
-  <section class="relative py-20 bg-surface overflow-hidden">
-    <AnimatedBg />
-    <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <Badge label="Right Fit" class="mb-4 block mx-auto" />
-      <h3 class="text-3xl font-semibold tracking-tight mb-6">Who It's For</h3>
-      <p class="text-white/75 leading-relaxed">
-        Children aged <strong class="text-white">6–12</strong> of any experience level. High-energy kids, those who need focus and structure, and complete beginners all thrive in the Kids Foundations program.
-      </p>
     </div>
   </section>
 

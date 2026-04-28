@@ -37,6 +37,13 @@ const {
   )}
   {!bgImage && <AnimatedBg variant="hero" />}
 
+  <!-- Warm red radial glow — sits behind content, gives depth without aggression -->
+  <div
+    class="absolute inset-0 pointer-events-none"
+    aria-hidden="true"
+    style="background: radial-gradient(ellipse 55% 50% at 18% 72%, rgba(196,30,30,0.16) 0%, transparent 65%);"
+  ></div>
+
   <div class="relative z-10 w-full max-w-[1360px] mx-auto px-[clamp(20px,4vw,64px)] pb-[clamp(56px,9vh,112px)] pt-24">
     {eyebrow && (
       <div class="mb-6">
@@ -55,9 +62,11 @@ const {
     )}
 
     {body && (
-      <p class="text-lg text-white/70 max-w-[52ch] mt-6 mb-8 leading-relaxed">
-        {body}
-      </p>
+      <div class="hero-body mt-6 mb-8">
+        <p class="text-lg text-white/90 max-w-[52ch] leading-relaxed">
+          {body}
+        </p>
+      </div>
     )}
 
     {bullets.length > 0 && (
@@ -79,3 +88,13 @@ const {
     )}
   </div>
 </section>
+
+<style>
+  .hero-body {
+    border-left: 2px solid rgba(200, 169, 110, 0.65);
+    padding-left: 1.25rem;
+    background: linear-gradient(90deg, rgba(200,169,110,0.06) 0%, transparent 70%);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+</style>
