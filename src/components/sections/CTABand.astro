@@ -32,7 +32,7 @@ const {
     <div class={`absolute inset-0 ${dark ? 'bg-black/70' : 'bg-black/40'}`} aria-hidden="true"></div>
   )}
   {!bgImage && <div class="absolute inset-0 bg-surface" aria-hidden="true"></div>}
-  <AnimatedBg />
+  {!bgImage && <AnimatedBg />}
 
   <div class="relative z-10 max-w-2xl mx-auto">
     {eyebrow && <Badge label={eyebrow} class="mb-4 block" />}

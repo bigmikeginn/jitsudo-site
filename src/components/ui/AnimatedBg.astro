@@ -35,29 +35,26 @@ const { variant = 'default' } = Astro.props;
   height: 50%;
   fill: none;
   stroke-width: 1.5;
-  /* Glow effect — soft halo around the stroke without extra lines */
-  filter:
-    drop-shadow(0 0 6px rgba(255, 255, 255, 0.35))
-    drop-shadow(0 0 14px rgba(255, 255, 255, 0.20));
+  will-change: transform;
 }
 
 .wave-1 {
   top: 12%;
   stroke: rgba(255, 255, 255, 0.55);
-  animation: flow-left 22s linear infinite;
+  animation: flow-left 8s linear infinite;
 }
 .wave-2 {
   top: 38%;
   stroke: rgba(255, 255, 255, 0.40);
   stroke-width: 1.25;
-  animation: flow-right 30s linear infinite;
+  animation: flow-right 12s linear infinite;
 }
 .wave-3 {
   top: 64%;
   stroke: rgba(255, 255, 255, 0.30);
   stroke-width: 1;
-  animation: flow-left 38s linear infinite;
-  animation-delay: -8s;
+  animation: flow-left 16s linear infinite;
+  animation-delay: -4s;
 }
 
 /* Animations: full wavelength is 50% of SVG width because viewBox is 2x */
@@ -70,25 +67,20 @@ const { variant = 'default' } = Astro.props;
   100% { transform: translateX(0); }
 }
 
-/* Hero variant — same waves, just brighter glow */
+/* Hero variant — brighter strokes */
 [data-variant="hero"] .wave-1 { stroke: rgba(255, 255, 255, 0.85); stroke-width: 2; }
 [data-variant="hero"] .wave-2 { stroke: rgba(255, 255, 255, 0.65); stroke-width: 1.5; }
 [data-variant="hero"] .wave-3 { stroke: rgba(255, 255, 255, 0.50); stroke-width: 1.25; }
-[data-variant="hero"] .wave {
-  filter:
-    drop-shadow(0 0 8px rgba(255, 255, 255, 0.50))
-    drop-shadow(0 0 18px rgba(255, 255, 255, 0.30));
-}
 
 /* Subtle variant — for sections sitting over a photo bg */
 [data-variant="subtle"] .wave-1 { stroke: rgba(255, 255, 255, 0.30); }
 [data-variant="subtle"] .wave-2 { stroke: rgba(255, 255, 255, 0.22); }
 [data-variant="subtle"] .wave-3 { stroke: rgba(255, 255, 255, 0.18); }
 
-/* Respect prefers-reduced-motion */
+/* Hide entirely when user prefers reduced motion — no frozen static lines */
 @media (prefers-reduced-motion: reduce) {
-  .wave {
-    animation: none !important;
+  .animated-bg {
+    display: none;
   }
 }
 </style>
