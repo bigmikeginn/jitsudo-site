@@ -1,118 +1,109 @@
 ---
 /**
- * Topographic contour-line background.
- * A dense field of smooth wave paths, very low opacity, continuously
- * scrolling left. The SVG is 200% wide so translateX(-50%) loops
- * seamlessly — wavelength 480 divides 1440 (container) exactly × 3.
+ * Lake-surface wave background.
+ * Four wave components propagating at different angles interfere to
+ * produce an organic water-surface texture. Canvas paths are redrawn
+ * every frame via rAF so the OS reduced-motion CSS block has no effect.
  */
 interface Props {
   variant?: 'default' | 'hero' | 'subtle';
 }
 const { variant = 'default' } = Astro.props;
 
-const LINES  = 24;   // number of contour lines
-const VW     = 2880; // viewBox width  (200% of 1440px container)
-const VH     = 600;  // viewBox height (scales to fill section)
-const WL     = 480;  // wavelength — must divide 1440 for seamless loop
-const AMP    = 11;   // wave amplitude in viewBox units
-const STEP   = WL / 4;   // quarter-wavelength sample spacing
-const GOLDEN = 2.39996322; // 2π × golden-ratio fraction — natural phase spread
-
-/** Catmull-Rom → cubic bezier conversion for smooth sine interpolation */
-function wavePath(baseY: number, phase: number): string {
-  const count = Math.ceil(VW / STEP) + 2;
-  const pts = Array.from({ length: count }, (_, i) => ({
-    x: i * STEP,
-    y: +(baseY + AMP * Math.sin(phase + (i * Math.PI) / 2)).toFixed(2),
-  }));
-
-  let d = `M ${pts[0].x} ${pts[0].y}`;
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p0 = pts[Math.max(0, i - 1)];
-    const p1 = pts[i];
-    const p2 = pts[i + 1];
-    const p3 = pts[Math.min(pts.length - 1, i + 2)];
-    const cp1x = +(p1.x + (p2.x - p0.x) / 6).toFixed(1);
-    const cp1y = +(p1.y + (p2.y - p0.y) / 6).toFixed(2);
-    const cp2x = +(p2.x - (p3.x - p1.x) / 6).toFixed(1);
-    const cp2y = +(p2.y - (p3.y - p1.y) / 6).toFixed(2);
-    d += ` C ${cp1x} ${cp1y},${cp2x} ${cp2y},${p2.x} ${p2.y}`;
-  }
-  return d;
-}
-
-const paths = Array.from({ length: LINES }, (_, i) => {
-  const baseY = (i / (LINES - 1)) * VH;
-  const phase = i * GOLDEN;
-  return wavePath(baseY, phase);
-});
+const OPACITY: Record<string, number> = {
+  default: 0.055,
+  hero:    0.085,
+  subtle:  0.032,
+};
 ---
 
-<div class="topo-bg" aria-hidden="true" data-variant={variant}>
-  <svg
-    class="topo-svg"
-    viewBox={`0 0 ${VW} ${VH}`}
-    preserveAspectRatio="xMidYMid slice"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    {paths.map((d) => <path d={d} />)}
-  </svg>
-</div>
+<canvas
+  class="topo-canvas"
+  aria-hidden="true"
+  data-opacity={OPACITY[variant ?? 'default']}
+></canvas>
 
 <style>
-  .topo-bg {
+  .topo-canvas {
     position: absolute;
     inset: 0;
-    overflow: hidden;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     user-select: none;
-  }
-
-  .topo-svg {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 200%;
-    height: 100%;
-    will-change: transform;
-  }
-
-  .topo-svg path {
-    fill: none;
-    stroke: rgba(255, 255, 255, 0.055);
-    stroke-width: 1;
-    vector-effect: non-scaling-stroke;
-  }
-
-  [data-variant="hero"] .topo-svg path {
-    stroke: rgba(255, 255, 255, 0.08);
-  }
-
-  [data-variant="subtle"] .topo-svg path {
-    stroke: rgba(255, 255, 255, 0.035);
+    z-index: 0;
+    display: block;
   }
 </style>
 
 <script>
-  // Drive scroll via rAF so the OS "prefers-reduced-motion" CSS override can't kill it.
-  // translateX(-50%) of a 200%-wide element = one full container width = one viewbox repeat.
-  const DURATION = 32000; // ms for one full loop
+  function initWaves(canvas: HTMLCanvasElement) {
+    const ctx = canvas.getContext('2d')!;
+    const opacity = parseFloat(canvas.dataset.opacity ?? '0.055');
+    const dpr = Math.min(window.devicePixelRatio ?? 1, 2);
 
-  document.querySelectorAll<SVGSVGElement>('.topo-svg').forEach((svg) => {
-    let progress = 0;
-    let last: number | null = null;
+    let cssW = 0, cssH = 0;
 
-    function tick(now: number) {
-      if (last !== null) {
-        progress += (now - last) / DURATION;
-        if (progress >= 1) progress -= 1;
-      }
-      last = now;
-      svg.style.transform = `translateX(-${(progress * 50).toFixed(4)}%)`;
-      requestAnimationFrame(tick);
+    function resize() {
+      cssW = canvas.offsetWidth  || (canvas.parentElement?.offsetWidth  ?? 1440);
+      cssH = canvas.offsetHeight || (canvas.parentElement?.offsetHeight ?? 400);
+      canvas.width  = cssW * dpr;
+      canvas.height = cssH * dpr;
     }
 
-    requestAnimationFrame(tick);
-  });
+    function draw(t: number) {
+      if (cssW === 0) { resize(); return; }
+
+      ctx.save();
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, cssW, cssH);
+      ctx.lineWidth = 1;
+      ctx.lineJoin  = 'round';
+      ctx.strokeStyle = `rgba(255,255,255,${opacity})`;
+
+      const SPACING = 22;
+      const lineCount = Math.floor(cssH / SPACING) + 2;
+
+      for (let i = 0; i < lineCount; i++) {
+        const by = (i / Math.max(lineCount - 1, 1)) * cssH; // base y
+
+        ctx.beginPath();
+        let first = true;
+
+        for (let x = 0; x <= cssW; x += 4) {
+          // Four wave components, each propagating at a different angle.
+          // kx/ky set the wavevector; positive ωt = leftward; negative = rightward.
+          // Mixing angles and speeds creates natural interference patterns.
+          const y = by
+            // Long primary swell — slow, rightward, slight downward angle
+            + 9   * Math.sin(x * 0.0060 + by * 0.0028 - t * 0.38)
+            // Medium wave — leftward, slight upward angle
+            + 5   * Math.sin(x * 0.0130 - by * 0.0050 + t * 0.54)
+            // Short cross-ripple — rightward at steeper angle
+            + 2.5 * Math.sin(x * 0.0240 + by * 0.0090 - t * 0.92)
+            // Very long diagonal swell — leftward, strong cross-line component
+            + 3.5 * Math.sin(x * 0.0028 + by * 0.0120 + t * 0.19);
+
+          if (first) { ctx.moveTo(x, y); first = false; }
+          else        ctx.lineTo(x, y);
+        }
+
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    }
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    function loop(ts: number) {
+      if (cssW === 0) resize();
+      draw(ts / 1000);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  document.querySelectorAll<HTMLCanvasElement>('.topo-canvas').forEach(initWaves);
 </script>
