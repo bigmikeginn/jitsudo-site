@@ -27,9 +27,8 @@ const plans = [
     note: 'No signup fee · No term limit',
     features: [
       { ok: true, text: 'Unlimited classes (Karate & BJJ)' },
-      { ok: true, text: 'Adult & family classes' },
+      { ok: true, text: 'Adult / Youth / Kids' },
       { ok: true, text: 'No signup fees' },
-      { ok: true, text: 'No term limits' },
     ],
     highlighted: true,
   },
@@ -42,43 +41,25 @@ const plans = [
     features: [
       { ok: true, text: 'Everything in Core' },
       { ok: true, text: '1 private lesson/month (30 min)' },
-      { ok: true, text: 'Gradings included (white–brown)' },
       { ok: true, text: '15% gear discount' },
     ],
     highlighted: false,
   },
 ];
-
 ---
 <Layout
-  title="Schedule & Pricing — Jitsu-Do Karate Newmarket"
+  title="Pricing & Schedule — Jitsu-Do Karate Newmarket"
   description="Class schedule and membership pricing for Jitsu-Do Karate in Newmarket. Core, Elite, and Basic plans from $129.99/mo. No signup fees on Core."
 >
   <Hero
-    eyebrow="Schedule + Pricing"
+    eyebrow="Pricing + Schedule"
     headline="Train On Your"
     accentLine="Schedule"
     body="Consistency is the only path to mastery. Whether you train twice a week or take private classes, we've got you covered."
     primaryCta={{ label: 'Start Free Trial', href: '/trial' }}
-    bgImage="/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.jpg"
+    bgImage="/images/heather-kote-mawashi.jpg"
     minHeight="min-h-[55vh]"
   />
-
-  <!-- Class Schedule (live from Gymdesk) -->
-  <section class="relative py-20 bg-surface overflow-hidden">
-    <AnimatedBg />
-    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <Badge label="Class Times" class="mb-4 block" />
-      <h2 class="text-4xl font-semibold tracking-tight mb-4">Weekly Schedule</h2>
-      <p class="text-white/60 mb-10 text-sm">Live schedule from our member portal. Click any class for details and to register.</p>
-      <div class="gymdesk-wrap">
-        <div class="gymdesk-schedule" attr-gym="AyGZN" attr-visible_schedule="lN5qQ" attr-default_schedule="all" attr-program="all" attr-theme="dark"></div>
-      </div>
-      <p class="mt-6 text-white/40 text-xs">* New to the dojo? <a href="/trial" class="text-accent hover:text-white transition-colors">Book a free trial</a> instead of registering directly.</p>
-    </div>
-  </section>
-
-  <script src="https://app.gymdesk.com/js/widgets.js" is:inline></script>
 
   <!-- Pricing -->
   <section class="relative py-20 bg-charcoal overflow-hidden">
@@ -125,6 +106,37 @@ const plans = [
       </div>
     </div>
   </section>
+
+  <!-- Class Schedule (live from Gymdesk) -->
+  <section class="relative py-20 bg-surface overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Class Times" class="mb-6 block" />
+      <p class="text-white/60 mb-10 text-sm">Live schedule from our member portal. Click any class for details and to register.</p>
+      <div class="gymdesk-wrap">
+        <div id="gymdesk-widget" class="gymdesk-schedule" attr-gym="AyGZN" attr-visible_schedule="lN5qQ" attr-default_schedule="all" attr-program="all" attr-theme="dark"></div>
+      </div>
+      <p class="mt-6 text-white/40 text-xs">* New to the dojo? <a href="/trial" class="text-accent hover:text-white transition-colors">Book a free trial</a> instead of registering directly.</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      function loadGymdesk() {
+        if (document.querySelector('.gymdesk-schedule')) {
+          var s = document.createElement('script');
+          s.src = 'https://app.gymdesk.com/js/widgets.js';
+          s.async = true;
+          document.body.appendChild(s);
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadGymdesk);
+      } else {
+        loadGymdesk();
+      }
+    })();
+  </script>
 
   <CTABand
     eyebrow="Not sure which plan?"

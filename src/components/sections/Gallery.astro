@@ -27,7 +27,15 @@ const { images, eyebrow, heading } = Astro.props;
   <div class="gc-outer reveal" role="region" aria-label={heading ?? 'Gallery'}>
     <div class="gc-stage" aria-live="polite">
       {images.map((img, i) => (
-        <div class="gc-slide" data-slot="2" aria-hidden={i !== 0 ? 'true' : undefined}>
+        <button
+          class="gc-slide"
+          data-slot="2"
+          aria-hidden={i !== 0 ? 'true' : undefined}
+          data-src={img.src}
+          data-alt={img.alt}
+          aria-label={`View full image: ${img.alt}`}
+          type="button"
+        >
           <img
             src={img.src}
             alt={img.alt}
@@ -36,7 +44,7 @@ const { images, eyebrow, heading } = Astro.props;
             height="400"
             draggable="false"
           />
-        </div>
+        </button>
       ))}
     </div>
     <!-- edge vignettes -->
@@ -45,21 +53,35 @@ const { images, eyebrow, heading } = Astro.props;
   </div>
 </section>
 
+<!-- Lightbox -->
+<div id="gc-lightbox" aria-modal="true" role="dialog" aria-label="Photo lightbox" hidden>
+  <button id="gc-lb-close" aria-label="Close lightbox" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+  <div id="gc-lb-backdrop"></div>
+  <div id="gc-lb-content">
+    <img id="gc-lb-img" src="" alt="" />
+  </div>
+</div>
+
 <script>
+  // ── Carousel ────────────────────────────────────────────────────────────────
   function initFlow(outer: HTMLElement) {
     const stage = outer.querySelector<HTMLElement>('.gc-stage')!;
     const slides = Array.from(stage.querySelectorAll<HTMLElement>('.gc-slide'));
     const total = slides.length;
-    let center = 0;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let autoTimer: ReturnType<typeof setInterval> | null = null;
 
-    // slot configs: [scale, opacity, grayscale%, z-index]
     const CONFIGS: Record<number, [number, number, number, number]> = {
       0: [1.00, 1.00,  0, 5],
       1: [0.82, 0.62, 25, 4],
       2: [0.66, 0.32, 65, 3],
     };
-    const FALLOFF = [0.52, 0.18, 80, 2]; // |slot| >= 3
+    const FALLOFF = [0.52, 0.18, 80, 2];
+
+    let center = 0;
 
     function getSlot(i: number): number {
       const raw = ((i - center) % total + total) % total;
@@ -92,18 +114,68 @@ const { images, eyebrow, heading } = Astro.props;
       layout();
     }
 
+    function startAuto() {
+      if (!autoTimer && total > 1) autoTimer = setInterval(advance, 2500);
+    }
+
+    function stopAuto() {
+      if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+    }
+
     layout();
     window.addEventListener('resize', layout, { passive: true });
+    startAuto();
 
-    if (total > 1) {
-      setInterval(advance, 2500);
-    }
+    // Pause auto-advance while lightbox is open
+    document.addEventListener('gc:lightbox-open', stopAuto);
+    document.addEventListener('gc:lightbox-close', startAuto);
   }
 
   document.querySelectorAll<HTMLElement>('.gc-outer').forEach(initFlow);
+
+  // ── Lightbox ─────────────────────────────────────────────────────────────────
+  const lightbox  = document.getElementById('gc-lightbox')!;
+  const lbImg     = document.getElementById('gc-lb-img') as HTMLImageElement;
+  const lbClose   = document.getElementById('gc-lb-close')!;
+  const lbBackdrop = document.getElementById('gc-lb-backdrop')!;
+
+  function openLightbox(src: string, alt: string) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+    document.dispatchEvent(new CustomEvent('gc:lightbox-open'));
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lbImg.src = '';
+    document.body.style.overflow = '';
+    document.dispatchEvent(new CustomEvent('gc:lightbox-close'));
+  }
+
+  // Open on slide click
+  document.querySelectorAll<HTMLElement>('.gc-slide').forEach((slide) => {
+    slide.addEventListener('click', () => {
+      const src = slide.dataset.src;
+      const alt = slide.dataset.alt ?? '';
+      if (src) openLightbox(src, alt);
+    });
+  });
+
+  // Close on backdrop click or close button
+  lbBackdrop.addEventListener('click', closeLightbox);
+  lbClose.addEventListener('click', closeLightbox);
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  });
 </script>
 
 <style>
+  /* ── Carousel ─────────────────────────────────────────────────────────────── */
   .gc-outer {
     position: relative;
     height: 200px;
@@ -123,15 +195,23 @@ const { images, eyebrow, heading } = Astro.props;
     position: absolute;
     top: 0;
     left: 0;
-    /* width set by JS offset — CSS just defines the size */
     width: clamp(160px, 48vw, 270px);
     height: 100%;
     overflow: hidden;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: zoom-in;
     transition:
       transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
       opacity   0.7s ease,
       filter    0.7s ease;
     will-change: transform, opacity;
+  }
+
+  .gc-slide:focus-visible {
+    outline: 2px solid var(--color-accent, #c8393b);
+    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -147,7 +227,6 @@ const { images, eyebrow, heading } = Astro.props;
     user-select: none;
   }
 
-  /* edge fade-out to match section bg */
   .gc-vignette {
     position: absolute;
     top: 0;
@@ -163,5 +242,69 @@ const { images, eyebrow, heading } = Astro.props;
   .gc-vignette-right {
     right: 0;
     background: linear-gradient(to left, #1a1a1a 0%, transparent 100%);
+  }
+
+  /* ── Lightbox ─────────────────────────────────────────────────────────────── */
+  #gc-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #gc-lightbox[hidden] { display: none; }
+
+  #gc-lb-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    cursor: zoom-out;
+  }
+
+  #gc-lb-content {
+    position: relative;
+    z-index: 1;
+    max-width: min(92vw, 1100px);
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #gc-lb-img {
+    display: block;
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+  }
+
+  #gc-lb-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    transition: background 0.2s;
+  }
+
+  #gc-lb-close:hover { background: rgba(255,255,255,0.2); }
+
+  #gc-lb-close svg {
+    width: 1rem;
+    height: 1rem;
   }
 </style>

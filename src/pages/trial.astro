@@ -2,14 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
-import Button from '../components/ui/Button.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
 import { business } from '../data/business';
 
 const whatToBring = [
   'Comfortable athletic clothing (gi not required for trial)',
   'Water bottle',
-  'Clean indoor footwear or bare feet',
+  'Bare feet on the mat (no footwear)',
   'An open mind and genuine questions',
 ];
 ---
@@ -22,8 +21,7 @@ const whatToBring = [
     headline="Book Your"
     accentLine="Free Trial Class"
     body="Come in, train, see if the technical standard and dojo culture fit your goals. No high-pressure sales — ever."
-    primaryCta={{ label: 'Email To Book', href: `mailto:${business.email}` }}
-    secondaryCta={{ label: `Call ${business.phoneDisplay}`, href: `tel:${business.phone}` }}
+    primaryCta={{ label: 'Book Your Trial Below', href: '#trial-schedule' }}
     bgImage="/images/3x-seiza-hzWGsz3r226OhdrB.jpg"
     minHeight="min-h-[70vh]"
   />
@@ -79,13 +77,31 @@ const whatToBring = [
     </div>
   </section>
 
-  <section class="py-24 bg-charcoal text-center px-4">
-    <Badge label="Ready to Start" class="mb-4 block" />
-    <h2 class="text-4xl font-semibold tracking-tight mb-6">Book Your Free Trial</h2>
-    <p class="text-white/70 mb-10 max-w-xl mx-auto">Email us to schedule your orientation and first class.</p>
-    <div class="flex flex-wrap items-center justify-center gap-4">
-      <Button href={`mailto:${business.email}`} variant="primary" size="lg">Email To Book</Button>
-      <Button href={`tel:${business.phone}`} variant="ghost" size="lg">Call {business.phoneDisplay}</Button>
+  <!-- Trial booking schedule (Gymdesk) -->
+  <section id="trial-schedule" class="relative py-20 bg-charcoal overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Badge label="Book Your Spot" class="mb-6 block" />
+      <p class="text-white/60 mb-10 text-sm">Select a class from the schedule below to book your free trial.</p>
+      <div class="gymdesk-schedule" attr-gym="AyGZN" attr-visible_schedule="AbOmv" attr-default_schedule="all" attr-program="all" attr-theme="dark"></div>
     </div>
   </section>
+
+  <script is:inline>
+    (function () {
+      function loadGymdesk() {
+        if (document.querySelector('.gymdesk-schedule')) {
+          var s = document.createElement('script');
+          s.src = 'https://app.gymdesk.com/js/widgets.js';
+          s.async = true;
+          document.body.appendChild(s);
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadGymdesk);
+      } else {
+        loadGymdesk();
+      }
+    })();
+  </script>
 </Layout>

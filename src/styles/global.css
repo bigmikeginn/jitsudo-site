@@ -14,6 +14,12 @@
   --color-muted: rgba(240, 237, 230, 0.55);
 }
 
+/* ─── Unified photo treatment ─────────────────────────────────────────────── */
+/* Slight desaturation + contrast lift ties colour and B&W photos together    */
+section img {
+  filter: contrast(1.1) saturate(0.68) brightness(0.92);
+}
+
 /* Section treatments — raised from pure black; ambient red glow adds depth */
 .bg-charcoal {
   background:

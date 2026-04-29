@@ -1,0 +1,22 @@
+# Old WordPress slugs → new Astro pages
+/karate-classes/          /karate           301
+/karate-classes           /karate           301
+/bjj-classes/             /bjj              301
+/bjj-classes              /bjj              301
+/contact-us/              /contact          301
+/contact-us               /contact          301
+/about-us/                /about            301
+/about-us                 /about            301
+/schedule/                /schedule         301
+/pricing/                 /schedule         301
+/pricing                  /schedule         301
+/join-us/                 /join             301
+/join-us                  /join             301
+/free-trial/              /trial            301
+/free-trial               /trial            301
+/kids/                    /kids-programs    301
+/kids                     /kids-programs    301
+/youth/                   /youth-programs   301
+/youth                    /youth-programs   301
+/adult/                   /adult-programs   301
+/adult                    /adult-programs   301
