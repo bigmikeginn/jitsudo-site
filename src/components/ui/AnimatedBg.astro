@@ -1,14 +1,12 @@
 ---
 /**
- * Trochoidal ocean-wave background.
- *
- * Each "material line" is a parametric curve displaced by two crossing
- * wave systems. A trochoidal wave displaces every point as:
- *   x = x₀ − R·sin(k·x₀ − ω·t)
- *   y = y₀ + R·cos(k·x₀ − ω·t)
- * where R decays exponentially with depth, giving dramatic breaking crests
- * at the surface and gentle rolling swells below — exactly the Great-Wave
- * contour look. All math runs in rAF so the OS reduced-motion flag is bypassed.
+ * Wave-art background.
+ * Uses the waves.png artwork (white line-art on near-black).
+ * mix-blend-mode: screen makes the dark background transparent so only
+ * the white wave lines bleed through at low opacity.
+ * A slow rAF-driven Lissajous drift (two slightly different sine periods)
+ * keeps the image alive. The inner element is 130% × 130% so the edges
+ * never expose during the drift.
  */
 interface Props {
   variant?: 'default' | 'hero' | 'subtle';
@@ -16,109 +14,58 @@ interface Props {
 const { variant = 'default' } = Astro.props;
 
 const OPACITY: Record<string, number> = {
-  default: 0.055,
-  hero:    0.08,
-  subtle:  0.032,
+  default: 0.18,
+  hero:    0.24,
+  subtle:  0.10,
 };
 ---
 
-<canvas
-  class="topo-canvas"
-  aria-hidden="true"
-  data-opacity={OPACITY[variant ?? 'default']}
-></canvas>
+<div class="wave-bg" aria-hidden="true" style={`--op:${OPACITY[variant ?? 'default']}`}>
+  <div class="wave-inner"></div>
+</div>
 
 <style>
-  .topo-canvas {
+  .wave-bg {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
+    z-index: 0;
     pointer-events: none;
     user-select: none;
-    z-index: 0;
-    display: block;
+    opacity: var(--op, 0.18);
+    mix-blend-mode: screen;
+  }
+
+  .wave-inner {
+    position: absolute;
+    top: -15%;
+    left: -15%;
+    width: 130%;
+    height: 130%;
+    background-image: url('/images/waves-bg.png');
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
   }
 </style>
 
 <script>
-  function initWaves(canvas: HTMLCanvasElement) {
-    const ctx = canvas.getContext('2d')!;
-    const opacity = parseFloat(canvas.dataset.opacity ?? '0.055');
-    const dpr = Math.min(window.devicePixelRatio ?? 1, 2);
-    let cssW = 0, cssH = 0;
-
-    function resize() {
-      cssW = canvas.offsetWidth  || canvas.parentElement?.offsetWidth  || 1440;
-      cssH = canvas.offsetHeight || canvas.parentElement?.offsetHeight || 400;
-      canvas.width  = cssW * dpr;
-      canvas.height = cssH * dpr;
-    }
-
-    function draw(t: number) {
-      if (cssW === 0) { resize(); return; }
-
-      ctx.save();
-      ctx.scale(dpr, dpr);
-      ctx.clearRect(0, 0, cssW, cssH);
-
-      ctx.lineWidth   = 1;
-      ctx.lineJoin    = 'round';
-      ctx.strokeStyle = `rgba(255,255,255,${opacity})`;
-
-      // ── Wave parameters ──────────────────────────────────────────────
-      // Primary swell: ~2.5 crests across the canvas, near-breaking steepness
-      const k1    = (2 * Math.PI) / (cssW * 0.40);
-      const A1    = 0.82 / k1;   // A·k = 0.82 → dramatic without full break
-      const w1    = 0.42;        // rightward
-
-      // Counter-swell: longer wavelength, gentler, travels left + slight diagonal
-      const k2    = (2 * Math.PI) / (cssW * 0.65);
-      const A2    = 0.48 / k2;
-      const w2    = -0.30;       // leftward
-      const ky2   = k2 * 0.14;  // small vertical wavevector component → diagonal crests
-
-      // Depth decay: amplitude → ~8 % at bottom of section
-      const kD    = 2.6 / cssH;
-
-      const STEP  = 10;          // pixels between material lines
-      const pad   = Math.ceil(A1 * 1.2); // render beyond edges for seamless look
-
-      // ── Draw material lines ──────────────────────────────────────────
-      for (let y0 = -pad; y0 < cssH + pad; y0 += STEP) {
-        const R1 = A1 * Math.exp(-kD * Math.max(0, y0));
-        const R2 = A2 * Math.exp(-kD * 0.75 * Math.max(0, y0));
-
-        ctx.beginPath();
-        let first = true;
-
-        for (let x0 = -pad; x0 <= cssW + pad; x0 += 4) {
-          const ph1 = k1 * x0        - w1  * t;
-          const ph2 = k2 * x0 + ky2 * y0 + w2 * t;
-
-          const x = x0 - R1 * Math.sin(ph1) - R2 * Math.sin(ph2) * 0.72;
-          const y = y0 + R1 * Math.cos(ph1) + R2 * Math.cos(ph2) * 0.88;
-
-          if (first) { ctx.moveTo(x, y); first = false; }
-          else        ctx.lineTo(x, y);
-        }
-
-        ctx.stroke();
-      }
-
-      ctx.restore();
-    }
-
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
+  document.querySelectorAll<HTMLElement>('.wave-inner').forEach((el) => {
+    // Lissajous-style drift: two slightly different periods so the path
+    // never exactly repeats, giving organic movement.
+    const TX_AMP = 6;   // ±6 % horizontal  (safe: 15% overhang > 6% * 130%)
+    const TY_AMP = 3;   // ±3 % vertical
+    const TX_T   = 38;  // seconds per horizontal cycle
+    const TY_T   = 53;  // seconds per vertical cycle (prime-ish ratio)
 
     function loop(ts: number) {
-      if (cssW === 0) resize();
-      draw(ts / 1000);
+      const t  = ts / 1000;
+      const tx = TX_AMP * Math.sin((2 * Math.PI * t) / TX_T);
+      const ty = TY_AMP * Math.sin((2 * Math.PI * t) / TY_T);
+      el.style.transform = `translate(${tx.toFixed(3)}%, ${ty.toFixed(3)}%)`;
       requestAnimationFrame(loop);
     }
-    requestAnimationFrame(loop);
-  }
 
-  document.querySelectorAll<HTMLCanvasElement>('.topo-canvas').forEach(initWaves);
+    requestAnimationFrame(loop);
+  });
 </script>
