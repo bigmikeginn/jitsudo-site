@@ -1,3 +1,6 @@
+# www → non-www redirect
+https://www.jitsudo.ca/*  https://jitsudo.ca/:splat 301
+
 # Old WordPress slugs → new Astro pages
 /karate-classes/          /karate           301
 /karate-classes           /karate           301
