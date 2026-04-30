@@ -4,9 +4,38 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/sections/Hero.astro';
 import Badge from '../../components/ui/Badge.astro';
 import AnimatedBg from '../../components/ui/AnimatedBg.astro';
+import BlogPagination from '../../components/BlogPagination.astro';
 
-const allPosts = await getCollection('posts', ({ data }) => !data.draft);
-const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+export async function getStaticPaths() {
+  const pageSize = 6;
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const totalPages = Math.ceil(sortedPosts.length / pageSize);
+
+  return Array.from({ length: totalPages }).map((_, index) => {
+    const pageNum = index + 1;
+    const start = index * pageSize;
+    const end = start + pageSize;
+    const pagePosts = sortedPosts.slice(start, end);
+
+    return {
+      params: { page: pageNum === 1 ? undefined : `page/${pageNum}` },
+      props: { pagePosts, pageNum, totalPages },
+    };
+  });
+}
+
+interface Props {
+  pagePosts: any[];
+  pageNum: number;
+  totalPages: number;
+}
+
+const { pagePosts, pageNum, totalPages } = Astro.props;
+
+const getPageHref = (pageNum: number) => {
+  return pageNum === 1 ? '/blog' : `/blog/page/${pageNum}`;
+};
 ---
 
 <Layout
@@ -25,7 +54,7 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
     <AnimatedBg />
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => {
+        {pagePosts.map((post) => {
           const dateStr = post.data.date.toLocaleDateString('en-CA', {
             year: 'numeric', month: 'long', day: 'numeric',
           });
@@ -70,6 +99,10 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
           );
         })}
       </div>
+
+      {totalPages > 1 && (
+        <BlogPagination page={pageNum} lastPage={totalPages} href={getPageHref} />
+      )}
     </div>
   </section>
 </Layout>
