@@ -10,7 +10,6 @@ https://www.jitsudo.ca/*  https://jitsudo.ca/:splat 301
 /contact-us               /contact          301
 /about-us/                /about            301
 /about-us                 /about            301
-/schedule/                /schedule         301
 /pricing/                 /schedule         301
 /pricing                  /schedule         301
 /join-us/                 /join             301
