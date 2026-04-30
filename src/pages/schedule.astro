@@ -120,6 +120,88 @@ const plans = [
     </div>
   </section>
 
+  <style is:global>
+    /* Gymdesk widget — restyled to match site aesthetic */
+    .gymdesk-wrap {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 1.5rem;
+      border-radius: 0;
+    }
+    .gymdesk-wrap iframe {
+      background: transparent !important;
+      border: none !important;
+      width: 100% !important;
+    }
+    /* Generic overrides that target common Gymdesk patterns */
+    .gymdesk-wrap *,
+    .gymdesk-schedule * {
+      font-family: 'Inter Variable', -apple-system, sans-serif !important;
+      letter-spacing: 0.01em;
+    }
+    .gymdesk-wrap h1, .gymdesk-wrap h2, .gymdesk-wrap h3,
+    .gymdesk-schedule h1, .gymdesk-schedule h2, .gymdesk-schedule h3 {
+      font-family: 'Aldrich', sans-serif !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em !important;
+    }
+    .gymdesk-wrap button,
+    .gymdesk-schedule button {
+      border-radius: 0 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      font-size: 0.75rem !important;
+      transition: all 0.2s !important;
+    }
+    .gymdesk-wrap a,
+    .gymdesk-schedule a {
+      color: #b71c1c !important;
+      text-decoration: none !important;
+      transition: color 0.2s !important;
+    }
+    .gymdesk-wrap a:hover,
+    .gymdesk-schedule a:hover {
+      color: #e53935 !important;
+    }
+    /* Day headers / column headers */
+    .gymdesk-wrap [class*="header"],
+    .gymdesk-wrap [class*="Header"],
+    .gymdesk-schedule [class*="header"],
+    .gymdesk-schedule [class*="Header"] {
+      text-transform: uppercase !important;
+      letter-spacing: 0.15em !important;
+      font-size: 0.7rem !important;
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+    /* Class blocks / cards */
+    .gymdesk-wrap [class*="class"],
+    .gymdesk-wrap [class*="Class"],
+    .gymdesk-schedule [class*="class"],
+    .gymdesk-schedule [class*="Class"] {
+      border-radius: 0 !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    /* Time slots */
+    .gymdesk-wrap [class*="time"],
+    .gymdesk-schedule [class*="time"] {
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.8rem !important;
+      letter-spacing: 0.05em !important;
+    }
+    /* Remove default rounded corners everywhere */
+    .gymdesk-wrap div,
+    .gymdesk-schedule div {
+      border-radius: 0 !important;
+    }
+    /* Backgrounds — make them transparent or match site */
+    .gymdesk-wrap [style*="background-color: white"],
+    .gymdesk-wrap [style*="background-color: #fff"],
+    .gymdesk-wrap [style*="background: white"],
+    .gymdesk-wrap [style*="background: #fff"] {
+      background: transparent !important;
+    }
+  </style>
+
   <script is:inline>
     (function () {
       function loadGymdesk() {
