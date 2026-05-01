@@ -78,14 +78,160 @@ const whatToBring = [
   </section>
 
   <!-- Trial booking schedule (Gymdesk) -->
-  <section id="trial-schedule" class="relative py-20 bg-charcoal overflow-hidden">
+  <section id="trial-schedule" class="relative py-20 bg-surface overflow-hidden">
     <AnimatedBg />
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <Badge label="Book Your Spot" class="mb-6 block" />
       <p class="text-white/60 mb-10 text-sm">Select a class from the schedule below to book your free trial.</p>
-      <div class="gymdesk-schedule" attr-gym="AyGZN" attr-visible_schedule="AbOmv" attr-default_schedule="all" attr-program="all" attr-theme="dark"></div>
+      <div class="gymdesk-wrap">
+        <div id="gymdesk-widget" class="gymdesk-schedule" attr-gym="AyGZN" attr-visible_schedule="AbOmv" attr-default_schedule="all" attr-program="all"></div>
+      </div>
     </div>
   </section>
+
+  <style is:global>
+    /* Gymdesk widget — light entries, clean look */
+    .gymdesk-wrap {
+      background: #f5f3ee;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0;
+      border-radius: 0;
+      overflow: hidden;
+    }
+    .gymdesk-wrap [style*="rgb(38, 200, 169)"],
+    .gymdesk-wrap [style*="rgb(0, 200"],
+    .gymdesk-wrap [style*="#26c8a9"],
+    .gymdesk-wrap [style*="teal"],
+    .gymdesk-wrap [style*="#00bcd4"] {
+      background: #b71c1c !important;
+      background-color: #b71c1c !important;
+      color: #fff !important;
+    }
+    .gymdesk-wrap [class*="today"],
+    .gymdesk-wrap [class*="Today"],
+    .gymdesk-wrap [class*="active"],
+    .gymdesk-wrap [class*="Active"],
+    .gymdesk-wrap [class*="selected"],
+    .gymdesk-wrap [class*="Selected"] {
+      background: #b71c1c !important;
+      background-color: #b71c1c !important;
+      color: #fff !important;
+    }
+    .gymdesk-wrap, .gymdesk-wrap * {
+      font-family: 'Inter Variable', -apple-system, sans-serif !important;
+    }
+    .gymdesk-wrap *,
+    .gymdesk-wrap div,
+    .gymdesk-wrap button,
+    .gymdesk-wrap a {
+      border-radius: 0 !important;
+    }
+    .gymdesk-wrap [class*="day-name"],
+    .gymdesk-wrap [class*="DayName"],
+    .gymdesk-wrap [class*="weekday"],
+    .gymdesk-wrap [class*="Weekday"] {
+      text-transform: uppercase !important;
+      letter-spacing: 0.18em !important;
+      font-size: 0.7rem !important;
+      font-weight: 500 !important;
+    }
+    .gymdesk-wrap [class*="day-number"],
+    .gymdesk-wrap [class*="DayNumber"],
+    .gymdesk-wrap [class*="date"],
+    .gymdesk-wrap [class*="Date"] {
+      font-family: 'Aldrich', sans-serif !important;
+      font-weight: 600 !important;
+    }
+    .gymdesk-wrap [class*="event"],
+    .gymdesk-wrap [class*="Event"],
+    .gymdesk-wrap [class*="lesson"],
+    .gymdesk-wrap [class*="Lesson"],
+    .gymdesk-wrap [class*="class-block"],
+    .gymdesk-wrap [class*="ClassBlock"] {
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+      color: #1a1a1a !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-left: 3px solid #b71c1c !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+      transition: all 0.2s !important;
+    }
+    .gymdesk-wrap [class*="event"] *,
+    .gymdesk-wrap [class*="Event"] *,
+    .gymdesk-wrap [class*="lesson"] *,
+    .gymdesk-wrap [class*="Lesson"] * {
+      color: #1a1a1a !important;
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+    .gymdesk-wrap [class*="event"]:hover,
+    .gymdesk-wrap [class*="Event"]:hover,
+    .gymdesk-wrap [class*="lesson"]:hover,
+    .gymdesk-wrap [class*="Lesson"]:hover {
+      border-color: #b71c1c !important;
+      box-shadow: 0 4px 14px rgba(183, 28, 28, 0.18) !important;
+      transform: translateY(-1px);
+    }
+    .gymdesk-wrap [class*="time"],
+    .gymdesk-wrap [class*="Time"] {
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.78rem !important;
+      letter-spacing: 0.02em !important;
+      color: #555 !important;
+    }
+    .gymdesk-wrap [class*="title"],
+    .gymdesk-wrap [class*="Title"],
+    .gymdesk-wrap [class*="name"],
+    .gymdesk-wrap [class*="Name"] {
+      font-family: 'Aldrich', sans-serif !important;
+      font-weight: 600 !important;
+      color: #1a1a1a !important;
+      letter-spacing: 0.01em !important;
+    }
+    .gymdesk-wrap [class*="instructor"],
+    .gymdesk-wrap [class*="Instructor"],
+    .gymdesk-wrap [class*="staff"],
+    .gymdesk-wrap [class*="Staff"] {
+      color: #666 !important;
+      font-size: 0.78rem !important;
+    }
+    .gymdesk-wrap button {
+      background: #b71c1c !important;
+      color: #fff !important;
+      border: none !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      font-size: 0.72rem !important;
+      padding: 0.6rem 1rem !important;
+      transition: all 0.2s !important;
+    }
+    .gymdesk-wrap button:hover {
+      background: #e53935 !important;
+    }
+    .gymdesk-wrap a {
+      color: #b71c1c !important;
+      text-decoration: none !important;
+    }
+    .gymdesk-wrap a:hover {
+      color: #e53935 !important;
+    }
+    .gymdesk-wrap [class*="header"],
+    .gymdesk-wrap [class*="Header"] {
+      background: #f5f3ee !important;
+      background-color: #f5f3ee !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+    .gymdesk-wrap [class*="toolbar"],
+    .gymdesk-wrap [class*="Toolbar"],
+    .gymdesk-wrap [class*="navbar"],
+    .gymdesk-wrap [class*="NavBar"] {
+      background: #f5f3ee !important;
+      background-color: #f5f3ee !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    .gymdesk-wrap ::-webkit-scrollbar { width: 6px; height: 6px; }
+    .gymdesk-wrap ::-webkit-scrollbar-thumb { background: rgba(183, 28, 28, 0.5); }
+  </style>
 
   <script is:inline>
     (function () {
