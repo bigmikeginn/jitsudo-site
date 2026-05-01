@@ -4,7 +4,7 @@ date: "2026-04-30"
 excerpt: "Have you ever wondered why someone might leave behind something they love? It wasn't an easy decision, but sometimes the best way forward is to create some"
 featuredImage: "/images/blog/why-i-left-jitsu-do-karate-and-what-i-built-instead.png"
 tags: []
-draft: false
+draft: true
 ---
 
 Have you ever wondered why someone might leave behind something they love? It wasn't an easy decision, but sometimes the best way forward is to create something new.
