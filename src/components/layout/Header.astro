@@ -15,6 +15,7 @@ const navLinks = [
   { label: 'Pricing / Schedule', href: '/schedule' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Store', href: 'https://jitsu-do-karate.gymdesk.com/shop', external: true },
 ];
 ---
 
@@ -59,6 +60,8 @@ const navLinks = [
             <a
               href={link.href}
               class="text-xs tracking-widest uppercase text-white/75 hover:text-white transition-colors"
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
             >
               {link.label}
             </a>
@@ -100,6 +103,8 @@ const navLinks = [
           <a
             href={link.href}
             class="block py-3 text-xs tracking-widest uppercase text-white/75 hover:text-white transition-colors border-b border-white/5"
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
           >
             {link.label}
           </a>
