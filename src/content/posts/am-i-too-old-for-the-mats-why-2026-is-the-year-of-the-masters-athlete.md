@@ -1,6 +1,6 @@
 ---
 title: "Am I Too Old for the Mats? Why 2026 is the Year of the 'Masters' Athlete"
-date: "2026-03-10"
+date: "2026-02-24"
 excerpt: "The Question: A user on Reddit recently asked: \"I’m 42, sit at a desk all day, and I’m out of shape. I’ve always wanted to try Karate/BJJ, but I’m terrified I’ll just get injured or laughed out of the gym. Is it too late for me to start?\" If you’ve spent any time scrolling through"
 featuredImage: "/images/old-guy-training-nJBUoR0i8rHLbeFQ.png"
 seoTitle: "Am I Too Old for the Mats? Why 2026 is the Year of the 'Masters' Athlete - Jitsu-Do Karate"
