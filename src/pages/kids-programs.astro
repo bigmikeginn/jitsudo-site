@@ -27,6 +27,13 @@ const benefits = [
   'Confidence built from real physical capability',
   'Friendships in a high-standard, kind environment',
 ];
+
+const kickstartDetails = [
+  'Same curriculum as our 6-year-old white belt program',
+  'Proper uniform from day one — gi and belt included in program',
+  'Stripe progression on their belt as they advance',
+  'Pacing, drills, and instruction calibrated for younger learners',
+];
 ---
 <Layout
   title="Kids Karate & BJJ — Jitsu-Do Newmarket"
@@ -100,6 +107,47 @@ const benefits = [
           width="800"
           height="600"
         />
+      </div>
+    </div>
+  </section>
+
+  <section class="relative py-20 bg-charcoal overflow-hidden">
+    <AnimatedBg />
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <Badge label="Ages 4–6 · Karate" class="mb-4 block" />
+        <h2 class="text-4xl font-semibold tracking-tight mb-4">Kickstart</h2>
+        <p class="text-white/75 leading-relaxed mb-6">
+          Kickstart is our 8-week introductory karate program designed specifically for children aged 4–6. Students wear a proper uniform, train the same core material as a 6-year-old white belt, and earn stripes on their belt as they progress — all delivered at a pace built for younger learners.
+        </p>
+        <ul class="space-y-3 mb-8">
+          {kickstartDetails.map((d) => (
+            <li class="flex gap-3 text-white/80">
+              <span class="text-accent shrink-0">✓</span>
+              <span>{d}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="border-l-2 border-accent/50 pl-5">
+          <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent/70 mb-2">Program Details</p>
+          <p class="text-white/70 leading-relaxed text-sm">
+            8-week session &middot; <strong class="text-white">$140</strong> per session
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-6">
+        <div class="border-l-2 border-accent pl-6">
+          <h3 class="text-lg font-semibold tracking-tight mb-2">Real Martial Arts, Right-Sized</h3>
+          <p class="text-white/65 leading-relaxed text-sm">This isn't a watered-down playgroup. Kickstart teaches the same foundational karate material your child will continue in Kids Foundations — just with instruction calibrated for the 4–6 age group.</p>
+        </div>
+        <div class="border-l-2 border-accent pl-6">
+          <h3 class="text-lg font-semibold tracking-tight mb-2">Uniform &amp; Belt from Day One</h3>
+          <p class="text-white/65 leading-relaxed text-sm">Students train in a proper gi and earn stripes on their belt as they demonstrate new skills. Structure and ceremony matter — even for the youngest students.</p>
+        </div>
+        <div class="border-l-2 border-accent pl-6">
+          <h3 class="text-lg font-semibold tracking-tight mb-2">The Perfect Bridge</h3>
+          <p class="text-white/65 leading-relaxed text-sm">Kickstart graduates move naturally into Kids Foundations at age 6, already familiar with dojo protocol, basic technique, and what it means to be a Jitsu-Do student.</p>
+        </div>
       </div>
     </div>
   </section>
