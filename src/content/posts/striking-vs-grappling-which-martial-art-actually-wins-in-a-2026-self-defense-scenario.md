@@ -1,6 +1,6 @@
 ---
 title: "Striking vs. Grappling: Which Martial Art Actually Wins in a 2026 Self-Defense Scenario?"
-date: "2026-03-10"
+date: "2026-03-03"
 excerpt: "The Question: A common debate on Reddit's r/MMA_Academy and r/martialarts is: \"If you could only choose one for a real-life situation, is it better to be a striker (Muay Thai/Boxing) or a grappler (BJJ/Wrestling)?\" This is the \"Oldest Question\" in combat sports. In the early 90s, the first UFCs proved that if you don't know"
 featuredImage: "/images/striking-vs-grappling-rMroVyN1TcYbQ0DU.png"
 seoTitle: "Striking vs. Grappling: Which Martial Art Actually Wins in a 2026 Self-Defense Scenario? - Jitsu-Do Karate"
