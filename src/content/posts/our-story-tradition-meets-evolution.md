@@ -1,6 +1,6 @@
 ---
 title: "Our Story: Tradition Meets Evolution"
-date: "2026-03-10"
+date: "2026-02-03"
 excerpt: "Martial arts is more than a hobby; it is a lifelong pursuit of excellence. My journey began in the deep traditions of Chito-Ryu Karate, where discipline, form, and respect are everything."
 featuredImage: "/images/never-quit-gBz375sJlaAubLDO.png"
 seoTitle: "Our Story: Tradition Meets Evolution - Jitsu-Do Karate"
