@@ -29,8 +29,8 @@ const {
 ---
 
 <section
-  class={`relative flex items-end overflow-hidden ${minHeight}`}
-  style={bgImage ? `background-image: url('${bgImage}'); background-size: cover; background-position: center top;` : ''}
+  class={`hero-section relative flex items-end overflow-hidden ${minHeight}`}
+  style={bgImage ? `background-image: url('${bgImage}'); background-size: cover;` : ''}
 >
   {bgImage && (
     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" aria-hidden="true"></div>
@@ -90,6 +90,16 @@ const {
 </section>
 
 <style>
+  .hero-section {
+    background-position: left top;
+  }
+
+  @media (min-width: 768px) {
+    .hero-section {
+      background-position: center top;
+    }
+  }
+
   .hero-body {
     border-left: 2px solid rgba(200, 169, 110, 0.65);
     padding-left: 1.25rem;
