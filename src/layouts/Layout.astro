@@ -342,10 +342,18 @@ const localBusinessSchema = {
             }
           }, true);
         }
+        // Defer until browser is idle so chat widget doesn't block LCP paint
+        function deferInit() {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(init, { timeout: 4000 });
+          } else {
+            setTimeout(init, 1000);
+          }
+        }
         if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', init);
+          document.addEventListener('DOMContentLoaded', deferInit);
         } else {
-          init();
+          deferInit();
         }
       })();
     </script>
