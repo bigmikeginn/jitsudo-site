@@ -22,11 +22,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? `https://${business.
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "SportsActivityLocation",
+  "@type": ["SportsActivityLocation", "LocalBusiness"],
   "name": business.name,
   "url": `https://${business.domain}`,
   "telephone": business.phone,
-  "email": business.email,
   "description": "Jitsu-Do Karate + BJJ is a technical martial arts school in Newmarket, Ontario offering Chito-Ryu Karate and Gracie Humaita Brazilian Jiu-Jitsu for kids, youth, and adults.",
   "address": {
     "@type": "PostalAddress",
@@ -58,7 +57,9 @@ const localBusinessSchema = {
   "priceRange": "$$",
   "image": `https://${business.domain}/images/karate-logo-white-text-oHuRP0peEmmhqRFY.png`,
   "sameAs": [
-    `https://${business.domain}`,
+    "https://www.facebook.com/JitsuDoKarate/",
+    "https://www.instagram.com/jitsudokarate/",
+    "https://www.youtube.com/@jitsu-dokarate5130",
   ],
   "hasMap": "https://www.google.com/maps/search/?api=1&query=1211+Gorham+Street+Unit+5+Newmarket+Ontario",
   "areaServed": {
@@ -68,6 +69,12 @@ const localBusinessSchema = {
       "@type": "State",
       "name": "Ontario",
     },
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "bestRating": "5",
+    "ratingCount": "50",
   },
 };
 ---
@@ -81,12 +88,28 @@ const localBusinessSchema = {
     <link rel="canonical" href={canonical.toString()} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
+    <!-- Favicons & PWA -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.toString()} />
+    <meta property="og:site_name" content="Jitsu-Do Karate + BJJ" />
     {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@JitsuDoKarate" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <!-- LocalBusiness structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />

@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { business } from '../data/business';
+---
+
+<Layout
+  title="Privacy Policy — Jitsu-Do Karate Newmarket"
+  description="Privacy Policy for Jitsu-Do Karate + BJJ. Learn how we collect, use, and protect your personal information in compliance with PIPEDA."
+  noindex={false}
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <h1 class="font-display text-3xl sm:text-4xl mb-4">Privacy Policy</h1>
+    <p class="text-white/50 text-sm mb-12">Last updated: May 20, 2026</p>
+
+    <div class="prose prose-invert prose-sm max-w-none space-y-8 text-white/75 leading-relaxed">
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">1. Who We Are</h2>
+        <p>
+          Jitsu-Do Karate + BJJ ("{business.name}") operates the website at https://{business.domain}
+          and martial arts training programs at {business.address.street}, {business.address.city},
+          {business.address.region} {business.address.postalCode}.
+          We are committed to protecting your personal information in accordance with Canada's
+          <em>Personal Information Protection and Electronic Documents Act</em> (PIPEDA).
+        </p>
+        <p class="mt-3">
+          For privacy inquiries, contact us at:
+          <a href={`mailto:${business.email}`} class="text-accent hover:text-white transition-colors">{business.email}</a>
+          or by phone at {business.phoneDisplay}.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">2. Information We Collect</h2>
+        <p>We may collect the following personal information:</p>
+        <ul class="list-disc pl-6 mt-2 space-y-1">
+          <li><strong>Contact information:</strong> name, email address, phone number</li>
+          <li><strong>Inquiry details:</strong> information you provide when submitting a contact form or booking a trial class</li>
+          <li><strong>Technical data:</strong> IP address, browser type, pages visited, and time of visit — collected automatically via our hosting provider (Cloudflare)</li>
+          <li><strong>Membership information:</strong> billing and enrollment details collected by our third-party membership platform (GymDesk)</li>
+        </ul>
+        <p class="mt-3">We do not collect sensitive personal information (e.g., health records, financial account numbers) directly on this website.</p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">3. How We Use Your Information</h2>
+        <p>We use your personal information to:</p>
+        <ul class="list-disc pl-6 mt-2 space-y-1">
+          <li>Respond to your inquiries and schedule trial classes</li>
+          <li>Manage memberships and class registrations</li>
+          <li>Send updates about classes, schedules, and dojo news (with your consent)</li>
+          <li>Improve our website and services</li>
+          <li>Comply with legal obligations</li>
+        </ul>
+        <p class="mt-3">We do not sell, rent, or trade your personal information to third parties.</p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">4. Consent</h2>
+        <p>
+          By submitting a contact form or booking a trial class, you consent to the collection and use of
+          your personal information as described in this policy. You may withdraw consent at any time by
+          contacting us, though this may affect our ability to provide certain services.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">5. Third-Party Services</h2>
+        <p>We use the following third-party services that may process your data:</p>
+        <ul class="list-disc pl-6 mt-2 space-y-2">
+          <li><strong>Cloudflare:</strong> Website hosting, performance, and security. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-white transition-colors">Cloudflare Privacy Policy</a></li>
+          <li><strong>GymDesk:</strong> Membership management and online store. Your membership data is governed by <a href="https://gymdesk.com/privacy" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-white transition-colors">GymDesk's Privacy Policy</a></li>
+          <li><strong>AI Chat Assistant:</strong> Our website chat feature sends your messages to a secure AI service hosted at jitsudo-chatbot.vercel.app. Chat conversations are not stored permanently.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">6. Cookies</h2>
+        <p>
+          Our website uses cookies set by Cloudflare for security and performance purposes. These are
+          technical cookies necessary for the website to function properly. We do not use advertising
+          or tracking cookies.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">7. Data Retention</h2>
+        <p>
+          We retain your contact information for as long as necessary to fulfill the purpose for which
+          it was collected, or as required by law. Membership records are retained for a minimum of
+          7 years in compliance with Canadian tax and business regulations.
+        </p>
+        <p class="mt-3">
+          You may request deletion of your personal information at any time by contacting us directly.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">8. Your Rights Under PIPEDA</h2>
+        <p>You have the right to:</p>
+        <ul class="list-disc pl-6 mt-2 space-y-1">
+          <li>Know what personal information we hold about you</li>
+          <li>Request access to your personal information</li>
+          <li>Request correction of inaccurate information</li>
+          <li>Withdraw consent to the collection or use of your information</li>
+          <li>File a complaint with the <a href="https://www.priv.gc.ca/" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-white transition-colors">Office of the Privacy Commissioner of Canada</a></li>
+        </ul>
+        <p class="mt-3">
+          To exercise any of these rights, contact us at
+          <a href={`mailto:${business.email}`} class="text-accent hover:text-white transition-colors">{business.email}</a>.
+          We will respond within 30 days.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">9. Security</h2>
+        <p>
+          We implement reasonable technical and organizational measures to protect your personal
+          information against unauthorized access, disclosure, or misuse. Our website uses HTTPS
+          encryption for all data transmission.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">10. Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. The "Last updated" date at the top of
+          this page will reflect any changes. Continued use of our website after changes are posted
+          constitutes your acceptance of the updated policy.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-white text-xl font-semibold mb-3">11. Contact Us</h2>
+        <p>For any privacy-related questions or requests:</p>
+        <address class="not-italic mt-3 space-y-1 text-white/65">
+          <p><strong class="text-white">{business.name}</strong></p>
+          <p>{business.address.street}</p>
+          <p>{business.address.city}, {business.address.region} {business.address.postalCode}</p>
+          <p>Phone: <a href={`tel:${business.phone}`} class="text-accent hover:text-white transition-colors">{business.phoneDisplay}</a></p>
+          <p>Email: <a href={`mailto:${business.email}`} class="text-accent hover:text-white transition-colors">{business.email}</a></p>
+        </address>
+      </section>
+
+    </div>
+  </div>
+</Layout>

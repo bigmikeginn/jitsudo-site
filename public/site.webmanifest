@@ -1,0 +1,22 @@
+{
+  "name": "Jitsu-Do Karate + BJJ",
+  "short_name": "Jitsu-Do",
+  "description": "Newmarket's home for high-standard Karate and Brazilian Jiu-Jitsu.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#111111",
+  "theme_color": "#b71c1c",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
