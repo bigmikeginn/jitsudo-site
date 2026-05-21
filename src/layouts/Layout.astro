@@ -88,6 +88,11 @@ const localBusinessSchema = {
     <link rel="canonical" href={canonical.toString()} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
+    <!-- Font preloads — hashes are content-based, stable until @fontsource packages are updated -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_astro/aldrich-latin-400-normal.D8sU7F5Z.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_astro/jetbrains-mono-latin-400-normal.V6pRDFza.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_astro/jetbrains-mono-latin-500-normal.BWZEU5yA.woff2" />
+
     <!-- Favicons & PWA -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
