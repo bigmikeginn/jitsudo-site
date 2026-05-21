@@ -122,7 +122,7 @@ const { images, eyebrow, heading } = Astro.props;
       if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
     }
 
-    layout();
+    requestAnimationFrame(() => layout());
     window.addEventListener('resize', layout, { passive: true });
     startAuto();
 
