@@ -18,7 +18,7 @@
     "@fontsource/aldrich": "^5.2.7",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@tailwindcss/vite": "^4.2.4",
-    "astro": "^6.1.9",
+    "astro": "^6.3.6",
     "tailwindcss": "^4.2.4"
   },
   "devDependencies": {
