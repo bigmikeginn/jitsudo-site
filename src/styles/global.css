@@ -36,7 +36,7 @@ section img {
 .bg-photo-parallax {
   background-image:
     linear-gradient(rgba(8, 8, 8, 0.82), rgba(8, 8, 8, 0.92)),
-    url('/images/hero-dojo.png');
+    url('/images/hero-dojo.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -46,7 +46,7 @@ section img {
 .bg-photo-parallax-light {
   background-image:
     linear-gradient(rgba(8, 8, 8, 0.72), rgba(8, 8, 8, 0.85)),
-    url('/images/hero-dojo.png');
+    url('/images/hero-dojo.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
