@@ -30,10 +30,20 @@ const {
 
 <section
   class={`hero-section relative flex items-end overflow-hidden ${minHeight}`}
-  style={bgImage ? `background-image: url('${bgImage}'); background-size: cover;` : ''}
 >
   {bgImage && (
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" aria-hidden="true"></div>
+    <>
+      <img
+        src={bgImage}
+        alt=""
+        aria-hidden="true"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+        class="hero-bg-img absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" aria-hidden="true"></div>
+    </>
   )}
   {!bgImage && <AnimatedBg variant="hero" />}
 
@@ -90,13 +100,13 @@ const {
 </section>
 
 <style>
-  .hero-section {
-    background-position: left top;
+  .hero-bg-img {
+    object-position: left top;
   }
 
   @media (min-width: 768px) {
-    .hero-section {
-      background-position: center top;
+    .hero-bg-img {
+      object-position: center top;
     }
   }
 
