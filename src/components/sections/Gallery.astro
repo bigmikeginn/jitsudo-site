@@ -82,6 +82,8 @@ const { images, eyebrow, heading } = Astro.props;
     const FALLOFF = [0.52, 0.18, 80, 2];
 
     let center = 0;
+    let cachedStageW = 0;
+    let cachedSlideW = 0;
 
     function getSlot(i: number): number {
       const raw = ((i - center) % total + total) % total;
@@ -89,10 +91,9 @@ const { images, eyebrow, heading } = Astro.props;
     }
 
     function layout() {
-      const stageW = stage.offsetWidth;
-      const slideW = slides[0].offsetWidth;
-      const step = slideW + 14;
-      const cx = (stageW - slideW) / 2;
+      if (!cachedStageW || !cachedSlideW) return;
+      const step = cachedSlideW + 14;
+      const cx = (cachedStageW - cachedSlideW) / 2;
 
       slides.forEach((slide, i) => {
         const slot = getSlot(i);
@@ -122,8 +123,18 @@ const { images, eyebrow, heading } = Astro.props;
       if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
     }
 
-    requestAnimationFrame(() => layout());
-    window.addEventListener('resize', layout, { passive: true });
+    // ResizeObserver caches dimensions so layout() never reads offsetWidth,
+    // eliminating the forced synchronous reflow.
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === stage) cachedStageW = entry.contentRect.width;
+        else cachedSlideW = entry.contentRect.width;
+      }
+      requestAnimationFrame(layout);
+    });
+    ro.observe(stage);
+    if (slides[0]) ro.observe(slides[0]);
+
     startAuto();
 
     // Pause auto-advance while lightbox is open

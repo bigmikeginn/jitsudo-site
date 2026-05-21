@@ -50,22 +50,25 @@ const OPACITY: Record<string, number> = {
 </style>
 
 <script>
-  document.querySelectorAll<HTMLElement>('.wave-inner').forEach((el) => {
-    // Lissajous-style drift: two slightly different periods so the path
-    // never exactly repeats, giving organic movement.
-    const TX_AMP = 6;   // ±6 % horizontal  (safe: 15% overhang > 6% * 130%)
-    const TY_AMP = 3;   // ±3 % vertical
-    const TX_T   = 38;  // seconds per horizontal cycle
-    const TY_T   = 53;  // seconds per vertical cycle (prime-ish ratio)
-
-    function loop(ts: number) {
-      const t  = ts / 1000;
-      const tx = TX_AMP * Math.sin((2 * Math.PI * t) / TX_T);
-      const ty = TY_AMP * Math.sin((2 * Math.PI * t) / TY_T);
-      el.style.transform = `translate(${tx.toFixed(3)}%, ${ty.toFixed(3)}%)`;
+  // Delay wave animations until the browser is idle so rAF loops don't
+  // compete with LCP paint during the critical rendering window.
+  function startWaves() {
+    document.querySelectorAll<HTMLElement>('.wave-inner').forEach((el) => {
+      const TX_AMP = 6, TY_AMP = 3, TX_T = 38, TY_T = 53;
+      function loop(ts: number) {
+        const t  = ts / 1000;
+        const tx = TX_AMP * Math.sin((2 * Math.PI * t) / TX_T);
+        const ty = TY_AMP * Math.sin((2 * Math.PI * t) / TY_T);
+        el.style.transform = `translate(${tx.toFixed(3)}%, ${ty.toFixed(3)}%)`;
+        requestAnimationFrame(loop);
+      }
       requestAnimationFrame(loop);
-    }
+    });
+  }
 
-    requestAnimationFrame(loop);
-  });
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(startWaves, { timeout: 3000 });
+  } else {
+    setTimeout(startWaves, 2000);
+  }
 </script>
