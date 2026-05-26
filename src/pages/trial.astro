@@ -236,12 +236,18 @@ const whatToBring = [
   <script is:inline>
     (function () {
       function loadGymdesk() {
-        if (document.querySelector('.gymdesk-schedule')) {
+        if (!document.querySelector('.gymdesk-schedule')) return;
+        // Load self-hosted jQuery first (Gymdesk depends on it).
+        // Avoids external CDN dependency and keeps CSP clean ('self' covers /js/).
+        var jq = document.createElement('script');
+        jq.src = '/js/jquery-3.6.0.min.js';
+        jq.onload = function () {
           var s = document.createElement('script');
           s.src = 'https://app.gymdesk.com/js/widgets.js';
           s.async = true;
           document.body.appendChild(s);
-        }
+        };
+        document.body.appendChild(jq);
       }
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadGymdesk);
