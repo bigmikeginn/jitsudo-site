@@ -106,6 +106,13 @@ const whatToBring = [
       border-radius: 0;
       overflow: hidden;
     }
+    /* Force iframe to full container width regardless of Gymdesk's own CSS */
+    .gymdesk-wrap iframe,
+    #gymdesk-widget iframe {
+      width: 100% !important;
+      min-width: 100% !important;
+      max-width: 100% !important;
+    }
     .gymdesk-wrap [style*="rgb(38, 200, 169)"],
     .gymdesk-wrap [style*="rgb(0, 200"],
     .gymdesk-wrap [style*="#26c8a9"],
