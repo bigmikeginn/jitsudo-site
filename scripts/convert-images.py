@@ -84,7 +84,7 @@ def main():
             orig_kb = os.path.getsize(src) // 1024
             img.save(dst, "WEBP", quality=QUALITY, method=METHOD)
             new_kb = os.path.getsize(dst) // 1024
-            print(f"[convert-images] {src} ({orig_kb} KB) → {dst} ({new_kb} KB)")
+            print(f"[convert-images] {src} ({orig_kb} KB) -> {dst} ({new_kb} KB)")
         except Exception as e:
             print(f"[convert-images] Failed to convert {src}: {e}")
             continue
