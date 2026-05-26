@@ -2,7 +2,7 @@
 title: "Learn Escapes Before Submissions in BJJ: The Key to Mastery"
 date: "2026-05-19"
 excerpt: "Why throw yourself into the deep end of submissions when escapes are your lifeline? Starting your Brazilian Jiu-Jitsu journey with escapes can save you fro"
-featuredImage: "/images/blog/learn-escapes-before-submissions-in-bjj-the-key-to-mastery.png"
+featuredImage: "/images/blog/learn-escapes-before-submissions-in-bjj-the-key-to-mastery.webp"
 tags: []
 draft: false
 ---

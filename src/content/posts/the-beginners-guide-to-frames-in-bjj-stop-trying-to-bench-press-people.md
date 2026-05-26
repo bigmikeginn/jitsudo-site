@@ -2,7 +2,7 @@
 title: "The Beginner's Guide to Frames in BJJ — Stop Trying to Bench Press People"
 date: "2026-05-18"
 excerpt: "Do you find yourself exhausted from pushing your sparring partners around as if you're trapped in a constant bench press battle? It’s time to rethink your "
-featuredImage: "/images/blog/the-beginners-guide-to-frames-in-bjj-stop-trying-to-bench-press-people.png"
+featuredImage: "/images/blog/the-beginners-guide-to-frames-in-bjj-stop-trying-to-bench-press-people.webp"
 tags: []
 draft: false
 ---

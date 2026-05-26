@@ -2,7 +2,7 @@
 title: "Our Story: Tradition Meets Evolution"
 date: "2026-02-03"
 excerpt: "Martial arts is more than a hobby; it is a lifelong pursuit of excellence. My journey began in the deep traditions of Chito-Ryu Karate, where discipline, form, and respect are everything."
-featuredImage: "/images/never-quit-gBz375sJlaAubLDO.png"
+featuredImage: "/images/never-quit-gBz375sJlaAubLDO.webp"
 seoTitle: "Our Story: Tradition Meets Evolution - Jitsu-Do Karate"
 seoDescription: "How 25+ years of Chito-Ryu Karate and Brazilian Jiu-Jitsu under the Gracie Humaita lineage led to the founding of Jitsu-Do Karate in Newmarket."
 tags: []
