@@ -12,6 +12,7 @@ interface Props {
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   bgImage?: string;
+  bgImagePosition?: string;
   minHeight?: string;
 }
 
@@ -24,6 +25,7 @@ const {
   primaryCta,
   secondaryCta,
   bgImage,
+  bgImagePosition,
   minHeight = 'min-h-screen',
 } = Astro.props;
 ---
@@ -41,6 +43,7 @@ const {
         loading="eager"
         decoding="async"
         class="hero-bg-img absolute inset-0 w-full h-full object-cover"
+        style={bgImagePosition ? `object-position: ${bgImagePosition}` : undefined}
       />
       <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/80" aria-hidden="true"></div>
     </>
