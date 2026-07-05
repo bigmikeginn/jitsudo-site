@@ -306,7 +306,7 @@ const plans = [
         if (!document.querySelector('.gymdesk-schedule')) return;
         // Load self-hosted jQuery first (Gymdesk depends on it).
         var jq = document.createElement('script');
-        jq.src = '/js/jquery-3.6.0.min.js';
+        jq.src = '/js/jquery-3.7.1.min.js';
         jq.onload = function () {
           var s = document.createElement('script');
           s.src = 'https://app.gymdesk.com/js/widgets.js';
