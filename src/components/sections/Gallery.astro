@@ -4,6 +4,9 @@ import AnimatedBg from '../ui/AnimatedBg.astro';
 interface GalleryImage {
   src: string;
   alt: string;
+  lightboxSrc?: string;
+  srcSet?: string;
+  sizes?: string;
 }
 
 interface Props {
@@ -35,13 +38,15 @@ const { images, eyebrow, heading } = Astro.props;
           data-slot="2"
           aria-hidden={i !== 0 ? 'true' : undefined}
           tabindex={i === 0 ? 0 : -1}
-          data-src={img.src}
+          data-src={img.lightboxSrc ?? img.src}
           data-alt={img.alt}
           aria-label={`View full image: ${img.alt}`}
           type="button"
         >
           <img
             src={img.src}
+            srcset={img.srcSet}
+            sizes={img.sizes}
             alt={img.alt}
             loading={i === 0 ? 'eager' : 'lazy'}
             width="600"

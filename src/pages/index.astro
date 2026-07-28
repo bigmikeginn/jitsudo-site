@@ -54,7 +54,7 @@ const reviews = [
 ];
 
 const galleryImages = [
-  { src: '/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.webp', alt: 'Karate intermediate class at Jitsu-Do' },
+  { src: '/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX-500.webp', lightboxSrc: '/images/intermediate-class-shuto-zvNTZVpOSlKKzbMX.webp', alt: 'Karate intermediate class at Jitsu-Do' },
   { src: '/images/brothers-smiling.webp', alt: 'Two young students smiling in gi at Jitsu-Do' },
   { src: '/images/cameron-throwing-sensei-c24NNNY01tl3OwG8.jpg', alt: 'Karate throw at Jitsu-Do' },
   { src: '/images/sensei-teaching-luke.jpg', alt: 'Sensei Ginn teaching students at Jitsu-Do' },
@@ -108,6 +108,8 @@ const galleryImages = [
           <span class="kanji-bento" aria-hidden="true">空</span>
           <img
             src="/images/charlotte-roundhouse-QFzAmO1THZeA6cRQ.webp"
+            srcset="/images/charlotte-roundhouse-QFzAmO1THZeA6cRQ-800.webp 800w, /images/charlotte-roundhouse-QFzAmO1THZeA6cRQ.webp 1344w"
+            sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1280px) 58vw, 741px"
             alt="Karate class at Jitsu-Do"
             class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
             loading="lazy"
