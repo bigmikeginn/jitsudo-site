@@ -4,7 +4,7 @@
 //
 // Usage: node scripts/extract-content.mjs
 
-import { writeFile, mkdir, rm } from 'node:fs/promises';
+import { writeFile, mkdir } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import TurndownService from 'turndown';

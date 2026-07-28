@@ -4,8 +4,9 @@ interface Props {
   heading?: string;
 }
 
-const { heading } = Astro.props;
+const { action, heading } = Astro.props;
 const web3Key = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+const configured = Boolean(web3Key);
 
 const inputClass = 'w-full bg-surface-2 border border-white/15 text-white text-sm px-4 py-3 placeholder-white/30 focus:outline-none focus:border-accent transition-colors';
 const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2';
@@ -16,10 +17,10 @@ const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2
     <h3 class="text-2xl font-semibold tracking-tight mb-8">{heading}</h3>
   )}
   <form
-    action="https://api.web3forms.com/submit"
+    action={action ?? 'https://api.web3forms.com/submit'}
     method="POST"
     class="space-y-5"
-    novalidate
+    aria-describedby="contact-form-note"
   >
     <input type="hidden" name="access_key" value={web3Key} />
     <input type="hidden" name="subject" value="New contact form submission — Jitsu-Do Karate" />
@@ -31,7 +32,7 @@ const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
       <div>
         <label for="cf-name" class={labelClass}>Name *</label>
-        <input id="cf-name" type="text" name="name" required autocomplete="name" placeholder="Your full name" class={inputClass} />
+        <input id="cf-name" type="text" name="name" required minlength="2" autocomplete="name" placeholder="Your full name" class={inputClass} />
       </div>
       <div>
         <label for="cf-phone" class={labelClass}>Phone</label>
@@ -40,7 +41,7 @@ const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2
     </div>
     <div>
       <label for="cf-email" class={labelClass}>Email *</label>
-      <input id="cf-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class={inputClass} />
+        <input id="cf-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" class={inputClass} />
     </div>
     <div>
       <label for="cf-interest" class={labelClass}>I'm interested in</label>
@@ -55,21 +56,24 @@ const labelClass = 'block text-xs tracking-[0.15em] uppercase text-white/55 mb-2
     </div>
     <div>
       <label for="cf-message" class={labelClass}>Message</label>
-      <textarea
+        <textarea
         id="cf-message"
         name="message"
         rows="5"
+        maxlength="4000"
         placeholder="Tell us a bit about yourself or ask a question..."
         class={inputClass}
       ></textarea>
     </div>
     <button
       type="submit"
+      disabled={!configured}
       class="w-full bg-accent text-white py-4 text-sm font-mono tracking-widest uppercase hover:bg-red-800 transition-colors"
     >
       Send Message
     </button>
-    <p class="text-xs text-white/35 text-center">
+    <p id="contact-form-note" class="text-xs text-white/35 text-center">
+      {!configured && <span class="block text-amber-200/80 mb-2">Online contact is temporarily unavailable. Please call or email us.</span>}
       Or call us at <a href="tel:+19052359119" class="text-white/60 hover:text-white">(905) 235-9119</a>
     </p>
   </form>

@@ -13,12 +13,25 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  author?: string;
   noindex?: boolean;
   bare?: boolean;
 }
 
-const { title, description, ogImage, noindex = false, bare = false } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  ogType = 'website',
+  publishedTime,
+  author,
+  noindex = false,
+  bare = false,
+} = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? `https://${business.domain}`);
+const socialImage = new URL(ogImage ?? '/images/hero-dojo.webp', canonical.origin).toString();
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -88,11 +101,6 @@ const localBusinessSchema = {
     <link rel="canonical" href={canonical.toString()} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
-    <!-- Font preloads — hashes are content-based, stable until @fontsource packages are updated -->
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_astro/aldrich-latin-400-normal.D8sU7F5Z.woff2" />
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_astro/jetbrains-mono-latin-400-normal.V6pRDFza.woff2" />
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="/_astro/jetbrains-mono-latin-500-normal.BWZEU5yA.woff2" />
-
     <!-- Favicons & PWA -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -100,24 +108,28 @@ const localBusinessSchema = {
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="en_CA" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.toString()} />
     <meta property="og:site_name" content="Jitsu-Do Karate + BJJ" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    {ogImage && <meta property="og:image:width" content="1200" />}
-    {ogImage && <meta property="og:image:height" content="630" />}
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {author && <meta property="article:author" content={author} />}
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@JitsuDoKarate" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:image" content={socialImage} />
+    <link rel="alternate" type="application/rss+xml" title="Jitsu-Do blog" href="/rss.xml" />
 
     <!-- LocalBusiness structured data -->
-    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   </head>
   <body class="bg-brand-bg font-sans antialiased" style="color: #f0ede6;">
     <!-- Cursor spotlight — red radial glow that follows mouse, desktop only -->
@@ -153,13 +165,15 @@ const localBusinessSchema = {
     </script>
     <!-- Jitsudo Chat Widget -->
     <script>
+      // @ts-nocheck
       (function () {
         'use strict';
         function init() {
           var root = document.createElement('div');
           root.id = 'jitsudo-chat-root';
           document.body.appendChild(root);
-          var API_URL = 'https://jitsudo-chatbot.vercel.app/api/chat';
+          // Keep the browser request same-origin; the deployment proxy forwards it to the AI service.
+          var API_URL = '/api/chat';
           var WELCOME = "Hey there! 👋 I'm the Jitsudo assistant. Whether you're curious about our classes, looking for the right fit, or just wondering what martial arts could do for you — I'm here to help! What's on your mind?";
           var css = [
             '#jitsudo-chat-root{pointer-events:none!important;}',
@@ -201,12 +215,13 @@ const localBusinessSchema = {
             '#jqr{display:flex!important;flex-wrap:wrap!important;gap:6px!important;padding:4px 4px 8px 4px!important;}',
             '.jqr-btn{background:#fff!important;border:1.5px solid #e53935!important;color:#b71c1c!important;border-radius:16px!important;padding:6px 12px!important;font-size:12.5px!important;cursor:pointer!important;transition:background .15s,color .15s!important;font-family:inherit!important;line-height:1.4!important;white-space:nowrap!important;}',
             '.jqr-btn:hover{background:#b71c1c!important;color:#fff!important;}',
-            '@media(max-width:480px){#jchat-window{right:0!important;bottom:0!important;width:100%!important;height:92vh!important;border-radius:18px 18px 0 0!important;}#jchat-btn{bottom:16px!important;right:16px!important;}}'
+            '@media(max-width:480px){#jchat-window{right:0!important;bottom:0!important;width:100%!important;height:92vh!important;border-radius:18px 18px 0 0!important;}#jchat-btn{bottom:16px!important;right:16px!important;}}',
+            '@media(prefers-reduced-motion:reduce){#jchat-window *{animation:none!important;transition:none!important;}}'
           ].join('');
           var sEl = document.createElement('style');
           sEl.textContent = css;
           document.head.appendChild(sEl);
-          root.innerHTML = '<button id="jchat-btn" aria-label="Chat with Jitsudo">🥋</button><div id="jchat-window" role="dialog" aria-label="Jitsudo Chat Assistant"><div id="jchat-header"><div id="jchat-avatar">🥋</div><div id="jchat-header-info"><h3>Jitsudo Assistant</h3><p>Ask me anything about our classes!</p></div><button id="jchat-x" aria-label="Close">✕</button></div><div id="jchat-msgs"></div><div id="jchat-input-row"><input id="jchat-in" type="text" placeholder="Ask about classes, schedule, pricing…" maxlength="500" /><button id="jchat-go" aria-label="Send"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div id="jchat-foot">Powered by Jitsudo AI</div></div>';
+          root.innerHTML = '<button id="jchat-btn" type="button" aria-label="Open chat" aria-expanded="false" aria-controls="jchat-window">🥋</button><div id="jchat-window" role="dialog" aria-modal="true" aria-labelledby="jchat-title" aria-hidden="true" inert><div id="jchat-header"><div id="jchat-avatar" aria-hidden="true">🥋</div><div id="jchat-header-info"><h3 id="jchat-title">Jitsudo Assistant</h3><p>Ask me anything about our classes!</p></div><button id="jchat-x" type="button" aria-label="Close chat">✕</button></div><div id="jchat-msgs" aria-live="polite"></div><div id="jchat-input-row"><input id="jchat-in" type="text" autocomplete="off" placeholder="Ask about classes, schedule, pricing…" maxlength="500" /><button id="jchat-go" type="button" aria-label="Send"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div><div id="jchat-foot">Powered by Jitsudo AI</div></div>';
           var QUICK_REPLIES = [
             { label: '🥋 Classes offered', text: 'What classes do you offer?' },
             { label: '💰 Pricing', text: 'How much does membership cost?' },
@@ -232,7 +247,7 @@ const localBusinessSchema = {
             msgs.appendChild(d);
             scroll();
           }
-          var open = false, loading = false, history = [];
+          var open = false, loading = false, history = [], lastFocus = null;
           var btn = document.getElementById('jchat-btn');
           var win = document.getElementById('jchat-window');
           var xBtn = document.getElementById('jchat-x');
@@ -247,7 +262,7 @@ const localBusinessSchema = {
             s = s.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
             s = s.replace(/\n/g, '<br>');
-            s = s.replace(/(https?:\/\/[^\s<>"]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+            s = s.replace(/(?<![="'])https?:\/\/[^\s<>"]+/g, '<a href="$&" target="_blank" rel="noopener noreferrer">$&</a>');
             return s;
           }
           function scroll() { msgs.scrollTop = msgs.scrollHeight; }
@@ -279,6 +294,11 @@ const localBusinessSchema = {
             open = !open;
             win.classList.toggle('jopen', open);
             btn.textContent = open ? '✕' : '🥋';
+            btn.setAttribute('aria-label', open ? 'Close chat' : 'Open chat');
+            btn.setAttribute('aria-expanded', String(open));
+            win.setAttribute('aria-hidden', String(!open));
+            if (open) { lastFocus = document.activeElement; win.removeAttribute('inert'); }
+            else { win.setAttribute('inert', ''); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
             if (open && msgs.childElementCount === 0) { addBot(WELCOME); addQuickReplies(); }
             if (open) setTimeout(function(){ inp.focus(); }, 280);
           }
@@ -294,15 +314,19 @@ const localBusinessSchema = {
             history.push({ role: 'user', content: text });
             showTyping();
             try {
+              var controller = new AbortController();
+              var timeout = setTimeout(function () { controller.abort(); }, 12000);
               var res = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ messages: history }),
+                signal: controller.signal,
               });
+              clearTimeout(timeout);
               hideTyping();
               var data = await res.json();
               if (!res.ok) {
-                throw new Error(data.error || 'API error: ' + data.details || 'Unknown error');
+                throw new Error(data.error || data.details || 'Unknown API error');
               }
               var reply = data.reply || "Sorry, I couldn't get a response — please try again!";
               addBot(reply);
@@ -321,6 +345,9 @@ const localBusinessSchema = {
           goBtn.addEventListener('click', send);
           inp.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+          });
+          win.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && open) toggle();
           });
           document.addEventListener('click', function (e) {
             var btnRect = btn.getBoundingClientRect();

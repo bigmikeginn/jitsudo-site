@@ -1,5 +1,6 @@
 // Fixed: removed markdown link artifacts ([rect.top](http://...) → rect.top etc.)
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const cards = document.querySelectorAll('.tilt-card');
   const maxTilt = 8;
 

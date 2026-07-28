@@ -28,6 +28,9 @@ const dateStr = post.data.date.toLocaleDateString('en-CA', {
   title={post.data.seoTitle ?? post.data.title + ' — Jitsu-Do Karate'}
   description={post.data.seoDescription ?? post.data.excerpt}
   ogImage={post.data.featuredImage !== '/images/placeholder.jpg' ? post.data.featuredImage : undefined}
+  ogType="article"
+  publishedTime={post.data.date.toISOString()}
+  author="Jitsu-Do Karate + BJJ"
 >
   <!-- Post hero -->
   <header class="relative pt-32 pb-12 px-4" style="background: #141414;">

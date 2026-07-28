@@ -248,35 +248,5 @@ const whatToBring = [
     .gymdesk-wrap ::-webkit-scrollbar-thumb { background: rgba(183, 28, 28, 0.5); }
   </style>
 
-  <script is:inline>
-    (function () {
-      function loadGymdesk() {
-        if (!document.querySelector('.gymdesk-schedule')) return;
-        // Load self-hosted jQuery first (Gymdesk depends on it).
-        // Avoids external CDN dependency and keeps CSP clean ('self' covers /js/).
-        var jq = document.createElement('script');
-        jq.src = '/js/jquery-3.7.1.min.js';
-        jq.onload = function () {
-          var s = document.createElement('script');
-          s.src = 'https://app.gymdesk.com/js/widgets.js';
-          s.async = true;
-          document.body.appendChild(s);
-        };
-        // Show fallback if widget iframe hasn't appeared after 8s
-        setTimeout(function () {
-          var widget = document.getElementById('gymdesk-widget');
-          var fallback = document.getElementById('gymdesk-fallback');
-          if (fallback && widget && !widget.querySelector('iframe')) {
-            fallback.hidden = false;
-          }
-        }, 8000);
-        document.body.appendChild(jq);
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadGymdesk);
-      } else {
-        loadGymdesk();
-      }
-    })();
-  </script>
+  <script src="../scripts/gymdesk-loader.js"></script>
 </Layout>

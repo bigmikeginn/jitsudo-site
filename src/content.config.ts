@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const pages = defineCollection({
@@ -25,14 +26,4 @@ const posts = defineCollection({
   }),
 });
 
-const instructors = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/instructors' }),
-  schema: z.object({
-    name: z.string(),
-    title: z.string(),
-    photo: z.string(),
-    credentials: z.array(z.string()).default([]),
-  }),
-});
-
-export const collections = { pages, posts, instructors };
+export const collections = { pages, posts };

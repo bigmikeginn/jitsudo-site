@@ -85,11 +85,11 @@ const plans = [
               </span>
             )}
             {!plan.highlighted && (
-              <p class="text-xs tracking-[0.2em] uppercase text-white/40 mb-2">{plan.eyebrow}</p>
+              <p class="text-xs tracking-[0.2em] uppercase text-white/65 mb-2">{plan.eyebrow}</p>
             )}
             <h3 class="text-3xl font-semibold tracking-tight mb-4">{plan.name}</h3>
             <div class="mb-2">
-              <span class="font-display text-4xl text-accent">{plan.price}</span>
+              <span class="font-display text-4xl text-red-300">{plan.price}</span>
               <span class="text-white/55 text-sm">{plan.cadence}</span>
             </div>
             <p class="text-xs text-white/55 mb-6">{plan.note}</p>
@@ -300,36 +300,7 @@ const plans = [
     }
   </style>
 
-  <script is:inline>
-    (function () {
-      function loadGymdesk() {
-        if (!document.querySelector('.gymdesk-schedule')) return;
-        // Load self-hosted jQuery first (Gymdesk depends on it).
-        var jq = document.createElement('script');
-        jq.src = '/js/jquery-3.7.1.min.js';
-        jq.onload = function () {
-          var s = document.createElement('script');
-          s.src = 'https://app.gymdesk.com/js/widgets.js';
-          s.async = true;
-          document.body.appendChild(s);
-        };
-        // Show fallback if widget iframe hasn't appeared after 8s
-        setTimeout(function () {
-          var widget = document.getElementById('gymdesk-widget');
-          var fallback = document.getElementById('gymdesk-fallback');
-          if (fallback && widget && !widget.querySelector('iframe')) {
-            fallback.hidden = false;
-          }
-        }, 8000);
-        document.body.appendChild(jq);
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadGymdesk);
-      } else {
-        loadGymdesk();
-      }
-    })();
-  </script>
+  <script src="../scripts/gymdesk-loader.js"></script>
 
   <CTABand
     eyebrow="Not sure which plan?"

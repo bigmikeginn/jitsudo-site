@@ -97,11 +97,11 @@ const carouselItems = [...allReviews, ...allReviews];
          style="background: linear-gradient(to left, var(--color-charcoal, #1c1c1c), transparent);"></div>
 
     <div class="carousel-track" style={`--card-count: ${allReviews.length};`}>
-      {carouselItems.map((review) => {
+      {carouselItems.map((review, i) => {
         const initials = review.name.split(' ').map((n) => n[0]).slice(0, 2).join('');
         const rating = review.rating ?? 5;
         return (
-          <div class="carousel-card bg-surface-2 border border-white/8 p-5 flex flex-col gap-3 shrink-0">
+          <div class="carousel-card bg-surface-2 border border-white/8 p-5 flex flex-col gap-3 shrink-0" aria-hidden={i >= allReviews.length ? 'true' : undefined}>
             <div class="flex items-start justify-between gap-2">
               <div class="flex items-center gap-2.5">
                 <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center shrink-0">
@@ -169,5 +169,10 @@ const carouselItems = [...allReviews, ...allReviews];
   @keyframes marquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track { animation: none; transform: none; flex-wrap: wrap; width: 100%; }
+    .carousel-card { width: min(100%, 320px); }
   }
 </style>

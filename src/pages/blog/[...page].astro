@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/sections/Hero.astro';
-import Badge from '../../components/ui/Badge.astro';
 import AnimatedBg from '../../components/ui/AnimatedBg.astro';
 import BlogPagination from '../../components/BlogPagination.astro';
 
@@ -39,7 +38,7 @@ const getPageHref = (pageNum: number) => {
 ---
 
 <Layout
-  title="Blog — Jitsu-Do Karate Newmarket"
+  title={`Blog${pageNum > 1 ? ` — Page ${pageNum}` : ''} — Jitsu-Do Karate Newmarket`}
   description="Training tips, technique breakdowns, and dojo news from Jitsu-Do Karate in Newmarket, Ontario."
 >
   <Hero
@@ -80,7 +79,7 @@ const getPageHref = (pageNum: number) => {
                 <p class="text-sm text-white/60 leading-relaxed mb-5 line-clamp-3">{post.data.excerpt}</p>
                 {post.data.tags.length > 0 && (
                   <div class="flex flex-wrap gap-2 mb-5">
-                    {post.data.tags.map((tag) => (
+                    {post.data.tags.map((tag: string) => (
                       <span class="text-xs px-2 py-0.5 bg-white/5 text-white/50 border border-white/10">{tag}</span>
                     ))}
                   </div>

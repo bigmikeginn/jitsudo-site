@@ -17,20 +17,24 @@ const { images, eyebrow, heading } = Astro.props;
 
 <section class="relative py-12 bg-charcoal overflow-hidden">
   {(eyebrow || heading) && (
-    <AnimatedBg />
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 reveal">
-      {eyebrow && <p class="text-xs tracking-[0.25em] uppercase text-white/40 mb-3">{eyebrow}</p>}
-      {heading && <h2 class="text-4xl font-semibold tracking-tight">{heading}</h2>}
-    </div>
+    <>
+      <AnimatedBg />
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 reveal">
+        {eyebrow && <p class="text-xs tracking-[0.25em] uppercase text-white/40 mb-3">{eyebrow}</p>}
+        {heading && <h2 class="text-4xl font-semibold tracking-tight">{heading}</h2>}
+      </div>
+    </>
   )}
 
   <div class="gc-outer reveal" role="region" aria-label={heading ?? 'Gallery'}>
+    <button id="gc-prev" class="gc-control gc-control-prev" type="button" aria-label="Previous photo">&#8592;</button>
     <div class="gc-stage" aria-live="polite">
       {images.map((img, i) => (
         <button
           class="gc-slide"
           data-slot="2"
           aria-hidden={i !== 0 ? 'true' : undefined}
+          tabindex={i === 0 ? 0 : -1}
           data-src={img.src}
           data-alt={img.alt}
           aria-label={`View full image: ${img.alt}`}
@@ -47,6 +51,7 @@ const { images, eyebrow, heading } = Astro.props;
         </button>
       ))}
     </div>
+    <button id="gc-next" class="gc-control gc-control-next" type="button" aria-label="Next photo">&#8594;</button>
     <!-- edge vignettes -->
     <div class="gc-vignette gc-vignette-left" aria-hidden="true"></div>
     <div class="gc-vignette gc-vignette-right" aria-hidden="true"></div>
@@ -106,7 +111,9 @@ const { images, eyebrow, heading } = Astro.props;
         slide.style.zIndex = String(z);
         slide.style.filter = gray > 0 ? `grayscale(${gray}%)` : '';
         slide.dataset.slot = String(absSlot);
-        slide.setAttribute('aria-hidden', slot === 0 ? 'false' : 'true');
+        const active = slot === 0;
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+        slide.setAttribute('tabindex', active ? '0' : '-1');
       });
     }
 
@@ -115,8 +122,15 @@ const { images, eyebrow, heading } = Astro.props;
       layout();
     }
 
+    function retreat() {
+      center = (center - 1 + total) % total;
+      layout();
+    }
+
     function startAuto() {
-      if (!autoTimer && total > 1) autoTimer = setInterval(advance, 2500);
+      if (!autoTimer && total > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        autoTimer = setInterval(advance, 4000);
+      }
     }
 
     function stopAuto() {
@@ -136,6 +150,8 @@ const { images, eyebrow, heading } = Astro.props;
     if (slides[0]) ro.observe(slides[0]);
 
     startAuto();
+    document.getElementById('gc-prev')?.addEventListener('click', () => { stopAuto(); retreat(); });
+    document.getElementById('gc-next')?.addEventListener('click', () => { stopAuto(); advance(); });
 
     // Pause auto-advance while lightbox is open
     document.addEventListener('gc:lightbox-open', stopAuto);
@@ -149,8 +165,10 @@ const { images, eyebrow, heading } = Astro.props;
   const lbImg     = document.getElementById('gc-lb-img') as HTMLImageElement;
   const lbClose   = document.getElementById('gc-lb-close')!;
   const lbBackdrop = document.getElementById('gc-lb-backdrop')!;
+  let lastTrigger: HTMLElement | null = null;
 
   function openLightbox(src: string, alt: string) {
+    lastTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     lbImg.src = src;
     lbImg.alt = alt;
     lightbox.hidden = false;
@@ -163,6 +181,8 @@ const { images, eyebrow, heading } = Astro.props;
     lightbox.hidden = true;
     lbImg.src = '';
     document.body.style.overflow = '';
+    lastTrigger?.focus();
+    lastTrigger = null;
     document.dispatchEvent(new CustomEvent('gc:lightbox-close'));
   }
 
@@ -192,6 +212,22 @@ const { images, eyebrow, heading } = Astro.props;
     height: 200px;
     overflow: hidden;
   }
+
+  .gc-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    cursor: pointer;
+  }
+  .gc-control:hover { background: var(--color-accent, #c8393b); }
+  .gc-control-prev { left: 0.75rem; }
+  .gc-control-next { right: 0.75rem; }
 
   @media (min-width: 768px) {
     .gc-outer { height: 230px; }

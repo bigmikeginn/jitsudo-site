@@ -53,6 +53,7 @@ const OPACITY: Record<string, number> = {
   // Delay wave animations until the browser is idle so rAF loops don't
   // compete with LCP paint during the critical rendering window.
   function startWaves() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     document.querySelectorAll<HTMLElement>('.wave-inner').forEach((el) => {
       const TX_AMP = 6, TY_AMP = 3, TX_T = 38, TY_T = 53;
       function loop(ts: number) {
