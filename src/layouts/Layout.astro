@@ -130,6 +130,9 @@ const localBusinessSchema = {
 
     <!-- LocalBusiness structured data -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+    <!-- Privacy-friendly, cookieless analytics — see /privacy for disclosure -->
+    <script is:inline defer data-domain={business.domain} src="https://plausible.io/js/script.outbound-links.js"></script>
   </head>
   <body class="bg-brand-bg font-sans antialiased" style="color: #f0ede6;">
     <!-- Cursor spotlight — red radial glow that follows mouse, desktop only -->
@@ -144,6 +147,7 @@ const localBusinessSchema = {
     <script>
       import '../scripts/scroll-reveal.js';
       import '../scripts/card-tilt.js';
+      import '../scripts/tracking.js';
     </script>
     <script>
       // Cursor spotlight — only on precise pointer devices (mouse, not touch)
@@ -237,6 +241,7 @@ const localBusinessSchema = {
               b.className = 'jqr-btn';
               b.textContent = qr.label;
               b.addEventListener('click', function() {
+                if (window.trackEvent) window.trackEvent('chat_quick_reply', { label: qr.label });
                 var el = document.getElementById('jqr');
                 if (el) el.remove();
                 inp.value = qr.text;
@@ -299,6 +304,7 @@ const localBusinessSchema = {
             win.setAttribute('aria-hidden', String(!open));
             if (open) { lastFocus = document.activeElement; win.removeAttribute('inert'); }
             else { win.setAttribute('inert', ''); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+            if (open) { if (window.trackEvent) window.trackEvent('chat_open'); }
             if (open && msgs.childElementCount === 0) { addBot(WELCOME); addQuickReplies(); }
             if (open) setTimeout(function(){ inp.focus(); }, 280);
           }
@@ -330,6 +336,7 @@ const localBusinessSchema = {
               }
               var reply = data.reply || "Sorry, I couldn't get a response — please try again!";
               addBot(reply);
+              if (window.trackEvent) window.trackEvent('chat_response_success');
               history.push({ role: 'assistant', content: reply });
               if (history.length > 20) history = history.slice(-20);
             } catch (e) {

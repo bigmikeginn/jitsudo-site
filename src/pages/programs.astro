@@ -5,6 +5,7 @@ import Badge from '../components/ui/Badge.astro';
 import ProgramCard from '../components/sections/ProgramCard.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import { startingPriceLabel } from '../data/pricing';
 ---
 <Layout
   title="Programs — Jitsu-Do Karate Newmarket"
@@ -32,6 +33,7 @@ import AnimatedBg from '../components/ui/AnimatedBg.astro';
       <p class="text-white/75 leading-relaxed mb-6">
         By bridging the structural precision of <strong class="text-white">Chito-Ryu Karate</strong> with the ground-truth efficiency of <strong class="text-white">Gracie Humaita Brazilian Jiu-Jitsu</strong>, we provide a Newmarket-based curriculum built on biomechanics, safety, and real-world clarity.
       </p>
+      <p class="text-white/50 text-sm">Memberships from <a href="/schedule" class="text-accent hover:text-white transition-colors">{startingPriceLabel}</a>.</p>
     </div>
   </section>
 

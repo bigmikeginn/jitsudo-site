@@ -4,6 +4,35 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import FAQAccordion from '../components/sections/FAQAccordion.astro';
+import { startingPriceLabel } from '../data/pricing';
+
+const parentFaq = [
+  {
+    question: 'What ages and class format is this?',
+    answer: 'Youth classes run for ages 13–17, in 45–60 minute sessions 2–3x per week, training the same technical curriculum as the adult classes at age-appropriate intensity. Teens train alongside peers their own age, not mixed into adult classes.',
+  },
+  {
+    question: 'What does a first class look like?',
+    answer: 'New students get a short orientation with Shihan Ginn before joining the group, covering basic stances, footwork, and etiquette. A senior student partners with beginners for the first several classes. No live sparring happens until fundamentals and control are demonstrated.',
+  },
+  {
+    question: 'What should they wear and bring?',
+    answer: 'Athletic clothing is fine for a trial class — no gi needed. Bare feet on the mat, a water bottle, and a mouthguard once BJJ rolling starts. A gi is required once enrolled and can be purchased through our store.',
+  },
+  {
+    question: 'What is the typical progression and goals?',
+    answer: 'Teens grade for stripes and belts on a regular cycle tied to demonstrated skill, not time served. Most students move from foundational stand-up and positional BJJ work toward live sparring and rolling within their first year, alongside growing responsibility as senior students to younger classes.',
+  },
+  {
+    question: 'How is safety and supervision handled?',
+    answer: 'All sparring and rolling is supervised directly and matched by size, experience, and control. Contact is introduced gradually — footwork and technique first, controlled sparring only once a student shows the discipline to train safely with a partner.',
+  },
+  {
+    question: 'Can parents watch class?',
+    answer: 'Yes, there\'s seating for parents at every class. Many teens prefer to train without a parent watching every session, and that\'s fine too — we\'ll keep you posted on progress at grading time.',
+  },
+];
 
 const pillars = [
   {
@@ -97,15 +126,22 @@ const skills = [
             </li>
           ))}
         </ul>
-        <div class="border-l-2 border-accent/50 pl-5">
+        <div class="border-l-2 border-accent/50 pl-5 mb-6">
           <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent/70 mb-2">Right Fit</p>
           <p class="text-white/70 leading-relaxed text-sm">
             Teenagers who want something <strong class="text-white">more demanding and more rewarding</strong> than recreational sports. No experience required — complete beginners welcome.
           </p>
         </div>
+        <p class="text-white/50 text-sm">Memberships from <a href="/schedule" class="text-accent hover:text-white transition-colors">{startingPriceLabel}</a>.</p>
       </div>
     </div>
   </section>
+
+  <FAQAccordion
+    eyebrow="For Parents"
+    heading="What to Expect"
+    items={parentFaq}
+  />
 
   <CTABand
     eyebrow="First class is free"

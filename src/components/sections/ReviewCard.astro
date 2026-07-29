@@ -9,6 +9,10 @@ interface Props {
 
 const { name, text, rating = 5, date, source = 'google' } = Astro.props;
 
+const sourceLink = source === 'google'
+  ? { label: 'Google review', href: 'https://www.google.com/search?q=jitsu-do+karate' }
+  : { label: 'Facebook recommendation', href: 'https://www.facebook.com/JitsuDoKarate/reviews' };
+
 const initials = name
   .split(' ')
   .map((n) => n[0])
@@ -54,5 +58,17 @@ const initials = name
 
   <p class="text-sm text-white/65 leading-relaxed italic">&ldquo;{text}&rdquo;</p>
 
-  {date && <p class="text-xs text-white/35">{date}</p>}
+  <div class="flex items-center justify-between gap-3">
+    {date && <p class="text-xs text-white/35">{date}</p>}
+    <a
+      href={sourceLink.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-xs text-white/35 hover:text-accent transition-colors ml-auto"
+      data-track="review_link_click"
+      data-track-source={source}
+    >
+      {sourceLink.label} →
+    </a>
+  </div>
 </div>

@@ -5,47 +5,7 @@ import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
-
-const plans = [
-  {
-    eyebrow: 'Entry',
-    name: 'Basic',
-    price: '$129.99',
-    cadence: '/mo',
-    note: '3-month term or $100 signup fee',
-    features: [
-      { ok: true, text: 'Up to 2 classes per week' },
-      { ok: true, text: 'Karate & BJJ included' },
-    ],
-    highlighted: false,
-  },
-  {
-    eyebrow: 'Most Popular',
-    name: 'Core',
-    price: '$159.99',
-    cadence: '/mo',
-    note: 'No signup fee · No term limit',
-    features: [
-      { ok: true, text: 'Unlimited classes (Karate & BJJ)' },
-      { ok: true, text: 'Adult / Youth / Kids' },
-      { ok: true, text: 'No signup fees' },
-    ],
-    highlighted: true,
-  },
-  {
-    eyebrow: 'Premium',
-    name: 'Elite',
-    price: '$209.99',
-    cadence: '/mo',
-    note: 'Fastest progress',
-    features: [
-      { ok: true, text: 'Everything in Core' },
-      { ok: true, text: '1 private lesson/month (30 min)' },
-      { ok: true, text: '15% gear discount' },
-    ],
-    highlighted: false,
-  },
-];
+import { plans } from '../data/pricing';
 ---
 <Layout
   title="Pricing & Schedule — Jitsu-Do Karate Newmarket"
@@ -97,7 +57,7 @@ const plans = [
               {plan.features.map((f) => (
                 <li class="flex gap-2 text-sm text-white/75">
                   <span class="text-accent">✓</span>
-                  <span>{f.text}</span>
+                  <span>{f}</span>
                 </li>
               ))}
             </ul>

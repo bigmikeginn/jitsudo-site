@@ -4,6 +4,35 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import FAQAccordion from '../components/sections/FAQAccordion.astro';
+import { startingPriceLabel } from '../data/pricing';
+
+const parentFaq = [
+  {
+    question: 'What ages and class format is this?',
+    answer: 'Kids Foundations runs for ages 6–12, grouped by age and belt level, in 45-minute classes 1–2x per week. Kickstart (ages 4–6) runs as an 8-week session at a slower pace built for younger learners. Class sizes stay small enough that every student is corrected individually, not just drilled in unison.',
+  },
+  {
+    question: 'What does a first class look like?',
+    answer: 'Your child checks in with Shihan Ginn for a short one-on-one orientation, then joins the group for warm-up, basic technique drilling, and a cool-down bow-out. A senior student or assistant instructor stays close to new students the entire class. No sparring or contact drills happen in a first class.',
+  },
+  {
+    question: 'What should they wear and bring?',
+    answer: 'Comfortable athletic clothing is fine for a trial class — no gi required. Bare feet on the mat (no shoes), hair tied back if long, and a water bottle. Once enrolled, students move into a proper gi, which is included in the Kickstart program and available through our store for Kids Foundations.',
+  },
+  {
+    question: 'What is the typical progression and goals?',
+    answer: 'Students test for stripes and belts on a regular grading cycle as they demonstrate new material — never on a fixed timeline. Kickstart graduates move into Kids Foundations white belt already familiar with dojo protocol. Most kids progress through several stripes and their first belt promotions within the first year of consistent attendance.',
+  },
+  {
+    question: 'How is safety and supervision handled?',
+    answer: 'All partner drills are supervised directly by Shihan Ginn or a senior instructor, matched by size and experience level — never left to figure out on their own. Mats cover the full training floor, and contact is introduced gradually and always under direct supervision as a student\'s control and technique develop.',
+  },
+  {
+    question: 'Can parents watch class?',
+    answer: 'Yes — there\'s seating for parents to watch every class, and you\'re welcome to stay. Many parents drop off and run errands nearby; either way works.',
+  },
+];
 
 const pillars = [
   {
@@ -91,12 +120,13 @@ const kickstartDetails = [
             </li>
           ))}
         </ul>
-        <div class="border-l-2 border-accent/50 pl-5">
+        <div class="border-l-2 border-accent/50 pl-5 mb-6">
           <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent/70 mb-2">Right Fit</p>
           <p class="text-white/70 leading-relaxed text-sm">
             Children aged <strong class="text-white">6–12</strong> of any experience level. High-energy kids, those who need focus and structure, and complete beginners all thrive.
           </p>
         </div>
+        <p class="text-white/50 text-sm">Memberships from <a href="/schedule" class="text-accent hover:text-white transition-colors">{startingPriceLabel}</a>.</p>
       </div>
       <div class="aspect-[4/3] overflow-hidden">
         <img
@@ -151,6 +181,12 @@ const kickstartDetails = [
       </div>
     </div>
   </section>
+
+  <FAQAccordion
+    eyebrow="For Parents"
+    heading="What to Expect"
+    items={parentFaq}
+  />
 
   <CTABand
     eyebrow="Start the foundation"

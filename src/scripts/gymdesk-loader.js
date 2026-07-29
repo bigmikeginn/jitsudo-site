@@ -1,3 +1,4 @@
+// @ts-nocheck — window.trackEvent is a dynamic global set by tracking.js.
 function loadGymdesk() {
   const widget = document.querySelector('.gymdesk-schedule');
   if (!widget) return;
@@ -24,6 +25,7 @@ function loadGymdesk() {
   }
 
   const start = () => {
+    if (window.trackEvent) window.trackEvent('gymdesk_widget_loaded', { page: window.location.pathname });
     const jquery = document.createElement('script');
     jquery.src = '/js/jquery-3.7.1.min.js';
     jquery.onload = () => {

@@ -1,0 +1,53 @@
+name: Site Health
+
+on:
+  schedule:
+    - cron: '0 13 * * 1' # Mondays 8am ET (13:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  endpoint-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check key endpoints are live
+        run: |
+          urls=(
+            "https://jitsudo.ca/"
+            "https://jitsudo.ca/programs"
+            "https://jitsudo.ca/kids-programs"
+            "https://jitsudo.ca/youth-programs"
+            "https://jitsudo.ca/adult-programs"
+            "https://jitsudo.ca/schedule"
+            "https://jitsudo.ca/trial"
+            "https://jitsudo.ca/join"
+            "https://jitsudo.ca/contact"
+            "https://jitsudo.ca/blog"
+          )
+          fail=0
+          for url in "${urls[@]}"; do
+            status=$(curl -s -o /dev/null -w "%{http_code}" -L "$url")
+            echo "$status  $url"
+            if [ "$status" -ge 400 ]; then
+              fail=1
+            fi
+          done
+          exit $fail
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: endpoint-check
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://jitsudo.ca/
+            https://jitsudo.ca/programs
+            https://jitsudo.ca/schedule
+            https://jitsudo.ca/trial
+          uploadArtifacts: true
+          temporaryPublicStorage: true

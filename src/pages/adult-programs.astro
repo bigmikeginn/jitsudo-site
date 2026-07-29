@@ -4,6 +4,35 @@ import Hero from '../components/sections/Hero.astro';
 import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import FAQAccordion from '../components/sections/FAQAccordion.astro';
+import { startingPriceLabel } from '../data/pricing';
+
+const adultFaq = [
+  {
+    question: 'What is the class format?',
+    answer: 'Adult classes run Monday–Friday evenings (5:00–8:15pm) and Saturday mornings (8:30–11:30am), 60 minutes each, mixing Karate and BJJ across the week. No age cutoff — adults of any age train together, grouped by experience and belt level for partner work.',
+  },
+  {
+    question: 'What does a first class look like?',
+    answer: 'You\'ll get a short one-on-one orientation with Shihan Ginn before joining the floor, covering stance, movement, and etiquette. You\'ll train alongside the group for warm-up and basic technique drilling with a partner matched to your experience level. No sparring or live rolling in your first class — that comes once fundamentals are solid.',
+  },
+  {
+    question: 'What should I wear and bring?',
+    answer: 'Comfortable athletic clothing is fine for a trial class — no gi required. Bare feet on the mat, a water bottle, and a mouthguard once you start live BJJ rolling. A gi is required once you enroll and is available through our store, with a 15% discount for Elite members.',
+  },
+  {
+    question: 'What is the typical progression and goals?',
+    answer: 'You\'ll grade for belts on a demonstrated-skill cycle, not a fixed schedule. Most adults spend their first several months on stance, structure, and positional BJJ fundamentals before live sparring and rolling become a regular part of class. Elite members add a monthly private lesson to accelerate specific weak points.',
+  },
+  {
+    question: 'How is safety and supervision handled?',
+    answer: 'All sparring and rolling is supervised directly by Shihan Ginn or a senior instructor and matched by size, experience, and control — never left unsupervised. Contact and intensity increase gradually as your technique and control develop.',
+  },
+  {
+    question: 'Is this a good fit if I have no experience?',
+    answer: 'Yes — most adult students start with zero martial arts background. The program is built for the complete beginner just as much as the returning practitioner; you\'ll never be thrown into live sparring before you\'re ready.',
+  },
+];
 
 const audiences = [
   {
@@ -111,7 +140,7 @@ const audiences = [
         <Badge label="Right Fit" class="mb-4 block mx-auto" />
         <h3 class="text-3xl font-semibold tracking-tight">Built For The Professional Practitioner</h3>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
         {audiences.map((a) => (
           <div class="bg-surface-2 border border-white/10 p-6">
             <h4 class="font-mono text-sm tracking-[0.2em] uppercase text-accent mb-3">{a.label}</h4>
@@ -119,8 +148,15 @@ const audiences = [
           </div>
         ))}
       </div>
+      <p class="text-white/50 text-sm text-center">Memberships from <a href="/schedule" class="text-accent hover:text-white transition-colors">{startingPriceLabel}</a>.</p>
     </div>
   </section>
+
+  <FAQAccordion
+    eyebrow="What to Expect"
+    heading="Before Your First Class"
+    items={adultFaq}
+  />
 
   <CTABand
     eyebrow="Claim your free trial"

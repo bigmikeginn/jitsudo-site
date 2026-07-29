@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
+import { plans as pricingPlans } from '../data/pricing';
 
 const REGISTER_URL = 'https://jitsu-do-karate.gymdesk.com/register';
 
@@ -27,26 +28,12 @@ const steps = [
   },
 ];
 
-const plans = [
-  {
-    name: 'Basic',
-    price: '$129.99/mo',
-    note: '3-month term or $100 signup fee',
-    highlight: false,
-  },
-  {
-    name: 'Core',
-    price: '$159.99/mo',
-    note: 'No signup fee · No term — most popular',
-    highlight: true,
-  },
-  {
-    name: 'Elite',
-    price: '$209.99/mo',
-    note: 'Includes private lesson + gradings',
-    highlight: false,
-  },
-];
+const plans = pricingPlans.map((plan) => ({
+  name: plan.name,
+  price: `${plan.price}${plan.cadence}`,
+  note: plan.note,
+  highlight: plan.highlighted,
+}));
 ---
 <Layout
   title="Join — Jitsu-Do Karate Newmarket"
