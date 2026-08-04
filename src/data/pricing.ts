@@ -52,3 +52,9 @@ export const plans: Plan[] = [
 // Lowest published monthly membership price, for lightweight cross-page mentions.
 export const startingPlan = plans[0];
 export const startingPriceLabel = `${startingPlan.price}${startingPlan.cadence}`;
+
+export const kickstart = {
+  price: '$140',
+  cadence: 'per session',
+  note: '8-week session',
+};

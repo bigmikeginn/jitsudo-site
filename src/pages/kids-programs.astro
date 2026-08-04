@@ -5,7 +5,7 @@ import Badge from '../components/ui/Badge.astro';
 import CTABand from '../components/sections/CTABand.astro';
 import AnimatedBg from '../components/ui/AnimatedBg.astro';
 import FAQAccordion from '../components/sections/FAQAccordion.astro';
-import { startingPriceLabel } from '../data/pricing';
+import { startingPriceLabel, kickstart } from '../data/pricing';
 
 const parentFaq = [
   {
@@ -161,7 +161,7 @@ const kickstartDetails = [
         <div class="border-l-2 border-accent/50 pl-5">
           <p class="font-mono text-xs tracking-[0.2em] uppercase text-accent/70 mb-2">Program Details</p>
           <p class="text-white/70 leading-relaxed text-sm">
-            8-week session &middot; <strong class="text-white">$140</strong> per session
+            {kickstart.note} &middot; <strong class="text-white">{kickstart.price}</strong> {kickstart.cadence}
           </p>
         </div>
       </div>
