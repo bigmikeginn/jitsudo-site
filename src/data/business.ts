@@ -21,6 +21,7 @@ export const business = {
     sunday: 'closed',
   },
   hoursDisplay: 'Mon–Fri 5:00–8:15pm · Sat 8:30–11:30am',
+  appUrl: 'https://app.karatenewmarket.com/',
   domain: 'jitsudo.ca',
   legacyDomain: 'karatenewmarket.com',
 };
