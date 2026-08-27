@@ -1,9 +1,9 @@
 name: CI
 
 on:
+  # No push trigger on master: every merge here is a PR that already ran this
+  # exact workflow, so a push-triggered rerun would just retest passed code.
   pull_request:
-  push:
-    branches: [master]
 
 permissions:
   contents: read
