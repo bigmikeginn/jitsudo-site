@@ -9,6 +9,7 @@ const footerLinks = [
   { label: 'Free Trial Class', href: '/trial' },
   { label: 'Our Story', href: '/about' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Training App', href: business.appUrl, external: true },
 ];
 
 const socialLinks = [
@@ -86,9 +87,11 @@ const socialLinks = [
             <li>
               <a
                 href={link.href}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener noreferrer' : undefined}
                 class="text-sm text-white/65 hover:text-white transition-colors"
               >
-                {link.label}
+                {link.label}{link.external && <span class="text-white/40"> ↗</span>}
               </a>
             </li>
           ))}
