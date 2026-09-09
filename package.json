@@ -30,6 +30,7 @@
     "typescript": "^6.0.3"
   },
   "overrides": {
+    "fast-uri": "^3.1.7",
     "sharp": "^0.35.3",
     "svgo": "^4.0.2"
   }
