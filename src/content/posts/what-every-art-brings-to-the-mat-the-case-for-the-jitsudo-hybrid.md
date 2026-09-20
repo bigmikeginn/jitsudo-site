@@ -1,8 +1,8 @@
 ---
 title: "What Every Art Brings to the Mat: The Case for the Jitsudo Hybrid"
-date: "2026-08-21"
+date: "2026-09-20"
 excerpt: "Most martial arts pick a lane and stay in it. Here is why Jitsu-Do deliberately doesn't, and what that means for your training."
-featuredImage: "/images/placeholder.jpg"
+featuredImage: "/images/blog/what-every-art-brings-to-the-mat-the-case-for-the-jitsudo-hybrid.png"
 tags: []
 draft: false
 ---
