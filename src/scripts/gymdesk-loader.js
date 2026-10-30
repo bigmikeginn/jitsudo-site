@@ -3,18 +3,26 @@ function loadGymdesk() {
   const widget = document.querySelector('.gymdesk-schedule');
   if (!widget) return;
 
+  const loading = document.getElementById('gymdesk-loading');
+  const fallback = document.getElementById('gymdesk-fallback');
   const titleFrames = () => {
     widget.querySelectorAll('iframe:not([title])').forEach((frame) => {
       frame.setAttribute('title', 'Jitsu-Do class schedule and trial booking');
     });
+    if (widget.querySelector('iframe')) {
+      if (loading) loading.hidden = true;
+      if (fallback) fallback.hidden = true;
+    }
   };
   const observer = new MutationObserver(titleFrames);
   observer.observe(widget, { childList: true, subtree: true });
   titleFrames();
 
-  const fallback = document.getElementById('gymdesk-fallback');
   const showFallback = () => {
-    if (fallback && !widget.querySelector('iframe')) fallback.hidden = false;
+    if (!widget.querySelector('iframe')) {
+      if (loading) loading.hidden = true;
+      if (fallback) fallback.hidden = false;
+    }
   };
 
   // Gymdesk's loader intentionally switches to gymdesk.test on local hosts.
