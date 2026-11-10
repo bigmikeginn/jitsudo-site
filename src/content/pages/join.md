@@ -9,7 +9,7 @@ FREE TRIAL
 
 Register through Gymdesk. No contracts, no fees — just show up.
 
-[REGISTER NOW →](https://jitsu-do-karate.gymdesk.com/register)
+[REGISTER NOW →](https://jitsu-do-karate.gymdesk.com/signup)
 
 NO COMMITMENT REQUIRED
 
@@ -17,7 +17,7 @@ NO COMMITMENT REQUIRED
 
 Click below to register your details via Gymdesk. No hidden fees. No long-term contracts. Just high-standard, technical training in Newmarket.
 
-[REGISTER YOUR FREE TRIAL →](https://jitsu-do-karate.gymdesk.com/register)
+[REGISTER YOUR FREE TRIAL →](https://jitsu-do-karate.gymdesk.com/signup)
 
 ✓ No credit card required    ✓ No long-term contract    ✓ First class completely free
 
@@ -55,4 +55,4 @@ READY?
 
 Register now through Gymdesk to secure your free trial class.
 
-[REGISTER NOW →](https://jitsu-do-karate.gymdesk.com/register)[SEE WHAT TO BRING](/trial-class/)
+[REGISTER NOW →](https://jitsu-do-karate.gymdesk.com/signup)[SEE WHAT TO BRING](/trial-class/)
